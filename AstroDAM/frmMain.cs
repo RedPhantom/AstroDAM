@@ -54,6 +54,7 @@ namespace AstroDAM
                              .Select(s => s.SplitterDistance));
 
             Settings.Default.Save();
+            Application.Exit();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -90,6 +91,46 @@ namespace AstroDAM
                     splitContainers[x].SplitterDistance = positions[x];
                 }
             }            
+        }
+
+        private void databaseConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmDbConnection().ShowDialog();
+        }
+
+        private void camerasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManager(frmManager.ManagerTabs.Cameras).ShowDialog();
+        }
+
+        private void cataloguesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManager(frmManager.ManagerTabs.Catalogues).ShowDialog();
+        }
+
+        private void formatsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManager(frmManager.ManagerTabs.FileFormats).ShowDialog();
+        }
+
+        private void opticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManager(frmManager.ManagerTabs.Optics).ShowDialog();
+        }
+
+        private void photographersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManager(frmManager.ManagerTabs.Photographers).ShowDialog();
+        }
+
+        private void scopesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManager(frmManager.ManagerTabs.Scopes).ShowDialog();
+        }
+
+        private void sitesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManager(frmManager.ManagerTabs.Sites).ShowDialog();
         }
     }
 }

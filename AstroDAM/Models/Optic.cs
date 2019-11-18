@@ -27,6 +27,8 @@ namespace AstroDAM.Models
 
         public enum OpticTypes
         {
+            Reducer,
+            Barlow,
             Galilean,
             Convex,
             Huygens,

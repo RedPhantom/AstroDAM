@@ -89,16 +89,16 @@
             this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.managementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cataloguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.catalogueEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.photographersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.camerasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.scopesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cataloguesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.photographersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scopesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sitesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sitesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.databaseConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -694,84 +694,91 @@
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.addToolStripMenuItem.Text = "Add";
             // 
             // findToolStripMenuItem
             // 
             this.findToolStripMenuItem.Name = "findToolStripMenuItem";
             this.findToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.findToolStripMenuItem.Text = "Find";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // managementToolStripMenuItem
             // 
             this.managementToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cataloguesToolStripMenuItem,
-            this.catalogueEditorToolStripMenuItem,
-            this.formatsToolStripMenuItem,
-            this.photographersToolStripMenuItem,
             this.camerasToolStripMenuItem,
-            this.scopesToolStripMenuItem,
+            this.cataloguesToolStripMenuItem,
+            this.formatsToolStripMenuItem,
             this.opticsToolStripMenuItem,
+            this.photographersToolStripMenuItem,
+            this.scopesToolStripMenuItem,
             this.sitesToolStripMenuItem});
             this.managementToolStripMenuItem.Name = "managementToolStripMenuItem";
             this.managementToolStripMenuItem.Size = new System.Drawing.Size(103, 23);
             this.managementToolStripMenuItem.Text = "Management";
-            // 
-            // cataloguesToolStripMenuItem
-            // 
-            this.cataloguesToolStripMenuItem.Name = "cataloguesToolStripMenuItem";
-            this.cataloguesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
-            this.cataloguesToolStripMenuItem.Text = "Catalogues...";
-            // 
-            // catalogueEditorToolStripMenuItem
-            // 
-            this.catalogueEditorToolStripMenuItem.Name = "catalogueEditorToolStripMenuItem";
-            this.catalogueEditorToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
-            this.catalogueEditorToolStripMenuItem.Text = "Catalogue Editor...";
-            // 
-            // formatsToolStripMenuItem
-            // 
-            this.formatsToolStripMenuItem.Name = "formatsToolStripMenuItem";
-            this.formatsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
-            this.formatsToolStripMenuItem.Text = "File Formats...";
-            // 
-            // photographersToolStripMenuItem
-            // 
-            this.photographersToolStripMenuItem.Name = "photographersToolStripMenuItem";
-            this.photographersToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
-            this.photographersToolStripMenuItem.Text = "Photographers...";
             // 
             // camerasToolStripMenuItem
             // 
             this.camerasToolStripMenuItem.Name = "camerasToolStripMenuItem";
             this.camerasToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.camerasToolStripMenuItem.Text = "Cameras...";
+            this.camerasToolStripMenuItem.Click += new System.EventHandler(this.camerasToolStripMenuItem_Click);
             // 
-            // scopesToolStripMenuItem
+            // cataloguesToolStripMenuItem
             // 
-            this.scopesToolStripMenuItem.Name = "scopesToolStripMenuItem";
-            this.scopesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
-            this.scopesToolStripMenuItem.Text = "Scopes...";
+            this.cataloguesToolStripMenuItem.Name = "cataloguesToolStripMenuItem";
+            this.cataloguesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.cataloguesToolStripMenuItem.Text = "Catalogues...";
+            this.cataloguesToolStripMenuItem.Click += new System.EventHandler(this.cataloguesToolStripMenuItem_Click);
+            // 
+            // formatsToolStripMenuItem
+            // 
+            this.formatsToolStripMenuItem.Name = "formatsToolStripMenuItem";
+            this.formatsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.formatsToolStripMenuItem.Text = "File Formats...";
+            this.formatsToolStripMenuItem.Click += new System.EventHandler(this.formatsToolStripMenuItem_Click);
             // 
             // opticsToolStripMenuItem
             // 
             this.opticsToolStripMenuItem.Name = "opticsToolStripMenuItem";
             this.opticsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.opticsToolStripMenuItem.Text = "Optics...";
+            this.opticsToolStripMenuItem.Click += new System.EventHandler(this.opticsToolStripMenuItem_Click);
+            // 
+            // photographersToolStripMenuItem
+            // 
+            this.photographersToolStripMenuItem.Name = "photographersToolStripMenuItem";
+            this.photographersToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.photographersToolStripMenuItem.Text = "Photographers...";
+            this.photographersToolStripMenuItem.Click += new System.EventHandler(this.photographersToolStripMenuItem_Click);
+            // 
+            // scopesToolStripMenuItem
+            // 
+            this.scopesToolStripMenuItem.Name = "scopesToolStripMenuItem";
+            this.scopesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.scopesToolStripMenuItem.Text = "Scopes...";
+            this.scopesToolStripMenuItem.Click += new System.EventHandler(this.scopesToolStripMenuItem_Click);
+            // 
+            // sitesToolStripMenuItem
+            // 
+            this.sitesToolStripMenuItem.Name = "sitesToolStripMenuItem";
+            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.sitesToolStripMenuItem.Text = "Sites...";
+            this.sitesToolStripMenuItem.Click += new System.EventHandler(this.sitesToolStripMenuItem_Click);
             // 
             // applicationToolStripMenuItem
             // 
             this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.preferencesToolStripMenuItem});
+            this.preferencesToolStripMenuItem,
+            this.databaseConnectionToolStripMenuItem});
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
             this.applicationToolStripMenuItem.Size = new System.Drawing.Size(89, 23);
             this.applicationToolStripMenuItem.Text = "Application";
@@ -784,11 +791,12 @@
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             // 
-            // sitesToolStripMenuItem
+            // databaseConnectionToolStripMenuItem
             // 
-            this.sitesToolStripMenuItem.Name = "sitesToolStripMenuItem";
-            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
-            this.sitesToolStripMenuItem.Text = "Sites...";
+            this.databaseConnectionToolStripMenuItem.Name = "databaseConnectionToolStripMenuItem";
+            this.databaseConnectionToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
+            this.databaseConnectionToolStripMenuItem.Text = "Database Connection";
+            this.databaseConnectionToolStripMenuItem.Click += new System.EventHandler(this.databaseConnectionToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -875,7 +883,6 @@
         private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem managementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cataloguesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem catalogueEditorToolStripMenuItem;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel3;
@@ -908,6 +915,7 @@
         private System.Windows.Forms.ToolStripMenuItem applicationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sitesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem databaseConnectionToolStripMenuItem;
     }
 }
 

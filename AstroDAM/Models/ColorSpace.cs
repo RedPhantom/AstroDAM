@@ -15,5 +15,11 @@ namespace AstroDAM.Models
 
         [DataMember]
         public string Name { get; set; }
+
+        [DataMember]
+        public int BytesPerChannel { get; set; }
+
+        [DataMember]
+        public bool IsMultiChannel { get; set; }
     }
 }

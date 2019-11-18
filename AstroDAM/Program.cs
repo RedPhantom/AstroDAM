@@ -16,7 +16,19 @@ namespace AstroDAM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+
+            // https://stackoverflow.com/questions/17953298/c-sharp-application-exits-when-main-form-closes
+            var StartupForm = new frmSplash();
+            StartupForm.Show();
+
+            Application.Run();
+        }
+
+        public static void DoInvoke(this Control c, MethodInvoker mi)
+        {
+            c.Invoke(mi);
+
+            return;
         }
     }
 }
