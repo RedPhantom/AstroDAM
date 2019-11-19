@@ -8,13 +8,25 @@ using System.Threading.Tasks;
 namespace AstroDAM.Models
 {
     [DataContract]
-    class Scope
+    public class Scope
     {
+        public Scope(int id, string manufacturer, string name, double aperture, double focalLength, double centralObstructionDiameter, bool robotic, MountTypes mountType)
+        {
+            Id = id;
+            Manufacturer = manufacturer;
+            Name = name;
+            Aperture = aperture;
+            FocalLength = focalLength;
+            CentralObstructionDiameter = centralObstructionDiameter;
+            Robotic = robotic;
+            MountType = mountType;
+        }
+
         /// <summary>
         /// Such as 0.
         /// </summary>
         [DataMember]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public string Manufacturer { get; set; }

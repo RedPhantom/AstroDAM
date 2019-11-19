@@ -10,11 +10,18 @@ namespace AstroDAM.Models
     [DataContract]
     public class Photographer
     {
+        public Photographer(int id, string firstName, string lastName)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+        }
+
         /// <summary>
         /// Such as 0.
         /// </summary>
         [DataMember]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public string FirstName { get; set; }

@@ -11,11 +11,24 @@ namespace AstroDAM.Models
     [DataContract]
     public class Camera
     {
+        public Camera() { }
+
+        public Camera(int id, string shortName, string longName, Size maxResolution, List<ColorSpace> colorSpaces)
+        {
+            Id = id;
+            ShortName = shortName;
+            LongName = longName;
+            MaxResolution = maxResolution;
+            ColorSpaces = colorSpaces;
+        }
+
+
+
         /// <summary>
         /// Such as 0.
         /// </summary>
         [DataMember]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Such as "ASI120MC".

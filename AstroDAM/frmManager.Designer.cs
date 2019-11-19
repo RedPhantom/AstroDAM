@@ -527,7 +527,7 @@
             // 
             this.panel3.Controls.Add(this.radioButton2);
             this.panel3.Controls.Add(this.radioButton1);
-            this.panel3.Location = new System.Drawing.Point(273, 125);
+            this.panel3.Location = new System.Drawing.Point(276, 125);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(109, 26);
             this.panel3.TabIndex = 31;
@@ -556,7 +556,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(273, 99);
+            this.numericUpDown1.Location = new System.Drawing.Point(276, 99);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             64,
             0,
@@ -578,7 +578,7 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(273, 73);
+            this.textBox9.Location = new System.Drawing.Point(276, 73);
             this.textBox9.MaxLength = 25;
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(70, 20);
@@ -597,7 +597,7 @@
             // textBox10
             // 
             this.textBox10.Font = new System.Drawing.Font("Consolas", 7.471698F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox10.Location = new System.Drawing.Point(273, 47);
+            this.textBox10.Location = new System.Drawing.Point(276, 47);
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
             this.textBox10.Size = new System.Drawing.Size(94, 20);
@@ -607,7 +607,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label18.Location = new System.Drawing.Point(349, 76);
+            this.label18.Location = new System.Drawing.Point(352, 76);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(48, 15);
             this.label18.TabIndex = 24;
@@ -627,9 +627,9 @@
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(171, 101);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(91, 15);
+            this.label21.Size = new System.Drawing.Size(99, 15);
             this.label21.TabIndex = 25;
-            this.label21.Text = "Bytes-per-Color";
+            this.label21.Text = "Bits-per-Channel";
             // 
             // label19
             // 

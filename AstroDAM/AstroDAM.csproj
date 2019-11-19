@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="Models\Camera.cs" />
     <Compile Include="Models\Catalogue.cs" />
+    <Compile Include="Models\Collection.cs" />
     <Compile Include="Models\ColorSpace.cs" />
     <Compile Include="Models\FileFormat.cs" />
     <Compile Include="Models\Optic.cs" />

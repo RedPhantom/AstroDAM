@@ -8,10 +8,20 @@ using System.Threading.Tasks;
 namespace AstroDAM.Models
 {
     [DataContract]
-    class Site
+    public class Site
     {
+        public Site(int iD, string name, double longtitude, LongtitudeTypes longtitudeType, double latitude, LatitudeTypes latitudeType)
+        {
+            Id = iD;
+            Name = name;
+            Longtitude = longtitude;
+            LongtitudeType = longtitudeType;
+            Latitude = latitude;
+            LatitudeType = latitudeType;
+        }
+
         [DataMember]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public string Name { get; set; }
@@ -26,7 +36,7 @@ namespace AstroDAM.Models
         public LongtitudeTypes LongtitudeType { get; set; }
 
         [DataMember]
-        public double Latitue { get; set; }
+        public double Latitude { get; set; }
 
         [DataMember]
         public LatitudeTypes LatitudeType { get; set; }

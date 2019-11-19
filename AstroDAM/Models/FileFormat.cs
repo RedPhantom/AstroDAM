@@ -10,11 +10,18 @@ namespace AstroDAM.Models
     [DataContract]
     public class FileFormat
     {
+        public FileFormat(int id, string shortName, string longName)
+        {
+            Id = id;
+            ShortName = shortName;
+            LongName = longName;
+        }
+
         /// <summary>
         /// Such as 0.
         /// </summary>
         [DataMember]
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Such as "SER".

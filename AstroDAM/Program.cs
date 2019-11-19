@@ -23,12 +23,5 @@ namespace AstroDAM
 
             Application.Run();
         }
-
-        public static void DoInvoke(this Control c, MethodInvoker mi)
-        {
-            c.Invoke(mi);
-
-            return;
-        }
     }
 }
