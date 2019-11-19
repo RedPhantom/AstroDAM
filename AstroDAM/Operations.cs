@@ -101,6 +101,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@LongName", camera.LongName);
             cmd.Parameters.AddWithValue("@MaxResolution", MakeResolution(camera.MaxResolution));
             cmd.Parameters.AddWithValue("@ColorSpaces", MakeIntList(camera.ColorSpaces.Select(x => x.Id).ToList()));
+            cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
         }
@@ -166,11 +167,12 @@ namespace AstroDAM
 
             cmd.CommandText = "UPDATE [tblCatalogues] SET " +
                 "[ShortName] = @ShortName, " +
-                "[LongName] = @LongName, " +
+                "[LongName] = @LongName " +
                 "WHERE [Id] = @Id";
 
             cmd.Parameters.AddWithValue("@ShortName", catalogue.ShortName);
             cmd.Parameters.AddWithValue("@LongName", catalogue.LongName);
+            cmd.Parameters.AddWithValue("@Id", "Id");
 
             cmd.ExecuteNonQuery();
         }
@@ -258,6 +260,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@FileFormat", collection.FileFormat.Id);
             cmd.Parameters.AddWithValue("@ColorSpace", collection.ColorSpace.Id);
             cmd.Parameters.AddWithValue("@Resolution", MakeResolution(collection.Resolution));
+            cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
         }
@@ -335,6 +338,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Name", colorSpace.Name);
             cmd.Parameters.AddWithValue("@BitsPerChannel", colorSpace.BitsPerChannel);
             cmd.Parameters.AddWithValue("@IsMultiChannel", colorSpace.IsMultiChannel);
+            cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
         }
@@ -399,22 +403,23 @@ namespace AstroDAM
 
             cmd.CommandText = "UPDATE [tblFileFormats] SET " +
                 "[ShortName] = @ShortName, " +
-                "[LongName] = @LongName, " +
+                "[LongName] = @LongName " +
                 "WHERE [Id] = @Id";
 
             cmd.Parameters.AddWithValue("@ShortName", fileFormat.ShortName);
             cmd.Parameters.AddWithValue("@LongName", fileFormat.LongName);
+            cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
         }
 
-        public static int AddFileFormat(int Id, FileFormat fileFormat)
+        public static int AddFileFormat(FileFormat fileFormat)
         {
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
 
             cmd.CommandText = "INSERT INTO [tblFileFormats] ([ShortName],[LongName]) " +
-                "OUPUT INSERTED.Id " +
+                "OUTPUT INSERTED.Id " +
                 "VALUES (@ShortName,@LongName)";
 
             cmd.Parameters.AddWithValue("@ShortName", fileFormat.ShortName);
@@ -440,7 +445,7 @@ namespace AstroDAM
             {
                 int id = reader.GetInt32(0);
                 int type = reader.GetInt32(1);
-                float value = reader.GetFloat(2);
+                float value = (float)(float)reader.GetDouble(2);
 
                 optics.Add(new Optic(id, (Optic.OpticTypes)type, value));
             }
@@ -467,11 +472,12 @@ namespace AstroDAM
 
             cmd.CommandText = "UPDATE [tblOptics] SET " +
                 "[Type] = @Type, " +
-                "[Value] = @Value, " +
+                "[Value] = @Value " +
                 "WHERE [Id] = @Id";
 
             cmd.Parameters.AddWithValue("@Type", (int)optic.OpticType);
             cmd.Parameters.AddWithValue("@Value", optic.Value);
+            cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
         }
@@ -535,11 +541,12 @@ namespace AstroDAM
 
             cmd.CommandText = "UPDATE [tblPhotographers] SET " +
                 "[FirstName] = @FirstName, " +
-                "[LastName] = @LastName, " +
+                "[LastName] = @LastName " +
                 "WHERE [Id] = @Id";
 
             cmd.Parameters.AddWithValue("@ShortName", photographer.FirstName);
             cmd.Parameters.AddWithValue("@LongName", photographer.LastName);
+            cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
         }
@@ -553,8 +560,8 @@ namespace AstroDAM
                 "OUTPUT INSERTED.Id " +
                 "VALUES (@FirstName,@LastName)";
 
-            cmd.Parameters.AddWithValue("@ShortName", photographer.FirstName);
-            cmd.Parameters.AddWithValue("@LongName", photographer.LastName);
+            cmd.Parameters.AddWithValue("@FirstName", photographer.FirstName);
+            cmd.Parameters.AddWithValue("@LastName", photographer.LastName);
 
             return int.Parse(cmd.ExecuteScalar().ToString());
         }
@@ -577,9 +584,9 @@ namespace AstroDAM
                 int id = reader.GetInt32(0);
                 string manufacturer = reader.GetString(1);
                 string name = reader.GetString(2);
-                float aperture = reader.GetFloat(3);
-                float focalLength = reader.GetFloat(4);
-                float centralObstructionDiameter = reader.GetFloat(5);
+                float aperture = (float)reader.GetDouble(3);
+                float focalLength = (float)reader.GetDouble(4);
+                float centralObstructionDiameter = (float)reader.GetDouble(5);
                 bool robotic = reader.GetBoolean(6);
                 int mountType = reader.GetByte(7);
 
@@ -613,7 +620,7 @@ namespace AstroDAM
                 "[FocalLength] = @FocalLength, " +
                 "[CentralObstructionDiameter] = @CentralObstructionDiameter, " +
                 "[Robotic] = @Robotic, " +
-                "[MountType] = @MountType, " +
+                "[MountType] = @MountType " +
                 "WHERE [Id] = @Id";
 
             cmd.Parameters.AddWithValue("@Manufacturer", scope.Manufacturer);
@@ -623,6 +630,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@CentralObstructionDiameter", scope.CentralObstructionDiameter);
             cmd.Parameters.AddWithValue("@Robotic", scope.Robotic);
             cmd.Parameters.AddWithValue("@MountType", (int)scope.MountType);
+            cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
         }
@@ -664,9 +672,9 @@ namespace AstroDAM
             {
                 int id = reader.GetInt32(0);
                 string name = reader.GetString(1);
-                float longtitude = reader.GetFloat(2);
+                float longtitude = (float)reader.GetDouble(2);
                 bool longtitudeType = reader.GetBoolean(3);
-                float latitude = reader.GetFloat(4);
+                float latitude = (float)reader.GetDouble(4);
                 bool latitudeType = reader.GetBoolean(5);
 
                 sites.Add(new Site(id, name, longtitude, longtitudeType ? Site.LongtitudeTypes.North : Site.LongtitudeTypes.South,
@@ -698,7 +706,7 @@ namespace AstroDAM
                 "[Longtitude] = @Longtitude, " +
                 "[LongtitudeType] = @LongtitudeType, " +
                 "[Latitude] = @Latitude, " +
-                "[LatitudeType] = @LatitudeType, " +
+                "[LatitudeType] = @LatitudeType " +
                 "WHERE [Id] = @Id";
 
             cmd.Parameters.AddWithValue("@Name", site.Name);
@@ -706,6 +714,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@LongtitudeType", (int)site.LongtitudeType);
             cmd.Parameters.AddWithValue("@Latitude", site.Latitude);
             cmd.Parameters.AddWithValue("@LatitudeType", (int)site.LatitudeType);
+            cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
         }
@@ -715,9 +724,9 @@ namespace AstroDAM
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
 
-            cmd.CommandText = "INSERT INO [tblSites] ([Name],[Longtitude],[LongtitudeType],[Latitude],[LatitudeType]) " +
+            cmd.CommandText = "INSERT INTO [tblSites] ([Name],[Longtitude],[LongtitudeType],[Latitude],[LatitudeType]) " +
                 "OUTPUT INSERTED.Id " +
-                "VALUES (@Name,@Longtitude,@LongtitudeType,@Latitude,@LatitudeType";
+                "VALUES (@Name,@Longtitude,@LongtitudeType,@Latitude,@LatitudeType)";
 
             cmd.Parameters.AddWithValue("@Name", site.Name);
             cmd.Parameters.AddWithValue("@Longtitude", site.Longtitude);

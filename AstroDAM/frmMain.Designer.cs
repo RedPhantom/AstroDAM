@@ -46,38 +46,37 @@
             this.label17 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.clbOptics = new System.Windows.Forms.CheckedListBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.cbCamera = new System.Windows.Forms.ComboBox();
+            this.cbScope = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.tbComments = new System.Windows.Forms.TextBox();
+            this.cbPhotographers = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cbColorSpace = new System.Windows.Forms.ComboBox();
+            this.cbFileFormat = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.rbHasMetadataNo = new System.Windows.Forms.RadioButton();
+            this.rbHasMetadataYes = new System.Windows.Forms.RadioButton();
+            this.tbTotalFrames = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lnkHelp1 = new System.Windows.Forms.LinkLabel();
             this.btnRegenerateUUID = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbObjectTitle = new System.Windows.Forms.TextBox();
+            this.cbCatalogue = new System.Windows.Forms.ComboBox();
+            this.tbDateTime = new System.Windows.Forms.MaskedTextBox();
+            this.tbCollectionUuid = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -102,6 +101,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorSpacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbObjectId = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -116,7 +116,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTotalFrames)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -304,12 +304,12 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.checkedListBox1);
+            this.groupBox4.Controls.Add(this.clbOptics);
             this.groupBox4.Controls.Add(this.label16);
             this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.comboBox7);
-            this.groupBox4.Controls.Add(this.comboBox6);
+            this.groupBox4.Controls.Add(this.cbCamera);
+            this.groupBox4.Controls.Add(this.cbScope);
             this.groupBox4.Location = new System.Drawing.Point(6, 440);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(311, 182);
@@ -317,13 +317,13 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Equipment";
             // 
-            // checkedListBox1
+            // clbOptics
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(123, 70);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(120, 94);
-            this.checkedListBox1.TabIndex = 17;
+            this.clbOptics.FormattingEnabled = true;
+            this.clbOptics.Location = new System.Drawing.Point(123, 70);
+            this.clbOptics.Name = "clbOptics";
+            this.clbOptics.Size = new System.Drawing.Size(120, 94);
+            this.clbOptics.TabIndex = 17;
             // 
             // label16
             // 
@@ -352,26 +352,26 @@
             this.label14.TabIndex = 8;
             this.label14.Text = "Scope";
             // 
-            // comboBox7
+            // cbCamera
             // 
-            this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox7.Location = new System.Drawing.Point(123, 43);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(130, 21);
-            this.comboBox7.TabIndex = 16;
+            this.cbCamera.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCamera.Location = new System.Drawing.Point(123, 43);
+            this.cbCamera.Name = "cbCamera";
+            this.cbCamera.Size = new System.Drawing.Size(130, 21);
+            this.cbCamera.TabIndex = 16;
             // 
-            // comboBox6
+            // cbScope
             // 
-            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox6.Location = new System.Drawing.Point(123, 16);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(130, 21);
-            this.comboBox6.TabIndex = 16;
+            this.cbScope.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbScope.Location = new System.Drawing.Point(123, 16);
+            this.cbScope.Name = "cbScope";
+            this.cbScope.Size = new System.Drawing.Size(130, 21);
+            this.cbScope.TabIndex = 16;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.textBox3);
-            this.groupBox3.Controls.Add(this.comboBox5);
+            this.groupBox3.Controls.Add(this.tbComments);
+            this.groupBox3.Controls.Add(this.cbPhotographers);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Location = new System.Drawing.Point(6, 322);
@@ -381,21 +381,22 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Additional Information";
             // 
-            // textBox3
+            // tbComments
             // 
-            this.textBox3.Location = new System.Drawing.Point(120, 46);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(162, 57);
-            this.textBox3.TabIndex = 17;
+            this.tbComments.Location = new System.Drawing.Point(120, 46);
+            this.tbComments.MaxLength = 512;
+            this.tbComments.Multiline = true;
+            this.tbComments.Name = "tbComments";
+            this.tbComments.Size = new System.Drawing.Size(162, 57);
+            this.tbComments.TabIndex = 17;
             // 
-            // comboBox5
+            // cbPhotographers
             // 
-            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox5.Location = new System.Drawing.Point(120, 19);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(130, 21);
-            this.comboBox5.TabIndex = 16;
+            this.cbPhotographers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPhotographers.Location = new System.Drawing.Point(120, 19);
+            this.cbPhotographers.Name = "cbPhotographers";
+            this.cbPhotographers.Size = new System.Drawing.Size(130, 21);
+            this.cbPhotographers.TabIndex = 16;
             // 
             // label13
             // 
@@ -426,12 +427,12 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.comboBox4);
-            this.groupBox2.Controls.Add(this.comboBox3);
+            this.groupBox2.Controls.Add(this.cbColorSpace);
+            this.groupBox2.Controls.Add(this.cbFileFormat);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.panel3);
-            this.groupBox2.Controls.Add(this.numericUpDown1);
+            this.groupBox2.Controls.Add(this.tbTotalFrames);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Location = new System.Drawing.Point(6, 174);
@@ -441,21 +442,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File Information";
             // 
-            // comboBox4
+            // cbColorSpace
             // 
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.Location = new System.Drawing.Point(120, 106);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(130, 21);
-            this.comboBox4.TabIndex = 16;
+            this.cbColorSpace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbColorSpace.Location = new System.Drawing.Point(120, 106);
+            this.cbColorSpace.Name = "cbColorSpace";
+            this.cbColorSpace.Size = new System.Drawing.Size(130, 21);
+            this.cbColorSpace.TabIndex = 16;
             // 
-            // comboBox3
+            // cbFileFormat
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.Location = new System.Drawing.Point(120, 79);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(130, 21);
-            this.comboBox3.TabIndex = 16;
+            this.cbFileFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFileFormat.Location = new System.Drawing.Point(120, 79);
+            this.cbFileFormat.Name = "cbFileFormat";
+            this.cbFileFormat.Size = new System.Drawing.Size(130, 21);
+            this.cbFileFormat.TabIndex = 16;
             // 
             // label11
             // 
@@ -477,46 +478,46 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.radioButton2);
-            this.panel3.Controls.Add(this.radioButton1);
+            this.panel3.Controls.Add(this.rbHasMetadataNo);
+            this.panel3.Controls.Add(this.rbHasMetadataYes);
             this.panel3.Location = new System.Drawing.Point(120, 47);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(109, 26);
             this.panel3.TabIndex = 7;
             // 
-            // radioButton2
+            // rbHasMetadataNo
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(54, 3);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(41, 19);
-            this.radioButton2.TabIndex = 8;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "No";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbHasMetadataNo.AutoSize = true;
+            this.rbHasMetadataNo.Location = new System.Drawing.Point(54, 3);
+            this.rbHasMetadataNo.Name = "rbHasMetadataNo";
+            this.rbHasMetadataNo.Size = new System.Drawing.Size(41, 19);
+            this.rbHasMetadataNo.TabIndex = 8;
+            this.rbHasMetadataNo.TabStop = true;
+            this.rbHasMetadataNo.Text = "No";
+            this.rbHasMetadataNo.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rbHasMetadataYes
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(3, 3);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(45, 19);
-            this.radioButton1.TabIndex = 9;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Yes";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbHasMetadataYes.AutoSize = true;
+            this.rbHasMetadataYes.Location = new System.Drawing.Point(3, 3);
+            this.rbHasMetadataYes.Name = "rbHasMetadataYes";
+            this.rbHasMetadataYes.Size = new System.Drawing.Size(45, 19);
+            this.rbHasMetadataYes.TabIndex = 9;
+            this.rbHasMetadataYes.TabStop = true;
+            this.rbHasMetadataYes.Text = "Yes";
+            this.rbHasMetadataYes.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown1
+            // tbTotalFrames
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(120, 23);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.tbTotalFrames.Location = new System.Drawing.Point(120, 23);
+            this.tbTotalFrames.Maximum = new decimal(new int[] {
             1215752191,
             23,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(130, 20);
-            this.numericUpDown1.TabIndex = 6;
+            this.tbTotalFrames.Name = "tbTotalFrames";
+            this.tbTotalFrames.Size = new System.Drawing.Size(130, 20);
+            this.tbTotalFrames.TabIndex = 6;
             // 
             // label9
             // 
@@ -547,13 +548,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tbObjectId);
             this.groupBox1.Controls.Add(this.lnkHelp1);
             this.groupBox1.Controls.Add(this.btnRegenerateUUID);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.maskedTextBox1);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.tbObjectTitle);
+            this.groupBox1.Controls.Add(this.cbCatalogue);
+            this.groupBox1.Controls.Add(this.tbDateTime);
+            this.groupBox1.Controls.Add(this.tbCollectionUuid);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
@@ -579,53 +580,47 @@
             // 
             // btnRegenerateUUID
             // 
-            this.btnRegenerateUUID.Location = new System.Drawing.Point(286, 21);
+            this.btnRegenerateUUID.Location = new System.Drawing.Point(256, 22);
             this.btnRegenerateUUID.Name = "btnRegenerateUUID";
             this.btnRegenerateUUID.Size = new System.Drawing.Size(25, 23);
             this.btnRegenerateUUID.TabIndex = 15;
             this.btnRegenerateUUID.Text = "R";
             this.btnRegenerateUUID.UseVisualStyleBackColor = true;
+            this.btnRegenerateUUID.Click += new System.EventHandler(this.btnRegenerateUUID_Click);
             // 
-            // textBox2
+            // tbObjectTitle
             // 
-            this.textBox2.Location = new System.Drawing.Point(120, 129);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(130, 20);
-            this.textBox2.TabIndex = 14;
+            this.tbObjectTitle.Location = new System.Drawing.Point(120, 129);
+            this.tbObjectTitle.Name = "tbObjectTitle";
+            this.tbObjectTitle.Size = new System.Drawing.Size(130, 20);
+            this.tbObjectTitle.TabIndex = 14;
             // 
-            // comboBox2
+            // cbCatalogue
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.Location = new System.Drawing.Point(120, 102);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(130, 21);
-            this.comboBox2.TabIndex = 12;
+            this.cbCatalogue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCatalogue.Location = new System.Drawing.Point(120, 75);
+            this.cbCatalogue.Name = "cbCatalogue";
+            this.cbCatalogue.Size = new System.Drawing.Size(130, 21);
+            this.cbCatalogue.TabIndex = 13;
             // 
-            // comboBox1
+            // tbDateTime
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Location = new System.Drawing.Point(120, 75);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(130, 21);
-            this.comboBox1.TabIndex = 13;
+            this.tbDateTime.Font = new System.Drawing.Font("Consolas", 7.471698F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDateTime.Location = new System.Drawing.Point(120, 49);
+            this.tbDateTime.Mask = "0000-00-00 00:00:00";
+            this.tbDateTime.Name = "tbDateTime";
+            this.tbDateTime.Size = new System.Drawing.Size(130, 20);
+            this.tbDateTime.TabIndex = 11;
             // 
-            // maskedTextBox1
+            // tbCollectionUuid
             // 
-            this.maskedTextBox1.Font = new System.Drawing.Font("Consolas", 7.471698F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maskedTextBox1.Location = new System.Drawing.Point(120, 49);
-            this.maskedTextBox1.Mask = "0000-00-00 00:00:00";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(130, 20);
-            this.maskedTextBox1.TabIndex = 11;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Consolas", 7.471698F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(120, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(162, 20);
-            this.textBox1.TabIndex = 10;
+            this.tbCollectionUuid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(205)))));
+            this.tbCollectionUuid.Font = new System.Drawing.Font("Consolas", 7.471698F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCollectionUuid.Location = new System.Drawing.Point(120, 23);
+            this.tbCollectionUuid.Name = "tbCollectionUuid";
+            this.tbCollectionUuid.ReadOnly = true;
+            this.tbCollectionUuid.Size = new System.Drawing.Size(130, 20);
+            this.tbCollectionUuid.TabIndex = 10;
             // 
             // label7
             // 
@@ -827,6 +822,13 @@
             this.colorSpacesToolStripMenuItem.Text = "Color Spaces...";
             this.colorSpacesToolStripMenuItem.Click += new System.EventHandler(this.colorSpacesToolStripMenuItem_Click);
             // 
+            // tbObjectId
+            // 
+            this.tbObjectId.Location = new System.Drawing.Point(120, 102);
+            this.tbObjectId.Name = "tbObjectId";
+            this.tbObjectId.Size = new System.Drawing.Size(130, 20);
+            this.tbObjectId.TabIndex = 17;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -863,7 +865,7 @@
             this.groupBox2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTotalFrames)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -894,16 +896,15 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown tbTotalFrames;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnRegenerateUUID;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbObjectTitle;
+        private System.Windows.Forms.ComboBox cbCatalogue;
+        private System.Windows.Forms.MaskedTextBox tbDateTime;
+        private System.Windows.Forms.TextBox tbCollectionUuid;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -912,18 +913,18 @@
         private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem managementToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cataloguesToolStripMenuItem;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cbFileFormat;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbHasMetadataNo;
+        private System.Windows.Forms.RadioButton rbHasMetadataYes;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.TextBox tbComments;
+        private System.Windows.Forms.ComboBox cbPhotographers;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cbColorSpace;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ToolStripMenuItem formatsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem photographersToolStripMenuItem;
@@ -932,11 +933,11 @@
         private System.Windows.Forms.ToolStripMenuItem opticsToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.ComboBox cbScope;
+        private System.Windows.Forms.CheckedListBox clbOptics;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.ComboBox cbCamera;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
@@ -948,6 +949,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colorSpacesToolStripMenuItem;
+        private System.Windows.Forms.TextBox tbObjectId;
     }
 }
 

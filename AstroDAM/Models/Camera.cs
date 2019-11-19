@@ -11,7 +11,10 @@ namespace AstroDAM.Models
     [DataContract]
     public class Camera
     {
-        public Camera() { }
+        public Camera()
+        {
+            ColorSpaces = new List<ColorSpace>();
+        }
 
         public Camera(int id, string shortName, string longName, Size maxResolution, List<ColorSpace> colorSpaces)
         {

@@ -146,5 +146,14 @@ namespace AstroDAM
                 Application.Exit();
             }
         }
+
+        private void btnRegenerateUUID_Click(object sender, EventArgs e)
+        {
+            // Regenerates a UUID.
+            byte[] uuid = System.Guid.NewGuid().ToByteArray();
+            string uuidString = Convert.ToBase64String(uuid).Replace("=", "").Replace("+", "").Replace("/", "").Substring(0, 16);
+
+            tbCollectionUuid.Text = uuidString;
+        }
     }
 }

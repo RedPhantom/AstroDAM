@@ -12,7 +12,7 @@ namespace AstroDAM.Models
     {
         public Scope() { }
 
-        public Scope(int id, string manufacturer, string name, double aperture, double focalLength, double centralObstructionDiameter, bool robotic, MountTypes mountType)
+        public Scope(int id, string manufacturer, string name, float aperture, float focalLength, float centralObstructionDiameter, bool robotic, MountTypes mountType)
         {
             Id = id;
             Manufacturer = manufacturer;
@@ -37,13 +37,13 @@ namespace AstroDAM.Models
         public string Name { get; set; }
 
         [DataMember]
-        public double Aperture { get; set; }
+        public float Aperture { get; set; }
 
         [DataMember]
-        public double FocalLength { get; set; }
+        public float FocalLength { get; set; }
 
         [DataMember]
-        public double CentralObstructionDiameter { get; set; }
+        public float CentralObstructionDiameter { get; set; }
 
         [DataMember]
         public bool Robotic { get; set; }

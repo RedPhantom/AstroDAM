@@ -32,11 +32,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpCameras = new System.Windows.Forms.TabPage();
             this.cbCamerasColorSpaces = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnCamerasRemoveColorSpace = new System.Windows.Forms.Button();
             this.btnCamerasNew = new System.Windows.Forms.Button();
             this.btnCamerasRemove = new System.Windows.Forms.Button();
             this.btnCamerasSave = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCamerasAddColorSpace = new System.Windows.Forms.Button();
             this.tbCamerasYResolution = new System.Windows.Forms.TextBox();
             this.tbCamerasXResolution = new System.Windows.Forms.TextBox();
             this.tbCamerasShortName = new System.Windows.Forms.TextBox();
@@ -60,7 +60,7 @@
             this.btnCataloguesSave = new System.Windows.Forms.Button();
             this.tbCataloguesShortName = new System.Windows.Forms.TextBox();
             this.tbCataloguesLongName = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lblCatalogues = new System.Windows.Forms.Label();
             this.tbCataloguesId = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -86,9 +86,12 @@
             this.label20 = new System.Windows.Forms.Label();
             this.lbColorSpaces = new System.Windows.Forms.ListBox();
             this.tpFileFormats = new System.Windows.Forms.TabPage();
+            this.btnFileFormatsNew = new System.Windows.Forms.Button();
+            this.btnFileFormatsRemove = new System.Windows.Forms.Button();
+            this.btnFileFormatsSave = new System.Windows.Forms.Button();
             this.tbFileFormatShortName = new System.Windows.Forms.TextBox();
             this.tbFileFormatLongName = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
+            this.lblFileFormats = new System.Windows.Forms.Label();
             this.tbFileFormatId = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -99,7 +102,7 @@
             this.tpOptics = new System.Windows.Forms.TabPage();
             this.tbOpticValue = new System.Windows.Forms.TextBox();
             this.cbOpticType = new System.Windows.Forms.ComboBox();
-            this.label29 = new System.Windows.Forms.Label();
+            this.lblOptics = new System.Windows.Forms.Label();
             this.tbOpticId = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
@@ -108,7 +111,7 @@
             this.tpPhotographers = new System.Windows.Forms.TabPage();
             this.tbPhotographerLastName = new System.Windows.Forms.TextBox();
             this.tbPhotographerFirstName = new System.Windows.Forms.TextBox();
-            this.label33 = new System.Windows.Forms.Label();
+            this.lblPhotographers = new System.Windows.Forms.Label();
             this.tbPhotographerId = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
@@ -126,7 +129,7 @@
             this.tbScopeAperture = new System.Windows.Forms.TextBox();
             this.tbScopeName = new System.Windows.Forms.TextBox();
             this.tbScopeManufacturer = new System.Windows.Forms.TextBox();
-            this.label69 = new System.Windows.Forms.Label();
+            this.lblScopes = new System.Windows.Forms.Label();
             this.tbScopeId = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
@@ -141,7 +144,7 @@
             this.tbSiteLatitude = new System.Windows.Forms.TextBox();
             this.tbSiteName = new System.Windows.Forms.TextBox();
             this.tbSiteLongtitude = new System.Windows.Forms.TextBox();
-            this.label45 = new System.Windows.Forms.Label();
+            this.lblSites = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.tbSiteId = new System.Windows.Forms.TextBox();
             this.label50 = new System.Windows.Forms.Label();
@@ -153,6 +156,18 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btnOpticsNew = new System.Windows.Forms.Button();
+            this.btnOpticsRemove = new System.Windows.Forms.Button();
+            this.btnOpticsSave = new System.Windows.Forms.Button();
+            this.btnPhotographersNew = new System.Windows.Forms.Button();
+            this.btnPhotographersRemove = new System.Windows.Forms.Button();
+            this.btnPhotographersSave = new System.Windows.Forms.Button();
+            this.btnScopesNew = new System.Windows.Forms.Button();
+            this.btnScopesRemove = new System.Windows.Forms.Button();
+            this.btnScopesSave = new System.Windows.Forms.Button();
+            this.btnSitesNew = new System.Windows.Forms.Button();
+            this.btnSitesRemove = new System.Windows.Forms.Button();
+            this.btnSitesSave = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpCameras.SuspendLayout();
             this.tpCatalogues.SuspendLayout();
@@ -186,15 +201,16 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(800, 456);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.lbScopes_SelectedIndexChanged);
             // 
             // tpCameras
             // 
             this.tpCameras.Controls.Add(this.cbCamerasColorSpaces);
-            this.tpCameras.Controls.Add(this.button2);
+            this.tpCameras.Controls.Add(this.btnCamerasRemoveColorSpace);
             this.tpCameras.Controls.Add(this.btnCamerasNew);
             this.tpCameras.Controls.Add(this.btnCamerasRemove);
             this.tpCameras.Controls.Add(this.btnCamerasSave);
-            this.tpCameras.Controls.Add(this.button1);
+            this.tpCameras.Controls.Add(this.btnCamerasAddColorSpace);
             this.tpCameras.Controls.Add(this.tbCamerasYResolution);
             this.tpCameras.Controls.Add(this.tbCamerasXResolution);
             this.tpCameras.Controls.Add(this.tbCamerasShortName);
@@ -215,7 +231,7 @@
             this.tpCameras.Location = new System.Drawing.Point(4, 22);
             this.tpCameras.Name = "tpCameras";
             this.tpCameras.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCameras.Size = new System.Drawing.Size(792, 407);
+            this.tpCameras.Size = new System.Drawing.Size(792, 430);
             this.tpCameras.TabIndex = 0;
             this.tpCameras.Text = "Cameras";
             this.tpCameras.UseVisualStyleBackColor = true;
@@ -229,14 +245,15 @@
             this.cbCamerasColorSpaces.Size = new System.Drawing.Size(154, 21);
             this.cbCamerasColorSpaces.TabIndex = 6;
             // 
-            // button2
+            // btnCamerasRemoveColorSpace
             // 
-            this.button2.Location = new System.Drawing.Point(434, 178);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Remove...";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnCamerasRemoveColorSpace.Location = new System.Drawing.Point(434, 178);
+            this.btnCamerasRemoveColorSpace.Name = "btnCamerasRemoveColorSpace";
+            this.btnCamerasRemoveColorSpace.Size = new System.Drawing.Size(75, 23);
+            this.btnCamerasRemoveColorSpace.TabIndex = 9;
+            this.btnCamerasRemoveColorSpace.Text = "Remove...";
+            this.btnCamerasRemoveColorSpace.UseVisualStyleBackColor = true;
+            this.btnCamerasRemoveColorSpace.Click += new System.EventHandler(this.btnCamerasRemoveColorSpace_Click);
             // 
             // btnCamerasNew
             // 
@@ -267,14 +284,15 @@
             this.btnCamerasSave.UseVisualStyleBackColor = true;
             this.btnCamerasSave.Click += new System.EventHandler(this.btnCamerasSave_Click);
             // 
-            // button1
+            // btnCamerasAddColorSpace
             // 
-            this.button1.Location = new System.Drawing.Point(433, 149);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Add...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCamerasAddColorSpace.Location = new System.Drawing.Point(433, 149);
+            this.btnCamerasAddColorSpace.Name = "btnCamerasAddColorSpace";
+            this.btnCamerasAddColorSpace.Size = new System.Drawing.Size(75, 23);
+            this.btnCamerasAddColorSpace.TabIndex = 7;
+            this.btnCamerasAddColorSpace.Text = "Add...";
+            this.btnCamerasAddColorSpace.UseVisualStyleBackColor = true;
+            this.btnCamerasAddColorSpace.Click += new System.EventHandler(this.btnCamerasAddColorSpace_Click);
             // 
             // tbCamerasYResolution
             // 
@@ -436,7 +454,7 @@
             this.tpCatalogues.Controls.Add(this.btnCataloguesSave);
             this.tpCatalogues.Controls.Add(this.tbCataloguesShortName);
             this.tpCatalogues.Controls.Add(this.tbCataloguesLongName);
-            this.tpCatalogues.Controls.Add(this.label11);
+            this.tpCatalogues.Controls.Add(this.lblCatalogues);
             this.tpCatalogues.Controls.Add(this.tbCataloguesId);
             this.tpCatalogues.Controls.Add(this.label12);
             this.tpCatalogues.Controls.Add(this.label13);
@@ -447,7 +465,7 @@
             this.tpCatalogues.Location = new System.Drawing.Point(4, 22);
             this.tpCatalogues.Name = "tpCatalogues";
             this.tpCatalogues.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCatalogues.Size = new System.Drawing.Size(792, 407);
+            this.tpCatalogues.Size = new System.Drawing.Size(792, 430);
             this.tpCatalogues.TabIndex = 1;
             this.tpCatalogues.Text = "Catalogues";
             this.tpCatalogues.UseVisualStyleBackColor = true;
@@ -460,6 +478,7 @@
             this.btnCataloguesNew.TabIndex = 24;
             this.btnCataloguesNew.Text = "New";
             this.btnCataloguesNew.UseVisualStyleBackColor = true;
+            this.btnCataloguesNew.Click += new System.EventHandler(this.btnCataloguesNew_Click);
             // 
             // btnCataloguesRemove
             // 
@@ -478,6 +497,7 @@
             this.btnCataloguesSave.TabIndex = 22;
             this.btnCataloguesSave.Text = "Save";
             this.btnCataloguesSave.UseVisualStyleBackColor = true;
+            this.btnCataloguesSave.Click += new System.EventHandler(this.btnCataloguesSave_Click);
             // 
             // tbCataloguesShortName
             // 
@@ -486,7 +506,6 @@
             this.tbCataloguesShortName.Name = "tbCataloguesShortName";
             this.tbCataloguesShortName.Size = new System.Drawing.Size(152, 20);
             this.tbCataloguesShortName.TabIndex = 14;
-            this.tbCataloguesShortName.Validating += new System.ComponentModel.CancelEventHandler(this.tbCataloguesShortName_Validating);
             // 
             // tbCataloguesLongName
             // 
@@ -496,15 +515,15 @@
             this.tbCataloguesLongName.Size = new System.Drawing.Size(152, 20);
             this.tbCataloguesLongName.TabIndex = 13;
             // 
-            // label11
+            // lblCatalogues
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(168, 6);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(138, 35);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "Catalogues";
+            this.lblCatalogues.AutoSize = true;
+            this.lblCatalogues.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCatalogues.Location = new System.Drawing.Point(168, 6);
+            this.lblCatalogues.Name = "lblCatalogues";
+            this.lblCatalogues.Size = new System.Drawing.Size(138, 35);
+            this.lblCatalogues.TabIndex = 21;
+            this.lblCatalogues.Text = "Catalogues";
             // 
             // tbCataloguesId
             // 
@@ -570,6 +589,7 @@
             this.lbCatalogues.Name = "lbCatalogues";
             this.lbCatalogues.Size = new System.Drawing.Size(154, 394);
             this.lbCatalogues.TabIndex = 1;
+            this.lbCatalogues.SelectedIndexChanged += new System.EventHandler(this.lbCatalogues_SelectedIndexChanged);
             // 
             // tpColorSpaces
             // 
@@ -761,9 +781,12 @@
             // 
             // tpFileFormats
             // 
+            this.tpFileFormats.Controls.Add(this.btnFileFormatsNew);
+            this.tpFileFormats.Controls.Add(this.btnFileFormatsRemove);
+            this.tpFileFormats.Controls.Add(this.btnFileFormatsSave);
             this.tpFileFormats.Controls.Add(this.tbFileFormatShortName);
             this.tpFileFormats.Controls.Add(this.tbFileFormatLongName);
-            this.tpFileFormats.Controls.Add(this.label23);
+            this.tpFileFormats.Controls.Add(this.lblFileFormats);
             this.tpFileFormats.Controls.Add(this.tbFileFormatId);
             this.tpFileFormats.Controls.Add(this.label24);
             this.tpFileFormats.Controls.Add(this.label25);
@@ -773,10 +796,39 @@
             this.tpFileFormats.Controls.Add(this.lbFileFormats);
             this.tpFileFormats.Location = new System.Drawing.Point(4, 22);
             this.tpFileFormats.Name = "tpFileFormats";
-            this.tpFileFormats.Size = new System.Drawing.Size(792, 407);
+            this.tpFileFormats.Size = new System.Drawing.Size(792, 430);
             this.tpFileFormats.TabIndex = 3;
             this.tpFileFormats.Text = "File Formats";
             this.tpFileFormats.UseVisualStyleBackColor = true;
+            // 
+            // btnFileFormatsNew
+            // 
+            this.btnFileFormatsNew.Location = new System.Drawing.Point(331, 377);
+            this.btnFileFormatsNew.Name = "btnFileFormatsNew";
+            this.btnFileFormatsNew.Size = new System.Drawing.Size(75, 23);
+            this.btnFileFormatsNew.TabIndex = 36;
+            this.btnFileFormatsNew.Text = "New";
+            this.btnFileFormatsNew.UseVisualStyleBackColor = true;
+            this.btnFileFormatsNew.Click += new System.EventHandler(this.btnFileFormatsNew_Click);
+            // 
+            // btnFileFormatsRemove
+            // 
+            this.btnFileFormatsRemove.Location = new System.Drawing.Point(250, 377);
+            this.btnFileFormatsRemove.Name = "btnFileFormatsRemove";
+            this.btnFileFormatsRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnFileFormatsRemove.TabIndex = 35;
+            this.btnFileFormatsRemove.Text = "Remove";
+            this.btnFileFormatsRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnFileFormatsSave
+            // 
+            this.btnFileFormatsSave.Location = new System.Drawing.Point(169, 377);
+            this.btnFileFormatsSave.Name = "btnFileFormatsSave";
+            this.btnFileFormatsSave.Size = new System.Drawing.Size(75, 23);
+            this.btnFileFormatsSave.TabIndex = 34;
+            this.btnFileFormatsSave.Text = "Save";
+            this.btnFileFormatsSave.UseVisualStyleBackColor = true;
+            this.btnFileFormatsSave.Click += new System.EventHandler(this.btnFileFormatsSave_Click);
             // 
             // tbFileFormatShortName
             // 
@@ -785,7 +837,6 @@
             this.tbFileFormatShortName.Name = "tbFileFormatShortName";
             this.tbFileFormatShortName.Size = new System.Drawing.Size(64, 20);
             this.tbFileFormatShortName.TabIndex = 21;
-            this.tbFileFormatShortName.Validating += new System.ComponentModel.CancelEventHandler(this.tbFileFormatShortName_Validating);
             // 
             // tbFileFormatLongName
             // 
@@ -795,15 +846,15 @@
             this.tbFileFormatLongName.Size = new System.Drawing.Size(152, 20);
             this.tbFileFormatLongName.TabIndex = 20;
             // 
-            // label23
+            // lblFileFormats
             // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(168, 6);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(149, 35);
-            this.label23.TabIndex = 31;
-            this.label23.Text = "File Formats";
+            this.lblFileFormats.AutoSize = true;
+            this.lblFileFormats.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFileFormats.Location = new System.Drawing.Point(168, 6);
+            this.lblFileFormats.Name = "lblFileFormats";
+            this.lblFileFormats.Size = new System.Drawing.Size(149, 35);
+            this.lblFileFormats.TabIndex = 31;
+            this.lblFileFormats.Text = "File Formats";
             // 
             // tbFileFormatId
             // 
@@ -869,12 +920,16 @@
             this.lbFileFormats.Name = "lbFileFormats";
             this.lbFileFormats.Size = new System.Drawing.Size(154, 394);
             this.lbFileFormats.TabIndex = 24;
+            this.lbFileFormats.SelectedIndexChanged += new System.EventHandler(this.lbFileFormats_SelectedIndexChanged);
             // 
             // tpOptics
             // 
+            this.tpOptics.Controls.Add(this.btnOpticsNew);
+            this.tpOptics.Controls.Add(this.btnOpticsRemove);
+            this.tpOptics.Controls.Add(this.btnOpticsSave);
             this.tpOptics.Controls.Add(this.tbOpticValue);
             this.tpOptics.Controls.Add(this.cbOpticType);
-            this.tpOptics.Controls.Add(this.label29);
+            this.tpOptics.Controls.Add(this.lblOptics);
             this.tpOptics.Controls.Add(this.tbOpticId);
             this.tpOptics.Controls.Add(this.label32);
             this.tpOptics.Controls.Add(this.label31);
@@ -882,7 +937,7 @@
             this.tpOptics.Controls.Add(this.lbOptics);
             this.tpOptics.Location = new System.Drawing.Point(4, 22);
             this.tpOptics.Name = "tpOptics";
-            this.tpOptics.Size = new System.Drawing.Size(792, 407);
+            this.tpOptics.Size = new System.Drawing.Size(792, 430);
             this.tpOptics.TabIndex = 4;
             this.tpOptics.Text = "Optics";
             this.tpOptics.UseVisualStyleBackColor = true;
@@ -894,7 +949,6 @@
             this.tbOpticValue.Name = "tbOpticValue";
             this.tbOpticValue.Size = new System.Drawing.Size(70, 20);
             this.tbOpticValue.TabIndex = 24;
-            this.tbOpticValue.Validating += new System.ComponentModel.CancelEventHandler(this.tbOpticValue_Validating);
             // 
             // cbOpticType
             // 
@@ -904,17 +958,16 @@
             this.cbOpticType.Name = "cbOpticType";
             this.cbOpticType.Size = new System.Drawing.Size(121, 21);
             this.cbOpticType.TabIndex = 23;
-            this.cbOpticType.Validating += new System.ComponentModel.CancelEventHandler(this.cbOpticType_Validating);
             // 
-            // label29
+            // lblOptics
             // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(168, 6);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(86, 35);
-            this.label29.TabIndex = 35;
-            this.label29.Text = "Optics";
+            this.lblOptics.AutoSize = true;
+            this.lblOptics.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOptics.Location = new System.Drawing.Point(168, 6);
+            this.lblOptics.Name = "lblOptics";
+            this.lblOptics.Size = new System.Drawing.Size(86, 35);
+            this.lblOptics.TabIndex = 35;
+            this.lblOptics.Text = "Optics";
             // 
             // tbOpticId
             // 
@@ -960,12 +1013,16 @@
             this.lbOptics.Name = "lbOptics";
             this.lbOptics.Size = new System.Drawing.Size(154, 394);
             this.lbOptics.TabIndex = 32;
+            this.lbOptics.SelectedIndexChanged += new System.EventHandler(this.lbOptics_SelectedIndexChanged);
             // 
             // tpPhotographers
             // 
+            this.tpPhotographers.Controls.Add(this.btnPhotographersNew);
+            this.tpPhotographers.Controls.Add(this.btnPhotographersRemove);
+            this.tpPhotographers.Controls.Add(this.btnPhotographersSave);
             this.tpPhotographers.Controls.Add(this.tbPhotographerLastName);
             this.tpPhotographers.Controls.Add(this.tbPhotographerFirstName);
-            this.tpPhotographers.Controls.Add(this.label33);
+            this.tpPhotographers.Controls.Add(this.lblPhotographers);
             this.tpPhotographers.Controls.Add(this.tbPhotographerId);
             this.tpPhotographers.Controls.Add(this.label36);
             this.tpPhotographers.Controls.Add(this.label35);
@@ -973,7 +1030,7 @@
             this.tpPhotographers.Controls.Add(this.lbPhotographers);
             this.tpPhotographers.Location = new System.Drawing.Point(4, 22);
             this.tpPhotographers.Name = "tpPhotographers";
-            this.tpPhotographers.Size = new System.Drawing.Size(792, 407);
+            this.tpPhotographers.Size = new System.Drawing.Size(792, 430);
             this.tpPhotographers.TabIndex = 5;
             this.tpPhotographers.Text = "Photographers";
             this.tpPhotographers.UseVisualStyleBackColor = true;
@@ -994,15 +1051,15 @@
             this.tbPhotographerFirstName.Size = new System.Drawing.Size(100, 20);
             this.tbPhotographerFirstName.TabIndex = 26;
             // 
-            // label33
+            // lblPhotographers
             // 
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(168, 6);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(180, 35);
-            this.label33.TabIndex = 39;
-            this.label33.Text = "Photographers";
+            this.lblPhotographers.AutoSize = true;
+            this.lblPhotographers.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhotographers.Location = new System.Drawing.Point(168, 6);
+            this.lblPhotographers.Name = "lblPhotographers";
+            this.lblPhotographers.Size = new System.Drawing.Size(180, 35);
+            this.lblPhotographers.TabIndex = 39;
+            this.lblPhotographers.Text = "Photographers";
             // 
             // tbPhotographerId
             // 
@@ -1048,9 +1105,13 @@
             this.lbPhotographers.Name = "lbPhotographers";
             this.lbPhotographers.Size = new System.Drawing.Size(154, 394);
             this.lbPhotographers.TabIndex = 36;
+            this.lbPhotographers.SelectedIndexChanged += new System.EventHandler(this.lbPhotographers_SelectedIndexChanged);
             // 
             // tpScopes
             // 
+            this.tpScopes.Controls.Add(this.btnScopesNew);
+            this.tpScopes.Controls.Add(this.btnScopesRemove);
+            this.tpScopes.Controls.Add(this.btnScopesSave);
             this.tpScopes.Controls.Add(this.cbScopeMountType);
             this.tpScopes.Controls.Add(this.panel1);
             this.tpScopes.Controls.Add(this.label44);
@@ -1060,7 +1121,7 @@
             this.tpScopes.Controls.Add(this.tbScopeAperture);
             this.tpScopes.Controls.Add(this.tbScopeName);
             this.tpScopes.Controls.Add(this.tbScopeManufacturer);
-            this.tpScopes.Controls.Add(this.label69);
+            this.tpScopes.Controls.Add(this.lblScopes);
             this.tpScopes.Controls.Add(this.tbScopeId);
             this.tpScopes.Controls.Add(this.label42);
             this.tpScopes.Controls.Add(this.label41);
@@ -1071,7 +1132,7 @@
             this.tpScopes.Controls.Add(this.lbScopes);
             this.tpScopes.Location = new System.Drawing.Point(4, 22);
             this.tpScopes.Name = "tpScopes";
-            this.tpScopes.Size = new System.Drawing.Size(792, 407);
+            this.tpScopes.Size = new System.Drawing.Size(792, 430);
             this.tpScopes.TabIndex = 6;
             this.tpScopes.Text = "Scopes";
             this.tpScopes.UseVisualStyleBackColor = true;
@@ -1174,15 +1235,15 @@
             this.tbScopeManufacturer.Size = new System.Drawing.Size(100, 20);
             this.tbScopeManufacturer.TabIndex = 29;
             // 
-            // label69
+            // lblScopes
             // 
-            this.label69.AutoSize = true;
-            this.label69.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label69.Location = new System.Drawing.Point(168, 6);
-            this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(94, 35);
-            this.label69.TabIndex = 46;
-            this.label69.Text = "Scopes";
+            this.lblScopes.AutoSize = true;
+            this.lblScopes.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScopes.Location = new System.Drawing.Point(168, 6);
+            this.lblScopes.Name = "lblScopes";
+            this.lblScopes.Size = new System.Drawing.Size(94, 35);
+            this.lblScopes.TabIndex = 46;
+            this.lblScopes.Text = "Scopes";
             // 
             // tbScopeId
             // 
@@ -1255,15 +1316,19 @@
             this.lbScopes.Name = "lbScopes";
             this.lbScopes.Size = new System.Drawing.Size(154, 394);
             this.lbScopes.TabIndex = 41;
+            this.lbScopes.SelectedIndexChanged += new System.EventHandler(this.lbScopes_SelectedIndexChanged);
             // 
             // tpSites
             // 
+            this.tpSites.Controls.Add(this.btnSitesNew);
+            this.tpSites.Controls.Add(this.btnSitesRemove);
+            this.tpSites.Controls.Add(this.btnSitesSave);
             this.tpSites.Controls.Add(this.cbSiteLatitudeType);
             this.tpSites.Controls.Add(this.cbSiteLongtitudeType);
             this.tpSites.Controls.Add(this.tbSiteLatitude);
             this.tpSites.Controls.Add(this.tbSiteName);
             this.tpSites.Controls.Add(this.tbSiteLongtitude);
-            this.tpSites.Controls.Add(this.label45);
+            this.tpSites.Controls.Add(this.lblSites);
             this.tpSites.Controls.Add(this.label48);
             this.tpSites.Controls.Add(this.tbSiteId);
             this.tpSites.Controls.Add(this.label50);
@@ -1272,7 +1337,7 @@
             this.tpSites.Controls.Add(this.lbSites);
             this.tpSites.Location = new System.Drawing.Point(4, 22);
             this.tpSites.Name = "tpSites";
-            this.tpSites.Size = new System.Drawing.Size(792, 407);
+            this.tpSites.Size = new System.Drawing.Size(792, 430);
             this.tpSites.TabIndex = 7;
             this.tpSites.Text = "Sites";
             this.tpSites.UseVisualStyleBackColor = true;
@@ -1319,15 +1384,15 @@
             this.tbSiteLongtitude.Size = new System.Drawing.Size(100, 20);
             this.tbSiteLongtitude.TabIndex = 38;
             // 
-            // label45
+            // lblSites
             // 
-            this.label45.AutoSize = true;
-            this.label45.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label45.Location = new System.Drawing.Point(168, 6);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(66, 35);
-            this.label45.TabIndex = 50;
-            this.label45.Text = "Sites";
+            this.lblSites.AutoSize = true;
+            this.lblSites.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSites.Location = new System.Drawing.Point(168, 6);
+            this.lblSites.Name = "lblSites";
+            this.lblSites.Size = new System.Drawing.Size(66, 35);
+            this.lblSites.TabIndex = 50;
+            this.lblSites.Text = "Sites";
             // 
             // label48
             // 
@@ -1382,6 +1447,7 @@
             this.lbSites.Name = "lbSites";
             this.lbSites.Size = new System.Drawing.Size(154, 394);
             this.lbSites.TabIndex = 47;
+            this.lbSites.SelectedIndexChanged += new System.EventHandler(this.lbSites_SelectedIndexChanged);
             // 
             // pnlPreparing
             // 
@@ -1423,6 +1489,122 @@
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(77, 19);
             this.lblStatus.Text = "Preparing...";
+            // 
+            // btnOpticsNew
+            // 
+            this.btnOpticsNew.Location = new System.Drawing.Point(331, 377);
+            this.btnOpticsNew.Name = "btnOpticsNew";
+            this.btnOpticsNew.Size = new System.Drawing.Size(75, 23);
+            this.btnOpticsNew.TabIndex = 39;
+            this.btnOpticsNew.Text = "New";
+            this.btnOpticsNew.UseVisualStyleBackColor = true;
+            this.btnOpticsNew.Click += new System.EventHandler(this.btnOpticsNew_Click);
+            // 
+            // btnOpticsRemove
+            // 
+            this.btnOpticsRemove.Location = new System.Drawing.Point(250, 377);
+            this.btnOpticsRemove.Name = "btnOpticsRemove";
+            this.btnOpticsRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnOpticsRemove.TabIndex = 38;
+            this.btnOpticsRemove.Text = "Remove";
+            this.btnOpticsRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnOpticsSave
+            // 
+            this.btnOpticsSave.Location = new System.Drawing.Point(169, 377);
+            this.btnOpticsSave.Name = "btnOpticsSave";
+            this.btnOpticsSave.Size = new System.Drawing.Size(75, 23);
+            this.btnOpticsSave.TabIndex = 37;
+            this.btnOpticsSave.Text = "Save";
+            this.btnOpticsSave.UseVisualStyleBackColor = true;
+            this.btnOpticsSave.Click += new System.EventHandler(this.btnOpticsSave_Click);
+            // 
+            // btnPhotographersNew
+            // 
+            this.btnPhotographersNew.Location = new System.Drawing.Point(331, 377);
+            this.btnPhotographersNew.Name = "btnPhotographersNew";
+            this.btnPhotographersNew.Size = new System.Drawing.Size(75, 23);
+            this.btnPhotographersNew.TabIndex = 42;
+            this.btnPhotographersNew.Text = "New";
+            this.btnPhotographersNew.UseVisualStyleBackColor = true;
+            this.btnPhotographersNew.Click += new System.EventHandler(this.btnPhotographersNew_Click);
+            // 
+            // btnPhotographersRemove
+            // 
+            this.btnPhotographersRemove.Location = new System.Drawing.Point(250, 377);
+            this.btnPhotographersRemove.Name = "btnPhotographersRemove";
+            this.btnPhotographersRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnPhotographersRemove.TabIndex = 41;
+            this.btnPhotographersRemove.Text = "Remove";
+            this.btnPhotographersRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnPhotographersSave
+            // 
+            this.btnPhotographersSave.Location = new System.Drawing.Point(169, 377);
+            this.btnPhotographersSave.Name = "btnPhotographersSave";
+            this.btnPhotographersSave.Size = new System.Drawing.Size(75, 23);
+            this.btnPhotographersSave.TabIndex = 40;
+            this.btnPhotographersSave.Text = "Save";
+            this.btnPhotographersSave.UseVisualStyleBackColor = true;
+            this.btnPhotographersSave.Click += new System.EventHandler(this.btnPhotographersSave_Click);
+            // 
+            // btnScopesNew
+            // 
+            this.btnScopesNew.Location = new System.Drawing.Point(331, 377);
+            this.btnScopesNew.Name = "btnScopesNew";
+            this.btnScopesNew.Size = new System.Drawing.Size(75, 23);
+            this.btnScopesNew.TabIndex = 53;
+            this.btnScopesNew.Text = "New";
+            this.btnScopesNew.UseVisualStyleBackColor = true;
+            this.btnScopesNew.Click += new System.EventHandler(this.btnScopesNew_Click);
+            // 
+            // btnScopesRemove
+            // 
+            this.btnScopesRemove.Location = new System.Drawing.Point(250, 377);
+            this.btnScopesRemove.Name = "btnScopesRemove";
+            this.btnScopesRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnScopesRemove.TabIndex = 52;
+            this.btnScopesRemove.Text = "Remove";
+            this.btnScopesRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnScopesSave
+            // 
+            this.btnScopesSave.Location = new System.Drawing.Point(169, 377);
+            this.btnScopesSave.Name = "btnScopesSave";
+            this.btnScopesSave.Size = new System.Drawing.Size(75, 23);
+            this.btnScopesSave.TabIndex = 51;
+            this.btnScopesSave.Text = "Save";
+            this.btnScopesSave.UseVisualStyleBackColor = true;
+            this.btnScopesSave.Click += new System.EventHandler(this.btnScopesSave_Click);
+            // 
+            // btnSitesNew
+            // 
+            this.btnSitesNew.Location = new System.Drawing.Point(331, 377);
+            this.btnSitesNew.Name = "btnSitesNew";
+            this.btnSitesNew.Size = new System.Drawing.Size(75, 23);
+            this.btnSitesNew.TabIndex = 53;
+            this.btnSitesNew.Text = "New";
+            this.btnSitesNew.UseVisualStyleBackColor = true;
+            this.btnSitesNew.Click += new System.EventHandler(this.btnSitesNew_Click);
+            // 
+            // btnSitesRemove
+            // 
+            this.btnSitesRemove.Location = new System.Drawing.Point(250, 377);
+            this.btnSitesRemove.Name = "btnSitesRemove";
+            this.btnSitesRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnSitesRemove.TabIndex = 52;
+            this.btnSitesRemove.Text = "Remove";
+            this.btnSitesRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnSitesSave
+            // 
+            this.btnSitesSave.Location = new System.Drawing.Point(169, 377);
+            this.btnSitesSave.Name = "btnSitesSave";
+            this.btnSitesSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSitesSave.TabIndex = 51;
+            this.btnSitesSave.Text = "Save";
+            this.btnSitesSave.UseVisualStyleBackColor = true;
+            this.btnSitesSave.Click += new System.EventHandler(this.btnSitesSave_Click);
             // 
             // frmManager
             // 
@@ -1494,9 +1676,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCamerasRemoveColorSpace;
         private System.Windows.Forms.Button btnCamerasSave;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCamerasAddColorSpace;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListBox lbCamerasColorSpaces;
         private System.Windows.Forms.Button btnCamerasRemove;
@@ -1505,7 +1687,7 @@
         private System.Windows.Forms.ListBox lbCatalogues;
         private System.Windows.Forms.TextBox tbCataloguesShortName;
         private System.Windows.Forms.TextBox tbCataloguesLongName;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblCatalogues;
         private System.Windows.Forms.TextBox tbCataloguesId;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
@@ -1527,7 +1709,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox tbFileFormatShortName;
         private System.Windows.Forms.TextBox tbFileFormatLongName;
-        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label lblFileFormats;
         private System.Windows.Forms.TextBox tbFileFormatId;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
@@ -1535,7 +1717,7 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.ListBox lbFileFormats;
-        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label lblOptics;
         private System.Windows.Forms.TextBox tbOpticId;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.ListBox lbOptics;
@@ -1545,7 +1727,7 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.TextBox tbPhotographerLastName;
         private System.Windows.Forms.TextBox tbPhotographerFirstName;
-        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label lblPhotographers;
         private System.Windows.Forms.TextBox tbPhotographerId;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label35;
@@ -1553,7 +1735,7 @@
         private System.Windows.Forms.ListBox lbPhotographers;
         private System.Windows.Forms.TextBox tbScopeName;
         private System.Windows.Forms.TextBox tbScopeManufacturer;
-        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Label lblScopes;
         private System.Windows.Forms.TextBox tbScopeId;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label39;
@@ -1571,7 +1753,7 @@
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label lblSites;
         private System.Windows.Forms.TextBox tbSiteId;
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.ListBox lbSites;
@@ -1596,5 +1778,20 @@
         private System.Windows.Forms.Button btnColorSpacesAdd;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private System.Windows.Forms.Button btnFileFormatsNew;
+        private System.Windows.Forms.Button btnFileFormatsRemove;
+        private System.Windows.Forms.Button btnFileFormatsSave;
+        private System.Windows.Forms.Button btnOpticsNew;
+        private System.Windows.Forms.Button btnOpticsRemove;
+        private System.Windows.Forms.Button btnOpticsSave;
+        private System.Windows.Forms.Button btnPhotographersNew;
+        private System.Windows.Forms.Button btnPhotographersRemove;
+        private System.Windows.Forms.Button btnPhotographersSave;
+        private System.Windows.Forms.Button btnScopesNew;
+        private System.Windows.Forms.Button btnScopesRemove;
+        private System.Windows.Forms.Button btnScopesSave;
+        private System.Windows.Forms.Button btnSitesNew;
+        private System.Windows.Forms.Button btnSitesRemove;
+        private System.Windows.Forms.Button btnSitesSave;
     }
 }
