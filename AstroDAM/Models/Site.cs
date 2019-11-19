@@ -10,6 +10,8 @@ namespace AstroDAM.Models
     [DataContract]
     public class Site
     {
+        public Site() { }
+
         public Site(int iD, string name, double longtitude, LongtitudeTypes longtitudeType, double latitude, LatitudeTypes latitudeType)
         {
             Id = iD;

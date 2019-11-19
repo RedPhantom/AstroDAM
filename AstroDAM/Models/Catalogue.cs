@@ -10,6 +10,8 @@ namespace AstroDAM.Models
     [DataContract]
     public class Catalogue
     {
+        public Catalogue() { }
+
         public Catalogue(int id, string shortName, string longName)
         {
             Id = id;

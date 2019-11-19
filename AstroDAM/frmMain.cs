@@ -108,6 +108,12 @@ namespace AstroDAM
             new frmManager(frmManager.ManagerTabs.Catalogues).ShowDialog();
         }
 
+        private void colorSpacesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmManager(frmManager.ManagerTabs.ColorSpaces).ShowDialog();
+
+        }
+
         private void formatsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManager(frmManager.ManagerTabs.FileFormats).ShowDialog();
@@ -131,6 +137,14 @@ namespace AstroDAM
         private void sitesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManager(frmManager.ManagerTabs.Sites).ShowDialog();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to quit?", "Quitting?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }

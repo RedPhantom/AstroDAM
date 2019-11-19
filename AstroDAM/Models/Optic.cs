@@ -10,6 +10,8 @@ namespace AstroDAM.Models
     [DataContract]
     public class Optic
     {
+        public Optic() { }
+
         public Optic(int id, OpticTypes opticType, double value)
         {
             Id = id;
@@ -47,7 +49,8 @@ namespace AstroDAM.Models
             Erfle,
             Konig,
             RKE,
-            Nagler
+            Nagler,
+            Other
         }
     }
 }

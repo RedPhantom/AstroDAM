@@ -10,6 +10,8 @@ namespace AstroDAM.Models
     [DataContract]
     public class FileFormat
     {
+        public FileFormat() { }
+
         public FileFormat(int id, string shortName, string longName)
         {
             Id = id;

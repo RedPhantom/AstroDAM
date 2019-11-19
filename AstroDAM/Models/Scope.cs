@@ -10,6 +10,8 @@ namespace AstroDAM.Models
     [DataContract]
     public class Scope
     {
+        public Scope() { }
+
         public Scope(int id, string manufacturer, string name, double aperture, double focalLength, double centralObstructionDiameter, bool robotic, MountTypes mountType)
         {
             Id = id;
