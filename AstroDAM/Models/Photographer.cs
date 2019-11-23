@@ -30,5 +30,15 @@ namespace AstroDAM.Models
 
         [DataMember]
         public string LastName { get; set; }
+
+        public string GetInformalName()
+        {
+            return FirstName + " " + LastName;
+        }
+
+        public string GetFormalName()
+        {
+            return LastName + ", " + FirstName;
+        }
     }
 }

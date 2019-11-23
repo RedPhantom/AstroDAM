@@ -57,5 +57,10 @@ namespace AstroDAM.Models
             EqNorth,
             EqSouth
         }
+
+        public string GetScopeName()
+        {
+            return Manufacturer + " " + Name;
+        }
     }
 }

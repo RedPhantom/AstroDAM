@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AstroDAM
 {
@@ -194,21 +195,22 @@ namespace AstroDAM
 
         public static List<Collection> GetCollections(List<int> Ids = null)
         {
-            List<Collection> Collections = new List<Collection>();
+            List<Collection> collections = new List<Collection>();
 
             string selector = SelectorBuilder(Ids);
 
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
 
-            cmd.CommandText = "SELECT [Id],[CaptureDateTime],[CatalogueId],[ObjectId],[ObjectTitle]," +
-                "[NumberFrames],[FileFormat],[ColorSpace],[Resolution] FROM [tblCollections] " + selector;
+            cmd.CommandText = "SELECT [CaptureDateTime],[Catalogue],[Object],[ObjectTitle]," +
+                "[NumberFrames],[FileFormat],[ColorSpace],[Camera],[Scope],[Site],[Optics]," +
+                "[Photographer],[Resolution],[Comments] FROM [tblCollections] " + selector;
 
             SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-                int id = reader.GetInt32(0);
+                string id = reader.GetString(0);
                 DateTime captureDateTime = reader.GetDateTime(1);
                 Catalogue catalogue = GetCatalogues(new List<int>() { reader.GetInt32(2) })[0];
                 int objectId = reader.GetInt32(3);
@@ -216,12 +218,20 @@ namespace AstroDAM
                 int numberFrames = reader.GetInt32(5);
                 FileFormat fileFormat = GetFileFormats(new List<int>() { reader.GetInt32(6) })[0];
                 ColorSpace colorSpace = GetColorSpaces(new List<int>() { reader.GetInt32(7) })[0];
-                Size resolution = ParseResolution(reader.GetString(8));
+                Camera camera = GetCameras(new List<int>() { reader.GetInt32(8) })[0];
+                Scope scope = GetScopes(new List<int>() { reader.GetInt32(9) })[0];
+                Site site = GetSites(new List<int>() { reader.GetInt32(10) })[0];
+                List<Optic> optics = GetOptics(ParseIntList(reader.GetString(11)));
+                Photographer photographer = GetPhotographers(new List<int>() { reader.GetInt32(12) })[0];
+                Size resolution = ParseResolution(reader.GetString(13));
+                string comments = reader.GetString(14);
 
-                Collections.Add(new Collection(id, captureDateTime, catalogue, objectId, objectTitle, numberFrames, fileFormat, colorSpace, resolution));
+                collections.Add(new Collection(id, captureDateTime, catalogue, objectId, objectTitle,
+                    numberFrames, fileFormat, colorSpace, camera, scope, site, optics, photographer,
+                    resolution, comments));
             }
 
-            return Collections;
+            return collections;
         }
 
         public static void DeleteCollections(List<int> Ids = null)
@@ -236,7 +246,7 @@ namespace AstroDAM
             cmd.ExecuteNonQuery();
         }
 
-        public static void EditCollection(int Id, Collection collection)
+        public static void EditCollection(string Id, Collection collection)
         {
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
@@ -247,43 +257,64 @@ namespace AstroDAM
                 "[ObjectId] = @ObjectId, " +
                 "[ObjectTitle] = @ObjectTitle, " +
                 "[NumberFrames] = @NumberFrames, " +
-                "[FileFormat] = @FileFormat " +
-                "[ColorSpace] = @ColorSpace " +
-                "[Resolution] = @Resolution " +
+                "[FileFormat] = @FileFormat, " +
+                "[ColorSpace] = @ColorSpace, " +
+                "[Camera] = @Camera, " +
+                "[Scope] = @Scope, " +
+                "[Site] = @Site, " +
+                "[Optics] = @Optics, " +
+                "[Photographer] = @Photographer, " +
+                "[Resolution] = @Resolution, " +
+                "[Comments] = @Comments " +
                 "WHERE [Id] = @Id";
 
             cmd.Parameters.AddWithValue("@CaptureDateTime", collection.CaptureDateTime);
             cmd.Parameters.AddWithValue("@CatalogueId", collection.Catalogue.Id);
-            cmd.Parameters.AddWithValue("@ObjectId", collection.ObjectId);
+            cmd.Parameters.AddWithValue("@ObjectId", collection.Object);
             cmd.Parameters.AddWithValue("@ObjectTitle", collection.ObjectTitle);
             cmd.Parameters.AddWithValue("@NumberFrames", collection.NumberFrames);
             cmd.Parameters.AddWithValue("@FileFormat", collection.FileFormat.Id);
             cmd.Parameters.AddWithValue("@ColorSpace", collection.ColorSpace.Id);
+            cmd.Parameters.AddWithValue("@Camera", collection.Camera.Id);
+            cmd.Parameters.AddWithValue("@Scope", collection.Scope.Id);
+            cmd.Parameters.AddWithValue("@Site", collection.Site.Id);
+            cmd.Parameters.AddWithValue("@Optics", MakeIntList(collection.Optics.Select(x => x.Id).ToList()));
+            cmd.Parameters.AddWithValue("@Photographer", collection.Photographer.Id);
             cmd.Parameters.AddWithValue("@Resolution", MakeResolution(collection.Resolution));
+            cmd.Parameters.AddWithValue("@Comments",collection.Comments);
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
         }
 
-        public static int AddCollection(Collection collection)
+        public static bool AddCollection(Collection collection)
         {
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
 
-            cmd.CommandText = "INSERT INTO [tblCollections] ([CaptureDateTime],[CatalogueId],[ObjectId],[ObjectTitle],[NumberFrames],[FileFormat],[ColorSpace],[Resolution]) " +
+            cmd.CommandText = "INSERT INTO [tblCollections] ([Id],[CaptureDateTime],[Catalogue],[Object],[ObjectTitle]," +
+                "[NumberFrames],[FileFormat],[ColorSpace],[Camera],[Scope],[Site],[Optics]," +
+                "[Photographer],[Resolution],[Comments]) " +
                 "OUTPUT INSERTED.Id " +
-                "VALUES (@CaptureDateTime,@CatalogueId,@ObjectId,@ObjectTitle,@NumberFrames,@FileFormat,@ColorSpace,@Resolution)";
+                "VALUES (@Id,@CaptureDateTime,@CatalogueId,@ObjectId,@ObjectTitle,@NumberFrames,@FileFormat,@ColorSpace,@Camera,@Scope,@Site,@Optics,@Photographer,@Resolution,@Comments)";
 
+            cmd.Parameters.AddWithValue("@Id", collection.Id);
             cmd.Parameters.AddWithValue("@CaptureDateTime", collection.CaptureDateTime);
             cmd.Parameters.AddWithValue("@CatalogueId", collection.Catalogue.Id);
-            cmd.Parameters.AddWithValue("@ObjectId", collection.ObjectId);
+            cmd.Parameters.AddWithValue("@ObjectId", collection.Object);
             cmd.Parameters.AddWithValue("@ObjectTitle", collection.ObjectTitle);
             cmd.Parameters.AddWithValue("@NumberFrames", collection.NumberFrames);
             cmd.Parameters.AddWithValue("@FileFormat", collection.FileFormat.Id);
             cmd.Parameters.AddWithValue("@ColorSpace", collection.ColorSpace.Id);
+            cmd.Parameters.AddWithValue("@Camera", collection.Camera.Id);
+            cmd.Parameters.AddWithValue("@Scope", collection.Scope.Id);
+            cmd.Parameters.AddWithValue("@Site", collection.Site.Id);
+            cmd.Parameters.AddWithValue("@Optics", MakeIntList(collection.Optics.Select(x => x.Id).ToList()));
+            cmd.Parameters.AddWithValue("@Photographer", collection.Photographer.Id);
             cmd.Parameters.AddWithValue("@Resolution", MakeResolution(collection.Resolution));
+            cmd.Parameters.AddWithValue("@Comments",collection.Comments);
 
-            return int.Parse(cmd.ExecuteScalar().ToString());
+            return cmd.ExecuteNonQuery() == 1;
         }
 
         public static List<ColorSpace> GetColorSpaces(List<int> Ids = null)
@@ -738,6 +769,60 @@ namespace AstroDAM
         }
 
         #region Utility Functions
+        /// <summary>
+        /// Checks whether a specific object is in use in the collections table before deletion.
+        /// </summary>
+        /// <param name="Type">Object Type</param>
+        /// <param name="Id">Object id</param>
+        /// <returns></returns>
+        public static bool ObjectDeletionChecker(frmManager.ManagerTabs Type, int Id)
+        {
+            SqlConnection con = GetCon();
+
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandText = "SELECT [Id] FROM [tblCollections] ";
+
+            switch (Type)
+            {
+                case frmManager.ManagerTabs.Cameras:
+                    cmd.CommandText = "WHERE [Camera] = @Id";
+                    break;
+                case frmManager.ManagerTabs.Catalogues:
+                    cmd.CommandText = "WHERE [CatalogueId] = @Id";
+
+                    break;
+                case frmManager.ManagerTabs.ColorSpaces:
+                    cmd.CommandText = "WHERE [ColorSpace] = @Id";
+
+                    break;
+                case frmManager.ManagerTabs.FileFormats:
+                    cmd.CommandText = "WHERE [FileFormat] = @Id";
+
+                    break;
+                case frmManager.ManagerTabs.Optics:
+                    cmd.CommandText = "WHERE [Optics] LIKE '%@Id%'";
+                    
+                    break;
+                case frmManager.ManagerTabs.Photographers:
+                    cmd.CommandText = "WHERE [Photographer] = @Id";
+
+                    break;
+                case frmManager.ManagerTabs.Scopes:
+                    cmd.CommandText = "WHERE [Scope] = @Id";
+
+                    break;
+                case frmManager.ManagerTabs.Sites:
+                    cmd.CommandText = "WHERE [Site] = @Id";
+
+                    break;
+                default:
+                    break;
+            }
+
+            cmd.Parameters.AddWithValue("@Id", Id);
+            return cmd.ExecuteReader().HasRows;
+        }
+
         public static Size ParseResolution(string str)
         {
             List<int> xyData = ParseIntList(str);
@@ -805,6 +890,26 @@ namespace AstroDAM
             }
 
             return true;
+        }
+
+        public static void PopulateTreeView(ref TreeView treeView, bool isAscending)
+        {
+            SqlConnection con = GetCon();
+            SqlCommand cmd = con.CreateCommand();
+
+            // returns dates, ids and object titles of collections
+            cmd.CommandText = "SELECT [Id],CAST(FLOOR(CAST([CaptureDateTime] as FLOAT)) as DateTime),[ObjectTitle],[CaptureDateTime] FROM tblCollections ORDER BY [CaptureDateTime] " + (isAscending ? "ASC" : "DESC");
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string posibleKey = reader.GetDateTime(1).ToString("yyyy-MM-dd");
+                if (!treeView.Nodes.ContainsKey(posibleKey))
+                    treeView.Nodes.Add(posibleKey, posibleKey);
+
+                treeView.Nodes[posibleKey].Nodes.Add(reader.GetString(0), reader.GetDateTime(3).ToString("hh:mm:ss") + " - " + reader.GetString(2));
+            }
         }
 
         #endregion

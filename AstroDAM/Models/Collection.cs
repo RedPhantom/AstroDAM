@@ -13,21 +13,30 @@ namespace AstroDAM.Models
     {
         public Collection() { }
 
-        public Collection(int id, DateTime captureDateTime, Catalogue catalogue, int objectId, string objectTitle, int numberFrames, FileFormat fileFormat, ColorSpace colorSpace, Size resolution)
+        public Collection(string id, DateTime captureDateTime, Catalogue catalogue, int objectId, 
+            string objectTitle, int numberFrames, FileFormat fileFormat, ColorSpace colorSpace, 
+            Camera camera, Scope scope, Site site, List<Optic> optics, Photographer photographer, 
+            Size resolution, string comments)
         {
             Id = id;
             CaptureDateTime = captureDateTime;
             Catalogue = catalogue;
-            ObjectId = objectId;
+            Object = objectId;
             ObjectTitle = objectTitle;
             NumberFrames = numberFrames;
             FileFormat = fileFormat;
             ColorSpace = colorSpace;
+            Camera = camera;
+            Scope = scope;
+            Site = site;
+            Optics = optics;
+            Photographer = photographer;
             Resolution = resolution;
+            Comments = comments;
         }
 
         [DataMember]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [DataMember]
         public DateTime CaptureDateTime { get; set; }
@@ -36,7 +45,7 @@ namespace AstroDAM.Models
         public Catalogue Catalogue { get; set; }
 
         [DataMember]
-        public int ObjectId { get; set; }
+        public int Object { get; set; }
 
         [DataMember]
         public string ObjectTitle { get; set; }
@@ -51,6 +60,24 @@ namespace AstroDAM.Models
         public ColorSpace ColorSpace { get; set; }
 
         [DataMember]
+        public Camera Camera { get; set; }
+
+        [DataMember]
+        public Scope Scope { get; set; }
+
+        [DataMember]
+        public Site Site { get; set; }
+
+        [DataMember]
+        public List<Optic> Optics { get; set; }
+
+        [DataMember]
+        public Photographer Photographer { get; set; }
+
+        [DataMember]
         public Size Resolution { get; set; }
+
+        [DataMember]
+        public string Comments { get; set; }
     }
 }

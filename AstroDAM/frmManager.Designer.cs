@@ -100,6 +100,9 @@
             this.label28 = new System.Windows.Forms.Label();
             this.lbFileFormats = new System.Windows.Forms.ListBox();
             this.tpOptics = new System.Windows.Forms.TabPage();
+            this.btnOpticsNew = new System.Windows.Forms.Button();
+            this.btnOpticsRemove = new System.Windows.Forms.Button();
+            this.btnOpticsSave = new System.Windows.Forms.Button();
             this.tbOpticValue = new System.Windows.Forms.TextBox();
             this.cbOpticType = new System.Windows.Forms.ComboBox();
             this.lblOptics = new System.Windows.Forms.Label();
@@ -109,6 +112,9 @@
             this.label30 = new System.Windows.Forms.Label();
             this.lbOptics = new System.Windows.Forms.ListBox();
             this.tpPhotographers = new System.Windows.Forms.TabPage();
+            this.btnPhotographersNew = new System.Windows.Forms.Button();
+            this.btnPhotographersRemove = new System.Windows.Forms.Button();
+            this.btnPhotographersSave = new System.Windows.Forms.Button();
             this.tbPhotographerLastName = new System.Windows.Forms.TextBox();
             this.tbPhotographerFirstName = new System.Windows.Forms.TextBox();
             this.lblPhotographers = new System.Windows.Forms.Label();
@@ -118,6 +124,9 @@
             this.label34 = new System.Windows.Forms.Label();
             this.lbPhotographers = new System.Windows.Forms.ListBox();
             this.tpScopes = new System.Windows.Forms.TabPage();
+            this.btnScopesNew = new System.Windows.Forms.Button();
+            this.btnScopesRemove = new System.Windows.Forms.Button();
+            this.btnScopesSave = new System.Windows.Forms.Button();
             this.cbScopeMountType = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.rbScopeRoboticNo = new System.Windows.Forms.RadioButton();
@@ -139,6 +148,9 @@
             this.label40 = new System.Windows.Forms.Label();
             this.lbScopes = new System.Windows.Forms.ListBox();
             this.tpSites = new System.Windows.Forms.TabPage();
+            this.btnSitesNew = new System.Windows.Forms.Button();
+            this.btnSitesRemove = new System.Windows.Forms.Button();
+            this.btnSitesSave = new System.Windows.Forms.Button();
             this.cbSiteLatitudeType = new System.Windows.Forms.ComboBox();
             this.cbSiteLongtitudeType = new System.Windows.Forms.ComboBox();
             this.tbSiteLatitude = new System.Windows.Forms.TextBox();
@@ -156,18 +168,6 @@
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnOpticsNew = new System.Windows.Forms.Button();
-            this.btnOpticsRemove = new System.Windows.Forms.Button();
-            this.btnOpticsSave = new System.Windows.Forms.Button();
-            this.btnPhotographersNew = new System.Windows.Forms.Button();
-            this.btnPhotographersRemove = new System.Windows.Forms.Button();
-            this.btnPhotographersSave = new System.Windows.Forms.Button();
-            this.btnScopesNew = new System.Windows.Forms.Button();
-            this.btnScopesRemove = new System.Windows.Forms.Button();
-            this.btnScopesSave = new System.Windows.Forms.Button();
-            this.btnSitesNew = new System.Windows.Forms.Button();
-            this.btnSitesRemove = new System.Windows.Forms.Button();
-            this.btnSitesSave = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpCameras.SuspendLayout();
             this.tpCatalogues.SuspendLayout();
@@ -649,13 +649,13 @@
             this.panel3.Controls.Add(this.rbColorSpaceMultiChannelYes);
             this.panel3.Location = new System.Drawing.Point(276, 125);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(109, 26);
+            this.panel3.Size = new System.Drawing.Size(109, 20);
             this.panel3.TabIndex = 31;
             // 
             // rbColorSpaceMultiChannelNo
             // 
             this.rbColorSpaceMultiChannelNo.AutoSize = true;
-            this.rbColorSpaceMultiChannelNo.Location = new System.Drawing.Point(54, 3);
+            this.rbColorSpaceMultiChannelNo.Location = new System.Drawing.Point(54, -3);
             this.rbColorSpaceMultiChannelNo.Name = "rbColorSpaceMultiChannelNo";
             this.rbColorSpaceMultiChannelNo.Size = new System.Drawing.Size(41, 19);
             this.rbColorSpaceMultiChannelNo.TabIndex = 8;
@@ -666,7 +666,7 @@
             // rbColorSpaceMultiChannelYes
             // 
             this.rbColorSpaceMultiChannelYes.AutoSize = true;
-            this.rbColorSpaceMultiChannelYes.Location = new System.Drawing.Point(3, 3);
+            this.rbColorSpaceMultiChannelYes.Location = new System.Drawing.Point(3, -3);
             this.rbColorSpaceMultiChannelYes.Name = "rbColorSpaceMultiChannelYes";
             this.rbColorSpaceMultiChannelYes.Size = new System.Drawing.Size(45, 19);
             this.rbColorSpaceMultiChannelYes.TabIndex = 18;
@@ -736,7 +736,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(171, 132);
+            this.label22.Location = new System.Drawing.Point(171, 125);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(85, 15);
             this.label22.TabIndex = 25;
@@ -942,6 +942,35 @@
             this.tpOptics.Text = "Optics";
             this.tpOptics.UseVisualStyleBackColor = true;
             // 
+            // btnOpticsNew
+            // 
+            this.btnOpticsNew.Location = new System.Drawing.Point(331, 377);
+            this.btnOpticsNew.Name = "btnOpticsNew";
+            this.btnOpticsNew.Size = new System.Drawing.Size(75, 23);
+            this.btnOpticsNew.TabIndex = 39;
+            this.btnOpticsNew.Text = "New";
+            this.btnOpticsNew.UseVisualStyleBackColor = true;
+            this.btnOpticsNew.Click += new System.EventHandler(this.btnOpticsNew_Click);
+            // 
+            // btnOpticsRemove
+            // 
+            this.btnOpticsRemove.Location = new System.Drawing.Point(250, 377);
+            this.btnOpticsRemove.Name = "btnOpticsRemove";
+            this.btnOpticsRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnOpticsRemove.TabIndex = 38;
+            this.btnOpticsRemove.Text = "Remove";
+            this.btnOpticsRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnOpticsSave
+            // 
+            this.btnOpticsSave.Location = new System.Drawing.Point(169, 377);
+            this.btnOpticsSave.Name = "btnOpticsSave";
+            this.btnOpticsSave.Size = new System.Drawing.Size(75, 23);
+            this.btnOpticsSave.TabIndex = 37;
+            this.btnOpticsSave.Text = "Save";
+            this.btnOpticsSave.UseVisualStyleBackColor = true;
+            this.btnOpticsSave.Click += new System.EventHandler(this.btnOpticsSave_Click);
+            // 
             // tbOpticValue
             // 
             this.tbOpticValue.Location = new System.Drawing.Point(237, 100);
@@ -1034,6 +1063,35 @@
             this.tpPhotographers.TabIndex = 5;
             this.tpPhotographers.Text = "Photographers";
             this.tpPhotographers.UseVisualStyleBackColor = true;
+            // 
+            // btnPhotographersNew
+            // 
+            this.btnPhotographersNew.Location = new System.Drawing.Point(331, 377);
+            this.btnPhotographersNew.Name = "btnPhotographersNew";
+            this.btnPhotographersNew.Size = new System.Drawing.Size(75, 23);
+            this.btnPhotographersNew.TabIndex = 42;
+            this.btnPhotographersNew.Text = "New";
+            this.btnPhotographersNew.UseVisualStyleBackColor = true;
+            this.btnPhotographersNew.Click += new System.EventHandler(this.btnPhotographersNew_Click);
+            // 
+            // btnPhotographersRemove
+            // 
+            this.btnPhotographersRemove.Location = new System.Drawing.Point(250, 377);
+            this.btnPhotographersRemove.Name = "btnPhotographersRemove";
+            this.btnPhotographersRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnPhotographersRemove.TabIndex = 41;
+            this.btnPhotographersRemove.Text = "Remove";
+            this.btnPhotographersRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnPhotographersSave
+            // 
+            this.btnPhotographersSave.Location = new System.Drawing.Point(169, 377);
+            this.btnPhotographersSave.Name = "btnPhotographersSave";
+            this.btnPhotographersSave.Size = new System.Drawing.Size(75, 23);
+            this.btnPhotographersSave.TabIndex = 40;
+            this.btnPhotographersSave.Text = "Save";
+            this.btnPhotographersSave.UseVisualStyleBackColor = true;
+            this.btnPhotographersSave.Click += new System.EventHandler(this.btnPhotographersSave_Click);
             // 
             // tbPhotographerLastName
             // 
@@ -1137,11 +1195,40 @@
             this.tpScopes.Text = "Scopes";
             this.tpScopes.UseVisualStyleBackColor = true;
             // 
+            // btnScopesNew
+            // 
+            this.btnScopesNew.Location = new System.Drawing.Point(331, 377);
+            this.btnScopesNew.Name = "btnScopesNew";
+            this.btnScopesNew.Size = new System.Drawing.Size(75, 23);
+            this.btnScopesNew.TabIndex = 53;
+            this.btnScopesNew.Text = "New";
+            this.btnScopesNew.UseVisualStyleBackColor = true;
+            this.btnScopesNew.Click += new System.EventHandler(this.btnScopesNew_Click);
+            // 
+            // btnScopesRemove
+            // 
+            this.btnScopesRemove.Location = new System.Drawing.Point(250, 377);
+            this.btnScopesRemove.Name = "btnScopesRemove";
+            this.btnScopesRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnScopesRemove.TabIndex = 52;
+            this.btnScopesRemove.Text = "Remove";
+            this.btnScopesRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnScopesSave
+            // 
+            this.btnScopesSave.Location = new System.Drawing.Point(169, 377);
+            this.btnScopesSave.Name = "btnScopesSave";
+            this.btnScopesSave.Size = new System.Drawing.Size(75, 23);
+            this.btnScopesSave.TabIndex = 51;
+            this.btnScopesSave.Text = "Save";
+            this.btnScopesSave.UseVisualStyleBackColor = true;
+            this.btnScopesSave.Click += new System.EventHandler(this.btnScopesSave_Click);
+            // 
             // cbScopeMountType
             // 
             this.cbScopeMountType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbScopeMountType.FormattingEnabled = true;
-            this.cbScopeMountType.Location = new System.Drawing.Point(342, 236);
+            this.cbScopeMountType.Location = new System.Drawing.Point(342, 229);
             this.cbScopeMountType.Name = "cbScopeMountType";
             this.cbScopeMountType.Size = new System.Drawing.Size(109, 21);
             this.cbScopeMountType.TabIndex = 35;
@@ -1152,13 +1239,13 @@
             this.panel1.Controls.Add(this.rbScopeRoboticYes);
             this.panel1.Location = new System.Drawing.Point(342, 203);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(109, 26);
+            this.panel1.Size = new System.Drawing.Size(109, 20);
             this.panel1.TabIndex = 50;
             // 
             // rbScopeRoboticNo
             // 
             this.rbScopeRoboticNo.AutoSize = true;
-            this.rbScopeRoboticNo.Location = new System.Drawing.Point(54, 3);
+            this.rbScopeRoboticNo.Location = new System.Drawing.Point(54, -3);
             this.rbScopeRoboticNo.Name = "rbScopeRoboticNo";
             this.rbScopeRoboticNo.Size = new System.Drawing.Size(41, 19);
             this.rbScopeRoboticNo.TabIndex = 8;
@@ -1169,7 +1256,7 @@
             // rbScopeRoboticYes
             // 
             this.rbScopeRoboticYes.AutoSize = true;
-            this.rbScopeRoboticYes.Location = new System.Drawing.Point(3, 3);
+            this.rbScopeRoboticYes.Location = new System.Drawing.Point(3, -3);
             this.rbScopeRoboticYes.Name = "rbScopeRoboticYes";
             this.rbScopeRoboticYes.Size = new System.Drawing.Size(45, 19);
             this.rbScopeRoboticYes.TabIndex = 34;
@@ -1180,7 +1267,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(171, 239);
+            this.label44.Location = new System.Drawing.Point(171, 232);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(71, 15);
             this.label44.TabIndex = 49;
@@ -1189,7 +1276,7 @@
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(171, 210);
+            this.label43.Location = new System.Drawing.Point(171, 205);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(56, 15);
             this.label43.TabIndex = 49;
@@ -1342,6 +1429,35 @@
             this.tpSites.Text = "Sites";
             this.tpSites.UseVisualStyleBackColor = true;
             // 
+            // btnSitesNew
+            // 
+            this.btnSitesNew.Location = new System.Drawing.Point(331, 377);
+            this.btnSitesNew.Name = "btnSitesNew";
+            this.btnSitesNew.Size = new System.Drawing.Size(75, 23);
+            this.btnSitesNew.TabIndex = 53;
+            this.btnSitesNew.Text = "New";
+            this.btnSitesNew.UseVisualStyleBackColor = true;
+            this.btnSitesNew.Click += new System.EventHandler(this.btnSitesNew_Click);
+            // 
+            // btnSitesRemove
+            // 
+            this.btnSitesRemove.Location = new System.Drawing.Point(250, 377);
+            this.btnSitesRemove.Name = "btnSitesRemove";
+            this.btnSitesRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnSitesRemove.TabIndex = 52;
+            this.btnSitesRemove.Text = "Remove";
+            this.btnSitesRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnSitesSave
+            // 
+            this.btnSitesSave.Location = new System.Drawing.Point(169, 377);
+            this.btnSitesSave.Name = "btnSitesSave";
+            this.btnSitesSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSitesSave.TabIndex = 51;
+            this.btnSitesSave.Text = "Save";
+            this.btnSitesSave.UseVisualStyleBackColor = true;
+            this.btnSitesSave.Click += new System.EventHandler(this.btnSitesSave_Click);
+            // 
             // cbSiteLatitudeType
             // 
             this.cbSiteLatitudeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1489,122 +1605,6 @@
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(77, 19);
             this.lblStatus.Text = "Preparing...";
-            // 
-            // btnOpticsNew
-            // 
-            this.btnOpticsNew.Location = new System.Drawing.Point(331, 377);
-            this.btnOpticsNew.Name = "btnOpticsNew";
-            this.btnOpticsNew.Size = new System.Drawing.Size(75, 23);
-            this.btnOpticsNew.TabIndex = 39;
-            this.btnOpticsNew.Text = "New";
-            this.btnOpticsNew.UseVisualStyleBackColor = true;
-            this.btnOpticsNew.Click += new System.EventHandler(this.btnOpticsNew_Click);
-            // 
-            // btnOpticsRemove
-            // 
-            this.btnOpticsRemove.Location = new System.Drawing.Point(250, 377);
-            this.btnOpticsRemove.Name = "btnOpticsRemove";
-            this.btnOpticsRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnOpticsRemove.TabIndex = 38;
-            this.btnOpticsRemove.Text = "Remove";
-            this.btnOpticsRemove.UseVisualStyleBackColor = true;
-            // 
-            // btnOpticsSave
-            // 
-            this.btnOpticsSave.Location = new System.Drawing.Point(169, 377);
-            this.btnOpticsSave.Name = "btnOpticsSave";
-            this.btnOpticsSave.Size = new System.Drawing.Size(75, 23);
-            this.btnOpticsSave.TabIndex = 37;
-            this.btnOpticsSave.Text = "Save";
-            this.btnOpticsSave.UseVisualStyleBackColor = true;
-            this.btnOpticsSave.Click += new System.EventHandler(this.btnOpticsSave_Click);
-            // 
-            // btnPhotographersNew
-            // 
-            this.btnPhotographersNew.Location = new System.Drawing.Point(331, 377);
-            this.btnPhotographersNew.Name = "btnPhotographersNew";
-            this.btnPhotographersNew.Size = new System.Drawing.Size(75, 23);
-            this.btnPhotographersNew.TabIndex = 42;
-            this.btnPhotographersNew.Text = "New";
-            this.btnPhotographersNew.UseVisualStyleBackColor = true;
-            this.btnPhotographersNew.Click += new System.EventHandler(this.btnPhotographersNew_Click);
-            // 
-            // btnPhotographersRemove
-            // 
-            this.btnPhotographersRemove.Location = new System.Drawing.Point(250, 377);
-            this.btnPhotographersRemove.Name = "btnPhotographersRemove";
-            this.btnPhotographersRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnPhotographersRemove.TabIndex = 41;
-            this.btnPhotographersRemove.Text = "Remove";
-            this.btnPhotographersRemove.UseVisualStyleBackColor = true;
-            // 
-            // btnPhotographersSave
-            // 
-            this.btnPhotographersSave.Location = new System.Drawing.Point(169, 377);
-            this.btnPhotographersSave.Name = "btnPhotographersSave";
-            this.btnPhotographersSave.Size = new System.Drawing.Size(75, 23);
-            this.btnPhotographersSave.TabIndex = 40;
-            this.btnPhotographersSave.Text = "Save";
-            this.btnPhotographersSave.UseVisualStyleBackColor = true;
-            this.btnPhotographersSave.Click += new System.EventHandler(this.btnPhotographersSave_Click);
-            // 
-            // btnScopesNew
-            // 
-            this.btnScopesNew.Location = new System.Drawing.Point(331, 377);
-            this.btnScopesNew.Name = "btnScopesNew";
-            this.btnScopesNew.Size = new System.Drawing.Size(75, 23);
-            this.btnScopesNew.TabIndex = 53;
-            this.btnScopesNew.Text = "New";
-            this.btnScopesNew.UseVisualStyleBackColor = true;
-            this.btnScopesNew.Click += new System.EventHandler(this.btnScopesNew_Click);
-            // 
-            // btnScopesRemove
-            // 
-            this.btnScopesRemove.Location = new System.Drawing.Point(250, 377);
-            this.btnScopesRemove.Name = "btnScopesRemove";
-            this.btnScopesRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnScopesRemove.TabIndex = 52;
-            this.btnScopesRemove.Text = "Remove";
-            this.btnScopesRemove.UseVisualStyleBackColor = true;
-            // 
-            // btnScopesSave
-            // 
-            this.btnScopesSave.Location = new System.Drawing.Point(169, 377);
-            this.btnScopesSave.Name = "btnScopesSave";
-            this.btnScopesSave.Size = new System.Drawing.Size(75, 23);
-            this.btnScopesSave.TabIndex = 51;
-            this.btnScopesSave.Text = "Save";
-            this.btnScopesSave.UseVisualStyleBackColor = true;
-            this.btnScopesSave.Click += new System.EventHandler(this.btnScopesSave_Click);
-            // 
-            // btnSitesNew
-            // 
-            this.btnSitesNew.Location = new System.Drawing.Point(331, 377);
-            this.btnSitesNew.Name = "btnSitesNew";
-            this.btnSitesNew.Size = new System.Drawing.Size(75, 23);
-            this.btnSitesNew.TabIndex = 53;
-            this.btnSitesNew.Text = "New";
-            this.btnSitesNew.UseVisualStyleBackColor = true;
-            this.btnSitesNew.Click += new System.EventHandler(this.btnSitesNew_Click);
-            // 
-            // btnSitesRemove
-            // 
-            this.btnSitesRemove.Location = new System.Drawing.Point(250, 377);
-            this.btnSitesRemove.Name = "btnSitesRemove";
-            this.btnSitesRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnSitesRemove.TabIndex = 52;
-            this.btnSitesRemove.Text = "Remove";
-            this.btnSitesRemove.UseVisualStyleBackColor = true;
-            // 
-            // btnSitesSave
-            // 
-            this.btnSitesSave.Location = new System.Drawing.Point(169, 377);
-            this.btnSitesSave.Name = "btnSitesSave";
-            this.btnSitesSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSitesSave.TabIndex = 51;
-            this.btnSitesSave.Text = "Save";
-            this.btnSitesSave.UseVisualStyleBackColor = true;
-            this.btnSitesSave.Click += new System.EventHandler(this.btnSitesSave_Click);
             // 
             // frmManager
             // 

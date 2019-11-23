@@ -52,5 +52,10 @@ namespace AstroDAM.Models
             Nagler,
             Other
         }
+
+        public string GetOpticName()
+        {
+            return OpticType.ToString() + " " + Value.ToString();
+        }
     }
 }
