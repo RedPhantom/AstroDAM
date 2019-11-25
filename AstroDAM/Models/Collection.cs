@@ -13,10 +13,10 @@ namespace AstroDAM.Models
     {
         public Collection() { }
 
-        public Collection(string id, DateTime captureDateTime, Catalogue catalogue, int objectId, 
+        public Collection(int id, DateTime captureDateTime, Catalogue catalogue, int objectId, 
             string objectTitle, int numberFrames, FileFormat fileFormat, ColorSpace colorSpace, 
             Camera camera, Scope scope, Site site, List<Optic> optics, Photographer photographer, 
-            Size resolution, string comments)
+            Size resolution, string comments, string fileName, string metadataFile)
         {
             Id = id;
             CaptureDateTime = captureDateTime;
@@ -33,10 +33,12 @@ namespace AstroDAM.Models
             Photographer = photographer;
             Resolution = resolution;
             Comments = comments;
+            FileName = fileName;
+            MetaDataFileName = metadataFile;
         }
 
         [DataMember]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public DateTime CaptureDateTime { get; set; }
@@ -79,5 +81,11 @@ namespace AstroDAM.Models
 
         [DataMember]
         public string Comments { get; set; }
+
+        [DataMember]
+        public string FileName { get; set; }
+
+        [DataMember]
+        public string MetaDataFileName { get; set; }
     }
 }

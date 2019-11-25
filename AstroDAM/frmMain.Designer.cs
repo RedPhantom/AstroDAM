@@ -36,10 +36,17 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnSortOptions = new System.Windows.Forms.Button();
+            this.cmsSortingOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.option1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.option2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ascendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.descendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnResetSearch = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.tbSearchQuery = new System.Windows.Forms.TextBox();
             this.lblCollections = new System.Windows.Forms.Label();
+            this.tvCollections = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblManagement = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -54,11 +61,19 @@
             this.cbScope = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tbComments = new System.Windows.Forms.TextBox();
+            this.cbSites = new System.Windows.Forms.ComboBox();
             this.cbPhotographers = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbHasMetadataNo = new System.Windows.Forms.RadioButton();
+            this.rbHasMetadataYes = new System.Windows.Forms.RadioButton();
+            this.label18 = new System.Windows.Forms.Label();
+            this.tbResolutionY = new System.Windows.Forms.TextBox();
+            this.tbResolutionX = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.cbColorSpace = new System.Windows.Forms.ComboBox();
             this.cbFileFormat = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -70,7 +85,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbObjectId = new System.Windows.Forms.TextBox();
             this.lnkHelp1 = new System.Windows.Forms.LinkLabel();
-            this.btnRegenerateUUID = new System.Windows.Forms.Button();
             this.tbObjectTitle = new System.Windows.Forms.TextBox();
             this.cbCatalogue = new System.Windows.Forms.ComboBox();
             this.tbDateTime = new System.Windows.Forms.MaskedTextBox();
@@ -99,23 +113,14 @@
             this.photographersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scopesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sitesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tvCollections = new System.Windows.Forms.TreeView();
-            this.cmsSortingOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.option1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.option2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.ascendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.descendingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipInfo = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.cbSites = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbResolutionX = new System.Windows.Forms.TextBox();
-            this.tbResolutionY = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.rbHasMetadataNo = new System.Windows.Forms.RadioButton();
-            this.rbHasMetadataYes = new System.Windows.Forms.RadioButton();
+            this.tbFile = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tbMetadataFile = new System.Windows.Forms.TextBox();
+            this.btnLinkMetadataFile = new System.Windows.Forms.Button();
+            this.btnLinkFile = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -123,6 +128,7 @@
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.cmsSortingOptions.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -132,7 +138,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbTotalFrames)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.cmsSortingOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -211,6 +216,51 @@
             this.btnSortOptions.UseVisualStyleBackColor = true;
             this.btnSortOptions.Click += new System.EventHandler(this.btnSortOptions_Click);
             // 
+            // cmsSortingOptions
+            // 
+            this.cmsSortingOptions.ImageScalingSize = new System.Drawing.Size(18, 18);
+            this.cmsSortingOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.option1ToolStripMenuItem,
+            this.option2ToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.ascendingToolStripMenuItem,
+            this.descendingToolStripMenuItem});
+            this.cmsSortingOptions.Name = "cmsSortingOptions";
+            this.cmsSortingOptions.Size = new System.Drawing.Size(150, 106);
+            // 
+            // option1ToolStripMenuItem
+            // 
+            this.option1ToolStripMenuItem.Name = "option1ToolStripMenuItem";
+            this.option1ToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.option1ToolStripMenuItem.Text = "Option 1";
+            // 
+            // option2ToolStripMenuItem
+            // 
+            this.option2ToolStripMenuItem.Name = "option2ToolStripMenuItem";
+            this.option2ToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.option2ToolStripMenuItem.Text = "Option 2";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(146, 6);
+            // 
+            // ascendingToolStripMenuItem
+            // 
+            this.ascendingToolStripMenuItem.CheckOnClick = true;
+            this.ascendingToolStripMenuItem.Name = "ascendingToolStripMenuItem";
+            this.ascendingToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.ascendingToolStripMenuItem.Text = "Ascending";
+            this.ascendingToolStripMenuItem.Click += new System.EventHandler(this.ascendingToolStripMenuItem_Click);
+            // 
+            // descendingToolStripMenuItem
+            // 
+            this.descendingToolStripMenuItem.CheckOnClick = true;
+            this.descendingToolStripMenuItem.Name = "descendingToolStripMenuItem";
+            this.descendingToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.descendingToolStripMenuItem.Text = "Descending";
+            this.descendingToolStripMenuItem.Click += new System.EventHandler(this.descendingToolStripMenuItem_Click);
+            // 
             // btnResetSearch
             // 
             this.btnResetSearch.Location = new System.Drawing.Point(197, 2);
@@ -248,6 +298,15 @@
             this.lblCollections.Size = new System.Drawing.Size(136, 35);
             this.lblCollections.TabIndex = 3;
             this.lblCollections.Text = "Collections";
+            // 
+            // tvCollections
+            // 
+            this.tvCollections.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvCollections.Location = new System.Drawing.Point(3, 75);
+            this.tvCollections.Name = "tvCollections";
+            this.tvCollections.Size = new System.Drawing.Size(259, 383);
+            this.tvCollections.TabIndex = 4;
+            this.tvCollections.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvCollections_AfterSelect);
             // 
             // tableLayoutPanel2
             // 
@@ -319,7 +378,7 @@
             this.groupBox4.Controls.Add(this.label14);
             this.groupBox4.Controls.Add(this.cbCamera);
             this.groupBox4.Controls.Add(this.cbScope);
-            this.groupBox4.Location = new System.Drawing.Point(6, 482);
+            this.groupBox4.Location = new System.Drawing.Point(6, 542);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(311, 182);
             this.groupBox4.TabIndex = 3;
@@ -331,7 +390,7 @@
             this.clbOptics.FormattingEnabled = true;
             this.clbOptics.Location = new System.Drawing.Point(123, 70);
             this.clbOptics.Name = "clbOptics";
-            this.clbOptics.Size = new System.Drawing.Size(120, 94);
+            this.clbOptics.Size = new System.Drawing.Size(130, 94);
             this.clbOptics.TabIndex = 21;
             // 
             // label16
@@ -385,7 +444,7 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(6, 335);
+            this.groupBox3.Location = new System.Drawing.Point(6, 395);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(311, 141);
             this.groupBox3.TabIndex = 2;
@@ -401,6 +460,14 @@
             this.tbComments.Size = new System.Drawing.Size(162, 57);
             this.tbComments.TabIndex = 18;
             // 
+            // cbSites
+            // 
+            this.cbSites.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSites.Location = new System.Drawing.Point(120, 46);
+            this.cbSites.Name = "cbSites";
+            this.cbSites.Size = new System.Drawing.Size(130, 21);
+            this.cbSites.TabIndex = 17;
+            // 
             // cbPhotographers
             // 
             this.cbPhotographers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -408,6 +475,15 @@
             this.cbPhotographers.Name = "cbPhotographers";
             this.cbPhotographers.Size = new System.Drawing.Size(130, 21);
             this.cbPhotographers.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(28, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Site";
             // 
             // label13
             // 
@@ -440,6 +516,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnLinkFile);
+            this.groupBox2.Controls.Add(this.btnLinkMetadataFile);
+            this.groupBox2.Controls.Add(this.tbMetadataFile);
+            this.groupBox2.Controls.Add(this.tbFile);
             this.groupBox2.Controls.Add(this.rbHasMetadataNo);
             this.groupBox2.Controls.Add(this.rbHasMetadataYes);
             this.groupBox2.Controls.Add(this.label18);
@@ -452,18 +532,74 @@
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.tbTotalFrames);
             this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label20);
+            this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Location = new System.Drawing.Point(6, 174);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(311, 155);
+            this.groupBox2.Size = new System.Drawing.Size(311, 215);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File Information";
             // 
+            // rbHasMetadataNo
+            // 
+            this.rbHasMetadataNo.AutoSize = true;
+            this.rbHasMetadataNo.Location = new System.Drawing.Point(171, 99);
+            this.rbHasMetadataNo.Name = "rbHasMetadataNo";
+            this.rbHasMetadataNo.Size = new System.Drawing.Size(41, 19);
+            this.rbHasMetadataNo.TabIndex = 11;
+            this.rbHasMetadataNo.TabStop = true;
+            this.rbHasMetadataNo.Text = "No";
+            this.rbHasMetadataNo.UseVisualStyleBackColor = true;
+            // 
+            // rbHasMetadataYes
+            // 
+            this.rbHasMetadataYes.AutoSize = true;
+            this.rbHasMetadataYes.Location = new System.Drawing.Point(120, 99);
+            this.rbHasMetadataYes.Name = "rbHasMetadataYes";
+            this.rbHasMetadataYes.Size = new System.Drawing.Size(45, 19);
+            this.rbHasMetadataYes.TabIndex = 10;
+            this.rbHasMetadataYes.TabStop = true;
+            this.rbHasMetadataYes.Text = "Yes";
+            this.rbHasMetadataYes.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(180, 181);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(14, 15);
+            this.label18.TabIndex = 13;
+            this.label18.Text = "×";
+            // 
+            // tbResolutionY
+            // 
+            this.tbResolutionY.Location = new System.Drawing.Point(200, 178);
+            this.tbResolutionY.Name = "tbResolutionY";
+            this.tbResolutionY.Size = new System.Drawing.Size(53, 20);
+            this.tbResolutionY.TabIndex = 15;
+            // 
+            // tbResolutionX
+            // 
+            this.tbResolutionX.Location = new System.Drawing.Point(120, 178);
+            this.tbResolutionX.Name = "tbResolutionX";
+            this.tbResolutionX.Size = new System.Drawing.Size(53, 20);
+            this.tbResolutionX.TabIndex = 14;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 181);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 15);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Color Space";
+            // 
             // cbColorSpace
             // 
             this.cbColorSpace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbColorSpace.Location = new System.Drawing.Point(120, 100);
+            this.cbColorSpace.Location = new System.Drawing.Point(120, 151);
             this.cbColorSpace.Name = "cbColorSpace";
             this.cbColorSpace.Size = new System.Drawing.Size(130, 21);
             this.cbColorSpace.TabIndex = 13;
@@ -471,7 +607,7 @@
             // cbFileFormat
             // 
             this.cbFileFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFileFormat.Location = new System.Drawing.Point(120, 73);
+            this.cbFileFormat.Location = new System.Drawing.Point(120, 124);
             this.cbFileFormat.Name = "cbFileFormat";
             this.cbFileFormat.Size = new System.Drawing.Size(130, 21);
             this.cbFileFormat.TabIndex = 12;
@@ -479,7 +615,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(11, 103);
+            this.label11.Location = new System.Drawing.Point(10, 154);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(74, 15);
             this.label11.TabIndex = 8;
@@ -488,7 +624,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(10, 76);
+            this.label10.Location = new System.Drawing.Point(10, 127);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 15);
             this.label10.TabIndex = 8;
@@ -496,7 +632,7 @@
             // 
             // tbTotalFrames
             // 
-            this.tbTotalFrames.Location = new System.Drawing.Point(120, 23);
+            this.tbTotalFrames.Location = new System.Drawing.Point(120, 74);
             this.tbTotalFrames.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -519,7 +655,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 50);
+            this.label9.Location = new System.Drawing.Point(10, 101);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(91, 15);
             this.label9.TabIndex = 5;
@@ -529,7 +665,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(11, 25);
+            this.label8.Location = new System.Drawing.Point(10, 76);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(79, 15);
             this.label8.TabIndex = 5;
@@ -550,7 +686,6 @@
             // 
             this.groupBox1.Controls.Add(this.tbObjectId);
             this.groupBox1.Controls.Add(this.lnkHelp1);
-            this.groupBox1.Controls.Add(this.btnRegenerateUUID);
             this.groupBox1.Controls.Add(this.tbObjectTitle);
             this.groupBox1.Controls.Add(this.cbCatalogue);
             this.groupBox1.Controls.Add(this.tbDateTime);
@@ -585,17 +720,6 @@
             this.lnkHelp1.TabStop = true;
             this.lnkHelp1.Text = "?";
             this.lnkHelp1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkHelp1_LinkClicked);
-            // 
-            // btnRegenerateUUID
-            // 
-            this.btnRegenerateUUID.Location = new System.Drawing.Point(256, 22);
-            this.btnRegenerateUUID.Name = "btnRegenerateUUID";
-            this.btnRegenerateUUID.Size = new System.Drawing.Size(25, 23);
-            this.btnRegenerateUUID.TabIndex = 3;
-            this.btnRegenerateUUID.Text = "R";
-            this.toolTipInfo.SetToolTip(this.btnRegenerateUUID, "Regenerate a Collection ID");
-            this.btnRegenerateUUID.UseVisualStyleBackColor = true;
-            this.btnRegenerateUUID.Click += new System.EventHandler(this.btnRegenerateUUID_Click);
             // 
             // tbObjectTitle
             // 
@@ -747,7 +871,7 @@
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
             this.addToolStripMenuItem.Text = "Add";
             this.addToolStripMenuItem.ToolTipText = "Add a new collection.";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
@@ -756,7 +880,7 @@
             // 
             this.findToolStripMenuItem.Name = "findToolStripMenuItem";
             this.findToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
             this.findToolStripMenuItem.Text = "Find";
             this.findToolStripMenuItem.ToolTipText = "Find a collection.";
             this.findToolStripMenuItem.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
@@ -765,7 +889,7 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.ToolTipText = "Save the current collection.";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
@@ -789,111 +913,58 @@
             // camerasToolStripMenuItem
             // 
             this.camerasToolStripMenuItem.Name = "camerasToolStripMenuItem";
-            this.camerasToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.camerasToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.camerasToolStripMenuItem.Text = "Cameras...";
             this.camerasToolStripMenuItem.Click += new System.EventHandler(this.camerasToolStripMenuItem_Click);
             // 
             // cataloguesToolStripMenuItem
             // 
             this.cataloguesToolStripMenuItem.Name = "cataloguesToolStripMenuItem";
-            this.cataloguesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.cataloguesToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.cataloguesToolStripMenuItem.Text = "Catalogues...";
             this.cataloguesToolStripMenuItem.Click += new System.EventHandler(this.cataloguesToolStripMenuItem_Click);
             // 
             // colorSpacesToolStripMenuItem
             // 
             this.colorSpacesToolStripMenuItem.Name = "colorSpacesToolStripMenuItem";
-            this.colorSpacesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.colorSpacesToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.colorSpacesToolStripMenuItem.Text = "Color Spaces...";
             this.colorSpacesToolStripMenuItem.Click += new System.EventHandler(this.colorSpacesToolStripMenuItem_Click);
             // 
             // formatsToolStripMenuItem
             // 
             this.formatsToolStripMenuItem.Name = "formatsToolStripMenuItem";
-            this.formatsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.formatsToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.formatsToolStripMenuItem.Text = "File Formats...";
             this.formatsToolStripMenuItem.Click += new System.EventHandler(this.formatsToolStripMenuItem_Click);
             // 
             // opticsToolStripMenuItem
             // 
             this.opticsToolStripMenuItem.Name = "opticsToolStripMenuItem";
-            this.opticsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.opticsToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.opticsToolStripMenuItem.Text = "Optics...";
             this.opticsToolStripMenuItem.Click += new System.EventHandler(this.opticsToolStripMenuItem_Click);
             // 
             // photographersToolStripMenuItem
             // 
             this.photographersToolStripMenuItem.Name = "photographersToolStripMenuItem";
-            this.photographersToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.photographersToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.photographersToolStripMenuItem.Text = "Photographers...";
             this.photographersToolStripMenuItem.Click += new System.EventHandler(this.photographersToolStripMenuItem_Click);
             // 
             // scopesToolStripMenuItem
             // 
             this.scopesToolStripMenuItem.Name = "scopesToolStripMenuItem";
-            this.scopesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.scopesToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.scopesToolStripMenuItem.Text = "Scopes...";
             this.scopesToolStripMenuItem.Click += new System.EventHandler(this.scopesToolStripMenuItem_Click);
             // 
             // sitesToolStripMenuItem
             // 
             this.sitesToolStripMenuItem.Name = "sitesToolStripMenuItem";
-            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.sitesToolStripMenuItem.Text = "Sites...";
             this.sitesToolStripMenuItem.Click += new System.EventHandler(this.sitesToolStripMenuItem_Click);
-            // 
-            // tvCollections
-            // 
-            this.tvCollections.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvCollections.Location = new System.Drawing.Point(3, 75);
-            this.tvCollections.Name = "tvCollections";
-            this.tvCollections.Size = new System.Drawing.Size(259, 383);
-            this.tvCollections.TabIndex = 4;
-            // 
-            // cmsSortingOptions
-            // 
-            this.cmsSortingOptions.ImageScalingSize = new System.Drawing.Size(18, 18);
-            this.cmsSortingOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.option1ToolStripMenuItem,
-            this.option2ToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.ascendingToolStripMenuItem,
-            this.descendingToolStripMenuItem});
-            this.cmsSortingOptions.Name = "cmsSortingOptions";
-            this.cmsSortingOptions.Size = new System.Drawing.Size(150, 106);
-            // 
-            // option1ToolStripMenuItem
-            // 
-            this.option1ToolStripMenuItem.Name = "option1ToolStripMenuItem";
-            this.option1ToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
-            this.option1ToolStripMenuItem.Text = "Option 1";
-            // 
-            // option2ToolStripMenuItem
-            // 
-            this.option2ToolStripMenuItem.Name = "option2ToolStripMenuItem";
-            this.option2ToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
-            this.option2ToolStripMenuItem.Text = "Option 2";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(146, 6);
-            // 
-            // ascendingToolStripMenuItem
-            // 
-            this.ascendingToolStripMenuItem.CheckOnClick = true;
-            this.ascendingToolStripMenuItem.Name = "ascendingToolStripMenuItem";
-            this.ascendingToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
-            this.ascendingToolStripMenuItem.Text = "Ascending";
-            this.ascendingToolStripMenuItem.Click += new System.EventHandler(this.ascendingToolStripMenuItem_Click);
-            // 
-            // descendingToolStripMenuItem
-            // 
-            this.descendingToolStripMenuItem.CheckOnClick = true;
-            this.descendingToolStripMenuItem.Name = "descendingToolStripMenuItem";
-            this.descendingToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
-            this.descendingToolStripMenuItem.Text = "Descending";
-            this.descendingToolStripMenuItem.Click += new System.EventHandler(this.descendingToolStripMenuItem_Click);
             // 
             // toolTipInfo
             // 
@@ -905,76 +976,60 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 3;
             // 
-            // cbSites
+            // tbFile
             // 
-            this.cbSites.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSites.Location = new System.Drawing.Point(120, 46);
-            this.cbSites.Name = "cbSites";
-            this.cbSites.Size = new System.Drawing.Size(130, 21);
-            this.cbSites.TabIndex = 17;
+            this.tbFile.Location = new System.Drawing.Point(120, 48);
+            this.tbFile.Name = "tbFile";
+            this.tbFile.ReadOnly = true;
+            this.tbFile.Size = new System.Drawing.Size(162, 20);
+            this.tbFile.TabIndex = 16;
             // 
-            // label1
+            // label19
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 15);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Site";
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(10, 51);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(64, 15);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "File Name";
             // 
-            // label2
+            // label20
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 130);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 15);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Color Space";
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(10, 25);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(82, 15);
+            this.label20.TabIndex = 5;
+            this.label20.Text = "Metadata File";
             // 
-            // tbResolutionX
+            // tbMetadataFile
             // 
-            this.tbResolutionX.Location = new System.Drawing.Point(120, 127);
-            this.tbResolutionX.Name = "tbResolutionX";
-            this.tbResolutionX.Size = new System.Drawing.Size(53, 20);
-            this.tbResolutionX.TabIndex = 14;
+            this.tbMetadataFile.Location = new System.Drawing.Point(120, 22);
+            this.tbMetadataFile.Name = "tbMetadataFile";
+            this.tbMetadataFile.ReadOnly = true;
+            this.tbMetadataFile.Size = new System.Drawing.Size(162, 20);
+            this.tbMetadataFile.TabIndex = 16;
             // 
-            // tbResolutionY
+            // btnLinkMetadataFile
             // 
-            this.tbResolutionY.Location = new System.Drawing.Point(200, 127);
-            this.tbResolutionY.Name = "tbResolutionY";
-            this.tbResolutionY.Size = new System.Drawing.Size(53, 20);
-            this.tbResolutionY.TabIndex = 15;
+            this.btnLinkMetadataFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLinkMetadataFile.Location = new System.Drawing.Point(283, 22);
+            this.btnLinkMetadataFile.Name = "btnLinkMetadataFile";
+            this.btnLinkMetadataFile.Size = new System.Drawing.Size(28, 20);
+            this.btnLinkMetadataFile.TabIndex = 17;
+            this.btnLinkMetadataFile.Text = "...";
+            this.btnLinkMetadataFile.UseVisualStyleBackColor = true;
+            this.btnLinkMetadataFile.Click += new System.EventHandler(this.btnLinkMetadataFile_Click);
             // 
-            // label18
+            // btnLinkFile
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(180, 130);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(14, 15);
-            this.label18.TabIndex = 13;
-            this.label18.Text = "×";
-            // 
-            // rbHasMetadataNo
-            // 
-            this.rbHasMetadataNo.AutoSize = true;
-            this.rbHasMetadataNo.Location = new System.Drawing.Point(171, 48);
-            this.rbHasMetadataNo.Name = "rbHasMetadataNo";
-            this.rbHasMetadataNo.Size = new System.Drawing.Size(41, 19);
-            this.rbHasMetadataNo.TabIndex = 11;
-            this.rbHasMetadataNo.TabStop = true;
-            this.rbHasMetadataNo.Text = "No";
-            this.rbHasMetadataNo.UseVisualStyleBackColor = true;
-            // 
-            // rbHasMetadataYes
-            // 
-            this.rbHasMetadataYes.AutoSize = true;
-            this.rbHasMetadataYes.Location = new System.Drawing.Point(120, 48);
-            this.rbHasMetadataYes.Name = "rbHasMetadataYes";
-            this.rbHasMetadataYes.Size = new System.Drawing.Size(45, 19);
-            this.rbHasMetadataYes.TabIndex = 10;
-            this.rbHasMetadataYes.TabStop = true;
-            this.rbHasMetadataYes.Text = "Yes";
-            this.rbHasMetadataYes.UseVisualStyleBackColor = true;
+            this.btnLinkFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLinkFile.Location = new System.Drawing.Point(283, 48);
+            this.btnLinkFile.Name = "btnLinkFile";
+            this.btnLinkFile.Size = new System.Drawing.Size(28, 20);
+            this.btnLinkFile.TabIndex = 17;
+            this.btnLinkFile.Text = "...";
+            this.btnLinkFile.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -1000,6 +1055,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.cmsSortingOptions.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -1015,7 +1071,6 @@
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.cmsSortingOptions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1045,7 +1100,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnRegenerateUUID;
         private System.Windows.Forms.TextBox tbObjectTitle;
         private System.Windows.Forms.ComboBox cbCatalogue;
         private System.Windows.Forms.MaskedTextBox tbDateTime;
@@ -1109,6 +1163,12 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.RadioButton rbHasMetadataNo;
         private System.Windows.Forms.RadioButton rbHasMetadataYes;
+        private System.Windows.Forms.Button btnLinkFile;
+        private System.Windows.Forms.Button btnLinkMetadataFile;
+        private System.Windows.Forms.TextBox tbMetadataFile;
+        private System.Windows.Forms.TextBox tbFile;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
     }
 }
 

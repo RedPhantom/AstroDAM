@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -120,7 +121,7 @@ namespace AstroDAM
             listScopes = Operations.GetScopes();
             listSites = Operations.GetSites();
 
-            tbCollectionUuid.Text = GenerateUUID();
+            tbCollectionUuid.Text = "(adding)";
 
             cbCamera.Items.Clear();
             foreach (var item in listCameras)
@@ -160,20 +161,16 @@ namespace AstroDAM
             lblStatus.Text = "Loaded all assets.";
         }
 
-        private string GenerateUUID()
-        {
-            // Regenerates a UUID.
-            byte[] uuid = System.Guid.NewGuid().ToByteArray();
-            string uuidString = Convert.ToBase64String(uuid).Replace("=", "").Replace("+", "").Replace("/", "").Substring(0, 16);
+        //private string GenerateUUID()
+        //{
+        //    // Regenerates a UUID.
+        //    byte[] uuid = System.Guid.NewGuid().ToByteArray();
+        //    string uuidString = Convert.ToBase64String(uuid).Replace("=", "").Replace("+", "").Replace("/", "").Substring(0, 16);
 
-            return uuidString;
-        }
+        //    return uuidString;
+        //}
 
         // Buttons
-        private void btnRegenerateUUID_Click(object sender, EventArgs e)
-        {
-            tbCollectionUuid.Text = GenerateUUID();
-        }
 
         // Toolstrip
         private void databaseConnectionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -229,12 +226,97 @@ namespace AstroDAM
             LoadData();
         }
 
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int id = 0;
+                int.TryParse(tbCollectionUuid.Text, out id);
+
+                DateTime captureDateTime = DateTime.Parse(tbDateTime.Text);
+                Catalogue catalogue = listCatalogues[cbCatalogue.SelectedIndex];
+                int objectId = int.Parse(tbObjectId.Text);
+                string objectTitle = tbObjectTitle.Text;
+                int numberFrames = Convert.ToInt32(tbTotalFrames.Value);
+                FileFormat fileFormat = listFileFormats[cbFileFormat.SelectedIndex];
+                ColorSpace colorSpace = listColorSpaces[cbColorSpace.SelectedIndex];
+                Camera camera = listCameras[cbCamera.SelectedIndex];
+                Scope scope = listScopes[cbScope.SelectedIndex];
+                Site site = listSites[cbSites.SelectedIndex];
+                List<Optic> optics = new List<Optic>();
+
+                foreach (var item in clbOptics.CheckedItems)
+                {
+                    int opticId = int.Parse(item.ToString().Split('|')[0]);
+                    optics.Add(listOptics.Where(x => x.Id == opticId).ToList()[0]);
+                }
+
+                Photographer photographer = listPhotographers[cbPhotographers.SelectedIndex];
+                Size resolution = Operations.ParseResolution(tbResolutionX.Text + ";" + tbResolutionY.Text);
+                string comments = tbComments.Text;
+                string fileName = tbFile.Text;
+                string metadataFile = tbMetadataFile.Text;
+
+                Collection collection = new Collection(id, captureDateTime, catalogue, objectId, objectTitle,
+                    numberFrames, fileFormat, colorSpace, camera, scope, site, optics, photographer,
+                    resolution, comments, fileName, metadataFile);
+
+                if (EditingMode == frmManager.EditingModes.Add)
+                    Operations.AddCollection(collection);
+                else
+                    Operations.EditCollection(id, collection);
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+                //return;
+                throw;
+            }
+            LoadData();
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tbCollectionUuid.Text = "(adding)";
+            tbDateTime.Text = "";
+            cbCatalogue.SelectedIndex = -1;
+            tbObjectId.Text = "";
+            tbObjectTitle.Text = "";
+            tbTotalFrames.Value = 1;
+            cbFileFormat.SelectedIndex = -1;
+            cbColorSpace.SelectedIndex = -1;
+            cbCamera.SelectedIndex = -1;
+            cbScope.SelectedIndex = -1;
+            cbSites.SelectedIndex = -1;
+            cbPhotographers.SelectedIndex = -1;
+            tbResolutionX.Text = "";
+            tbResolutionY.Text = "";
+            tbComments.Text = "";
+            LoadData();
+        }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to quit?", "Quitting?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Application.Exit();
             }
+        }
+
+        private void tvCollections_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Name[0] == 'i') // if the selected node is a collection item.
+            {
+                string uuid = e.Node.Name.Substring(1);
+                LoadData();
+                PopulateFields(uuid);
+            }
+        }
+
+        // fills the different fields in the collection view.
+        private void PopulateFields(string uuid)
+        {
+            Collection collection = Operations.GetCollections(new List<int>() { int.Parse(uuid) })[0];
         }
 
         // Context Menu Strips
@@ -282,69 +364,54 @@ namespace AstroDAM
                 SearchBoxFadeProgress++;
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnLinkMetadataFile_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string id = tbCollectionUuid.Text;
-                DateTime captureDateTime = DateTime.Parse(tbDateTime.Text);
-                Catalogue catalogue = listCatalogues[cbCatalogue.SelectedIndex];
-                int objectId = int.Parse(tbObjectId.Text);
-                string objectTitle = tbObjectTitle.Text;
-                int numberFrames = Convert.ToInt32(tbTotalFrames.Value);
-                FileFormat fileFormat = listFileFormats[cbFileFormat.SelectedIndex];
-                ColorSpace colorSpace = listColorSpaces[cbColorSpace.SelectedIndex];
-                Camera camera = listCameras[cbCamera.SelectedIndex];
-                Scope scope = listScopes[cbScope.SelectedIndex];
-                Site site = listSites[cbSites.SelectedIndex];
-                List<Optic> optics = new List<Optic>();
+            frmFileImporter importer = new frmFileImporter(frmFileImporter.FileTypes.MetadataFile);
 
-                foreach (var item in clbOptics.CheckedItems)
+            if (importer.ShowDialog() == DialogResult.OK)
+            {
+                tbMetadataFile.Text = importer.DialogRes.FilePath;
+
+                if (importer.DialogRes.ImportFileMetadata)
                 {
-                    int opticId = int.Parse(item.ToString().Split('|')[0]);
-                    optics.Add(listOptics.Where(x => x.Id == opticId).ToList()[0]);
+                    ParseFile(importer.DialogRes.Metadata, importer.DialogRes.UnparsableLines);
                 }
-
-                Photographer photographer = listPhotographers[cbPhotographers.SelectedIndex];
-                Size resolution = Operations.ParseResolution(tbResolutionX.Text + ";" + tbResolutionY.Text);
-                string comments = tbComments.Text;
-
-                Collection collection = new Collection(id, captureDateTime, catalogue, objectId, objectTitle,
-                    numberFrames, fileFormat, colorSpace, camera, scope, site, optics, photographer,
-                    resolution, comments);
-
-                if (EditingMode == frmManager.EditingModes.Add)
-                    Operations.AddCollection(collection);
-                else
-                    Operations.EditCollection(id, collection);
             }
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.Message);
-                //return;
-                throw;
-            }
-            LoadData();
         }
 
-        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ParseFile(Dictionary<string, string> metadata, string[] unparsableLines)
         {
-            tbCollectionUuid.Text = GenerateUUID();
-            tbDateTime.Text = "";
-            cbCatalogue.SelectedIndex = -1;
-            tbObjectId.Text = "";
-            tbObjectTitle.Text = "";
-            tbTotalFrames.Value = 1;
-            cbFileFormat.SelectedIndex = -1;
-            cbColorSpace.SelectedIndex = -1;
-            cbCamera.SelectedIndex = -1;
-            cbScope.SelectedIndex = -1;
-            cbSites.SelectedIndex = -1;
-            cbPhotographers.SelectedIndex = -1;
-            tbResolutionX.Text = "";
-            tbResolutionY.Text = "";
-            tbComments.Text = "";
-            LoadData();
+            // -- SharpCap file: --
+            // camera model
+            string cameraModel = unparsableLines[0].Replace("[", "").Replace("]", "");
+            Camera cameraCandidate = listCameras.Find(x => x.LongName == cameraModel);
+
+            if (cameraCandidate != null)
+                cbCamera.SelectedIndex = listCameras.IndexOf(cameraCandidate);
+
+            // file extension
+            string fileExtension = Regex.Match(metadata["Output Format"], @"\(([^)]*)\)").Groups[1].Value;
+            FileFormat fileFormatCandidate = listFileFormats.Find(x => x.ShortName.Contains(fileExtension));
+            
+            if (fileFormatCandidate != null)
+                cbFileFormat.SelectedIndex = listFileFormats.IndexOf(fileFormatCandidate);
+
+            // capture area
+            string[] captureArea = metadata["Capture Area"].Split('x');
+
+            tbResolutionX.Text = captureArea[0];
+            tbResolutionY.Text = captureArea[1];
+
+            // color space
+            string colorSpace = metadata["Colour Space"];
+            ColorSpace colorSpaceCandidate = listColorSpaces.Find(x => x.Name == colorSpace);
+
+            if (colorSpaceCandidate != null)
+                cbColorSpace.SelectedIndex = listColorSpaces.IndexOf(colorSpaceCandidate);
+
+            // timestamp
+            string timestamp = metadata["TimeStamp"];
+            tbDateTime.Text = timestamp.Replace("T", " ").Substring(19);
         }
     }
 }

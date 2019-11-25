@@ -204,13 +204,14 @@ namespace AstroDAM
 
             cmd.CommandText = "SELECT [CaptureDateTime],[Catalogue],[Object],[ObjectTitle]," +
                 "[NumberFrames],[FileFormat],[ColorSpace],[Camera],[Scope],[Site],[Optics]," +
-                "[Photographer],[Resolution],[Comments] FROM [tblCollections] " + selector;
+                "[Photographer],[Resolution],[Comments],[FilePath],[MetadataFile] " +
+                "FROM [tblCollections] " + selector;
 
             SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-                string id = reader.GetString(0);
+                int id = reader.GetInt32(0);
                 DateTime captureDateTime = reader.GetDateTime(1);
                 Catalogue catalogue = GetCatalogues(new List<int>() { reader.GetInt32(2) })[0];
                 int objectId = reader.GetInt32(3);
@@ -225,10 +226,12 @@ namespace AstroDAM
                 Photographer photographer = GetPhotographers(new List<int>() { reader.GetInt32(12) })[0];
                 Size resolution = ParseResolution(reader.GetString(13));
                 string comments = reader.GetString(14);
+                string filePath = reader.GetString(15);
+                string metadataFile = reader.GetString(16);
 
                 collections.Add(new Collection(id, captureDateTime, catalogue, objectId, objectTitle,
                     numberFrames, fileFormat, colorSpace, camera, scope, site, optics, photographer,
-                    resolution, comments));
+                    resolution, comments, filePath, metadataFile));
             }
 
             return collections;
@@ -246,7 +249,7 @@ namespace AstroDAM
             cmd.ExecuteNonQuery();
         }
 
-        public static void EditCollection(string Id, Collection collection)
+        public static void EditCollection(int Id, Collection collection)
         {
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
@@ -265,7 +268,9 @@ namespace AstroDAM
                 "[Optics] = @Optics, " +
                 "[Photographer] = @Photographer, " +
                 "[Resolution] = @Resolution, " +
-                "[Comments] = @Comments " +
+                "[Comments] = @Comments, " +
+                "[FilePath] = @FilePath, " +
+                "[MetadataFile] = @MetadataFile " +
                 "WHERE [Id] = @Id";
 
             cmd.Parameters.AddWithValue("@CaptureDateTime", collection.CaptureDateTime);
@@ -282,6 +287,8 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Photographer", collection.Photographer.Id);
             cmd.Parameters.AddWithValue("@Resolution", MakeResolution(collection.Resolution));
             cmd.Parameters.AddWithValue("@Comments",collection.Comments);
+            cmd.Parameters.AddWithValue("@FilePath", collection.FileName);
+            cmd.Parameters.AddWithValue("@MetadataFile", collection.MetaDataFileName);
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
@@ -294,9 +301,11 @@ namespace AstroDAM
 
             cmd.CommandText = "INSERT INTO [tblCollections] ([Id],[CaptureDateTime],[Catalogue],[Object],[ObjectTitle]," +
                 "[NumberFrames],[FileFormat],[ColorSpace],[Camera],[Scope],[Site],[Optics]," +
-                "[Photographer],[Resolution],[Comments]) " +
+                "[Photographer],[Resolution],[Comments],[FilePath],[MetadataFile]) " +
                 "OUTPUT INSERTED.Id " +
-                "VALUES (@Id,@CaptureDateTime,@CatalogueId,@ObjectId,@ObjectTitle,@NumberFrames,@FileFormat,@ColorSpace,@Camera,@Scope,@Site,@Optics,@Photographer,@Resolution,@Comments)";
+                "VALUES (@Id,@CaptureDateTime,@CatalogueId,@ObjectId,@ObjectTitle," +
+                "@NumberFrames,@FileFormat,@ColorSpace,@Camera,@Scope,@Site,@Optics," +
+                "@Photographer,@Resolution,@Comments,@FilePath,@MetadataFile)";
 
             cmd.Parameters.AddWithValue("@Id", collection.Id);
             cmd.Parameters.AddWithValue("@CaptureDateTime", collection.CaptureDateTime);
@@ -313,6 +322,8 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Photographer", collection.Photographer.Id);
             cmd.Parameters.AddWithValue("@Resolution", MakeResolution(collection.Resolution));
             cmd.Parameters.AddWithValue("@Comments",collection.Comments);
+            cmd.Parameters.AddWithValue("@FilePath", collection.FileName);
+            cmd.Parameters.AddWithValue("@MetadataFile", collection.MetaDataFileName);
 
             return cmd.ExecuteNonQuery() == 1;
         }
@@ -904,11 +915,12 @@ namespace AstroDAM
 
             while (reader.Read())
             {
-                string posibleKey = reader.GetDateTime(1).ToString("yyyy-MM-dd");
+                string posibleKey = "f" + reader.GetDateTime(1).ToString("yyyy-MM-dd"); // f is for folder.
                 if (!treeView.Nodes.ContainsKey(posibleKey))
                     treeView.Nodes.Add(posibleKey, posibleKey);
 
-                treeView.Nodes[posibleKey].Nodes.Add(reader.GetString(0), reader.GetDateTime(3).ToString("hh:mm:ss") + " - " + reader.GetString(2));
+                treeView.Nodes[posibleKey].Nodes.Add("i" + reader.GetString(0), // key. i for item.
+                    reader.GetDateTime(3).ToString("hh:mm:ss") + " - " + reader.GetString(2));
             }
         }
 
