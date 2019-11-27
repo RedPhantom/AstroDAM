@@ -31,13 +31,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblFileResult = new System.Windows.Forms.Label();
+            this.btnSearchFolder = new System.Windows.Forms.Button();
             this.btnSearchFile = new System.Windows.Forms.Button();
             this.tbFilePath = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.cbImportData = new System.Windows.Forms.CheckBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -55,6 +58,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lblFileResult);
+            this.groupBox1.Controls.Add(this.btnSearchFolder);
             this.groupBox1.Controls.Add(this.btnSearchFile);
             this.groupBox1.Controls.Add(this.tbFilePath);
             this.groupBox1.Location = new System.Drawing.Point(18, 47);
@@ -69,17 +73,27 @@
             this.lblFileResult.AutoSize = true;
             this.lblFileResult.Location = new System.Drawing.Point(4, 46);
             this.lblFileResult.Name = "lblFileResult";
-            this.lblFileResult.Size = new System.Drawing.Size(141, 15);
+            this.lblFileResult.Size = new System.Drawing.Size(207, 15);
             this.lblFileResult.TabIndex = 9;
-            this.lblFileResult.Text = "File located successfully.";
+            this.lblFileResult.Text = "Please type a file path or select a file.";
+            // 
+            // btnSearchFolder
+            // 
+            this.btnSearchFolder.Location = new System.Drawing.Point(381, 21);
+            this.btnSearchFolder.Name = "btnSearchFolder";
+            this.btnSearchFolder.Size = new System.Drawing.Size(51, 23);
+            this.btnSearchFolder.TabIndex = 8;
+            this.btnSearchFolder.Text = "Folder";
+            this.btnSearchFolder.UseVisualStyleBackColor = true;
+            this.btnSearchFolder.Click += new System.EventHandler(this.btnSearchFolder_Click);
             // 
             // btnSearchFile
             // 
-            this.btnSearchFile.Location = new System.Drawing.Point(386, 20);
+            this.btnSearchFile.Location = new System.Drawing.Point(338, 21);
             this.btnSearchFile.Name = "btnSearchFile";
-            this.btnSearchFile.Size = new System.Drawing.Size(46, 23);
+            this.btnSearchFile.Size = new System.Drawing.Size(37, 23);
             this.btnSearchFile.TabIndex = 8;
-            this.btnSearchFile.Text = "...";
+            this.btnSearchFile.Text = "File";
             this.btnSearchFile.UseVisualStyleBackColor = true;
             this.btnSearchFile.Click += new System.EventHandler(this.btnSearchFile_Click);
             // 
@@ -89,7 +103,7 @@
             this.tbFilePath.Location = new System.Drawing.Point(7, 19);
             this.tbFilePath.MaxLength = 260;
             this.tbFilePath.Name = "tbFilePath";
-            this.tbFilePath.Size = new System.Drawing.Size(373, 24);
+            this.tbFilePath.Size = new System.Drawing.Size(325, 24);
             this.tbFilePath.TabIndex = 0;
             this.tbFilePath.TextChanged += new System.EventHandler(this.tbFilePath_TextChanged);
             // 
@@ -105,6 +119,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(304, 210);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
@@ -115,17 +130,30 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.cbImportData);
             this.groupBox2.Location = new System.Drawing.Point(18, 124);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(438, 49);
+            this.groupBox2.Size = new System.Drawing.Size(438, 80);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File Options";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(6, 44);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(160, 19);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Import data from this file.";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // cbImportData
             // 
             this.cbImportData.AutoSize = true;
+            this.cbImportData.Checked = true;
+            this.cbImportData.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbImportData.Location = new System.Drawing.Point(7, 19);
             this.cbImportData.Name = "cbImportData";
             this.cbImportData.Size = new System.Drawing.Size(160, 19);
@@ -133,9 +161,13 @@
             this.cbImportData.Text = "Import data from this file.";
             this.cbImportData.UseVisualStyleBackColor = true;
             // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.ShowNewFolderButton = false;
+            // 
             // frmFileImporter
             // 
-            this.AcceptButton = this.btnCancel;
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
@@ -173,5 +205,8 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox cbImportData;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnSearchFolder;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }

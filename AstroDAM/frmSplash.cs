@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace AstroDAM
 {
@@ -22,7 +23,9 @@ namespace AstroDAM
             bgwStartupCheck.DoWork += BgwStartupCheck_DoWork;
             bgwStartupCheck.RunWorkerCompleted += BgwStartupCheck_RunWorkerCompleted;
 
-            bgwStartupCheck.RunWorkerAsync();
+            bool ShowAllSequence = ModifierKeys.HasFlag(Keys.Shift);
+
+            bgwStartupCheck.RunWorkerAsync(ShowAllSequence);
 
             // Show a random splash message.
             string[] CaptionMessages =
@@ -64,11 +67,16 @@ namespace AstroDAM
 
                     break;
 
+                // Startup successfull.
                 case 0:
-                    UpdateStatusLabel("All checks successful.");
+                    TopMost = false;
 
-                    new frmMain().Show();
+                    frmMain frmMain = new frmMain();
+                    frmMain.Show();
+                    frmMain.Focus();
+
                     Close();
+                    Dispose();
                     break;
 
                 default:
@@ -91,12 +99,28 @@ namespace AstroDAM
                 UpdateStatusLabel("Database connection failed.");
             }
 
+            UpdateStatusLabel("All good in the hood." + ((bool)e.Argument ? " Showing film." : ""));
+            
+            // If we are requested to show the entire startup sequence.
+            if ((bool)e.Argument)
+                System.Threading.Thread.Sleep(22500);
+            else
+                System.Threading.Thread.Sleep(200);
+
             e.Result = 0;
         }
 
         private void UpdateStatusLabel(string Message)
         {
             lblStatus.Invoke((MethodInvoker)(() => lblStatus.Text = Message)); // https://stackoverflow.com/questions/2172467/set-value-of-label-with-c-sharp-cross-threading
+        }
+
+        private void frmSplash_Load(object sender, EventArgs e)
+        {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string version = fvi.FileVersion;
+            lblVersion.Text = version;
         }
     }
 }

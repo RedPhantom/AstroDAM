@@ -68,6 +68,10 @@
             this.label12 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnLinkFile = new System.Windows.Forms.Button();
+            this.btnLinkMetadataFile = new System.Windows.Forms.Button();
+            this.tbMetadataFile = new System.Windows.Forms.TextBox();
+            this.tbFile = new System.Windows.Forms.TextBox();
             this.rbHasMetadataNo = new System.Windows.Forms.RadioButton();
             this.rbHasMetadataYes = new System.Windows.Forms.RadioButton();
             this.label18 = new System.Windows.Forms.Label();
@@ -80,6 +84,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tbTotalFrames = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -113,14 +119,10 @@
             this.photographersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scopesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sitesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutAstroDAMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipInfo = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.tbFile = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.tbMetadataFile = new System.Windows.Forms.TextBox();
-            this.btnLinkMetadataFile = new System.Windows.Forms.Button();
-            this.btnLinkFile = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -542,6 +544,44 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File Information";
             // 
+            // btnLinkFile
+            // 
+            this.btnLinkFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLinkFile.Location = new System.Drawing.Point(283, 48);
+            this.btnLinkFile.Name = "btnLinkFile";
+            this.btnLinkFile.Size = new System.Drawing.Size(28, 20);
+            this.btnLinkFile.TabIndex = 17;
+            this.btnLinkFile.Text = "...";
+            this.btnLinkFile.UseVisualStyleBackColor = true;
+            this.btnLinkFile.Click += new System.EventHandler(this.btnLinkFile_Click);
+            // 
+            // btnLinkMetadataFile
+            // 
+            this.btnLinkMetadataFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLinkMetadataFile.Location = new System.Drawing.Point(283, 22);
+            this.btnLinkMetadataFile.Name = "btnLinkMetadataFile";
+            this.btnLinkMetadataFile.Size = new System.Drawing.Size(28, 20);
+            this.btnLinkMetadataFile.TabIndex = 17;
+            this.btnLinkMetadataFile.Text = "...";
+            this.btnLinkMetadataFile.UseVisualStyleBackColor = true;
+            this.btnLinkMetadataFile.Click += new System.EventHandler(this.btnLinkMetadataFile_Click);
+            // 
+            // tbMetadataFile
+            // 
+            this.tbMetadataFile.Location = new System.Drawing.Point(120, 22);
+            this.tbMetadataFile.Name = "tbMetadataFile";
+            this.tbMetadataFile.ReadOnly = true;
+            this.tbMetadataFile.Size = new System.Drawing.Size(162, 20);
+            this.tbMetadataFile.TabIndex = 16;
+            // 
+            // tbFile
+            // 
+            this.tbFile.Location = new System.Drawing.Point(120, 48);
+            this.tbFile.Name = "tbFile";
+            this.tbFile.ReadOnly = true;
+            this.tbFile.Size = new System.Drawing.Size(162, 20);
+            this.tbFile.TabIndex = 16;
+            // 
             // rbHasMetadataNo
             // 
             this.rbHasMetadataNo.AutoSize = true;
@@ -661,6 +701,24 @@
             this.label9.TabIndex = 5;
             this.label9.Text = "Has Metadata?";
             this.toolTipInfo.SetToolTip(this.label9, "Whether the capture has a metadata file saved next to it.");
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(10, 25);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(82, 15);
+            this.label20.TabIndex = 5;
+            this.label20.Text = "Metadata File";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(10, 51);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(64, 15);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "File Name";
             // 
             // label8
             // 
@@ -807,7 +865,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.applicationToolStripMenuItem,
             this.collectionsToolStripMenuItem,
-            this.managementToolStripMenuItem});
+            this.managementToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 27);
@@ -966,6 +1025,21 @@
             this.sitesToolStripMenuItem.Text = "Sites...";
             this.sitesToolStripMenuItem.Click += new System.EventHandler(this.sitesToolStripMenuItem_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutAstroDAMToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(49, 23);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutAstroDAMToolStripMenuItem
+            // 
+            this.aboutAstroDAMToolStripMenuItem.Name = "aboutAstroDAMToolStripMenuItem";
+            this.aboutAstroDAMToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
+            this.aboutAstroDAMToolStripMenuItem.Text = "About AstroDAM...";
+            this.aboutAstroDAMToolStripMenuItem.Click += new System.EventHandler(this.aboutAstroDAMToolStripMenuItem_Click);
+            // 
             // toolTipInfo
             // 
             this.toolTipInfo.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
@@ -975,61 +1049,6 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 3;
-            // 
-            // tbFile
-            // 
-            this.tbFile.Location = new System.Drawing.Point(120, 48);
-            this.tbFile.Name = "tbFile";
-            this.tbFile.ReadOnly = true;
-            this.tbFile.Size = new System.Drawing.Size(162, 20);
-            this.tbFile.TabIndex = 16;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(10, 51);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(64, 15);
-            this.label19.TabIndex = 5;
-            this.label19.Text = "File Name";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(10, 25);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(82, 15);
-            this.label20.TabIndex = 5;
-            this.label20.Text = "Metadata File";
-            // 
-            // tbMetadataFile
-            // 
-            this.tbMetadataFile.Location = new System.Drawing.Point(120, 22);
-            this.tbMetadataFile.Name = "tbMetadataFile";
-            this.tbMetadataFile.ReadOnly = true;
-            this.tbMetadataFile.Size = new System.Drawing.Size(162, 20);
-            this.tbMetadataFile.TabIndex = 16;
-            // 
-            // btnLinkMetadataFile
-            // 
-            this.btnLinkMetadataFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLinkMetadataFile.Location = new System.Drawing.Point(283, 22);
-            this.btnLinkMetadataFile.Name = "btnLinkMetadataFile";
-            this.btnLinkMetadataFile.Size = new System.Drawing.Size(28, 20);
-            this.btnLinkMetadataFile.TabIndex = 17;
-            this.btnLinkMetadataFile.Text = "...";
-            this.btnLinkMetadataFile.UseVisualStyleBackColor = true;
-            this.btnLinkMetadataFile.Click += new System.EventHandler(this.btnLinkMetadataFile_Click);
-            // 
-            // btnLinkFile
-            // 
-            this.btnLinkFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLinkFile.Location = new System.Drawing.Point(283, 48);
-            this.btnLinkFile.Name = "btnLinkFile";
-            this.btnLinkFile.Size = new System.Drawing.Size(28, 20);
-            this.btnLinkFile.TabIndex = 17;
-            this.btnLinkFile.Text = "...";
-            this.btnLinkFile.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -1169,6 +1188,8 @@
         private System.Windows.Forms.TextBox tbFile;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutAstroDAMToolStripMenuItem;
     }
 }
 

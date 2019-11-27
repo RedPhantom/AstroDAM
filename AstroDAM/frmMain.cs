@@ -374,44 +374,107 @@ namespace AstroDAM
 
                 if (importer.DialogRes.ImportFileMetadata)
                 {
-                    ParseFile(importer.DialogRes.Metadata, importer.DialogRes.UnparsableLines);
+                    ParseMetadataFile(importer.DialogRes.Metadata, importer.DialogRes.UnparsableLines);
                 }
             }
         }
 
-        private void ParseFile(Dictionary<string, string> metadata, string[] unparsableLines)
+        private void ParseMetadataFile(Dictionary<string, string> metadata, string[] unparsableLines)
         {
+            int numPramsImported = 0;
+
+            rbHasMetadataYes.Checked = true;
+
+            // -- FireCapture file: --
+
             // -- SharpCap file: --
-            // camera model
-            string cameraModel = unparsableLines[0].Replace("[", "").Replace("]", "");
-            Camera cameraCandidate = listCameras.Find(x => x.LongName == cameraModel);
-
-            if (cameraCandidate != null)
-                cbCamera.SelectedIndex = listCameras.IndexOf(cameraCandidate);
-
-            // file extension
-            string fileExtension = Regex.Match(metadata["Output Format"], @"\(([^)]*)\)").Groups[1].Value;
-            FileFormat fileFormatCandidate = listFileFormats.Find(x => x.ShortName.Contains(fileExtension));
             
-            if (fileFormatCandidate != null)
-                cbFileFormat.SelectedIndex = listFileFormats.IndexOf(fileFormatCandidate);
+            // camera model - if one of the parsable lines contains "[" and "]".
+            var possibleCameras = unparsableLines.Select(x => x.Contains("[") && x.Contains("]"));
+
+            if (possibleCameras.Count() > 0)
+            {
+                string cameraModel = unparsableLines[0].Replace("[", "").Replace("]", "");
+                Camera cameraCandidate = listCameras.Find(x => x.LongName == cameraModel);
+
+                if (cameraCandidate != null)
+                {
+                    cbCamera.SelectedIndex = listCameras.IndexOf(cameraCandidate);
+                    numPramsImported++;
+                }
+            }
+            
+            // file extension
+            if (metadata.ContainsKey("Output Format"))
+            {
+                string fileExtension = Regex.Match(metadata["Output Format"], @"\(([^)]*)\)").Groups[1].Value.Substring(2); // skip *.
+                FileFormat fileFormatCandidate = listFileFormats.Find(x => x.ShortName.ToLower().Contains(fileExtension));
+
+                if (fileFormatCandidate != null)
+                {
+                    cbFileFormat.SelectedIndex = listFileFormats.IndexOf(fileFormatCandidate);
+                    numPramsImported++;
+                }
+            }
 
             // capture area
-            string[] captureArea = metadata["Capture Area"].Split('x');
+            if (metadata.ContainsKey("Capture Area"))
+            {
+                if (metadata["Capture Area"].Contains('x'))
+                {
+                    string[] captureArea = metadata["Capture Area"].Split('x');
 
-            tbResolutionX.Text = captureArea[0];
-            tbResolutionY.Text = captureArea[1];
+                    tbResolutionX.Text = captureArea[0];
+                    tbResolutionY.Text = captureArea[1];
+                    numPramsImported++;
+                }
+            }
 
             // color space
-            string colorSpace = metadata["Colour Space"];
-            ColorSpace colorSpaceCandidate = listColorSpaces.Find(x => x.Name == colorSpace);
+            if (metadata.ContainsKey("Colour Space"))
+            {
+                string colorSpace = metadata["Colour Space"];
+                ColorSpace colorSpaceCandidate = listColorSpaces.Find(x => x.Name == colorSpace);
 
-            if (colorSpaceCandidate != null)
-                cbColorSpace.SelectedIndex = listColorSpaces.IndexOf(colorSpaceCandidate);
+                if (colorSpaceCandidate != null)
+                {
+                    cbColorSpace.SelectedIndex = listColorSpaces.IndexOf(colorSpaceCandidate);
+                    numPramsImported++;
+                }
+            }
 
             // timestamp
-            string timestamp = metadata["TimeStamp"];
-            tbDateTime.Text = timestamp.Replace("T", " ").Substring(19);
+            if (metadata.ContainsKey("TimeStamp"))
+            {
+                string timestamp = metadata["TimeStamp"];
+                tbDateTime.Text = timestamp.Replace("T", " ").Substring(0,19);
+                numPramsImported++;
+            }
+
+            if (numPramsImported > 0)
+                lblStatus.Text = string.Format("Successfully imported {0} parameters from metadata.", numPramsImported);
+            else
+                lblStatus.Text = "Failed to import data from metadata.";
+        }
+
+        private void aboutAstroDAMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmAbout().ShowDialog();
+        }
+
+        private void btnLinkFile_Click(object sender, EventArgs e)
+        {
+            frmFileImporter importer = new frmFileImporter(frmFileImporter.FileTypes.CaptureFile);
+
+            if (importer.ShowDialog() == DialogResult.OK)
+            {
+                tbFile.Text = importer.DialogRes.FilePath;
+
+                if (importer.DialogRes.ImportFileMetadata)
+                {
+                    ParseCaptureFile(importer.DialogRes.FilePath);
+                }
+            }
         }
     }
 }

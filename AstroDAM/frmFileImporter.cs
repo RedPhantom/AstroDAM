@@ -23,24 +23,62 @@ namespace AstroDAM
             MetadataFile
         }
 
+        public enum ObjectTypes
+        {
+            File,
+            Directory
+        }
+
         public frmFileImporter(FileTypes fileType)
         {
             InitializeComponent();
 
             FileType = fileType;
+
+            switch (fileType)
+            {
+                case FileTypes.CaptureFile:
+
+
+                    break;
+                case FileTypes.MetadataFile:
+                    btnSearchFolder.Enabled = false;
+
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void FileChecker()
         {
             bool res;
+            ObjectTypes objectType = GetObjectType(tbFilePath.Text);
 
-            res = File.Exists(tbFilePath.Text);
+            if (objectType == ObjectTypes.File)
+            {
+                res = File.Exists(tbFilePath.Text);
+            }
+            else
+            {
+                if (FileType == FileTypes.MetadataFile)
+                {
+                    lblFileResult.Text = "Cannot define a folder as a metadata file.";
+                    btnSave.Enabled = false;
+                    return;
+                }
+                else
+                {
+                    res = Directory.Exists(tbFilePath.Text);
+                }
+            }
 
             if (res)
             {
-                lblFileResult.Text = "File located successfully.";
+                lblFileResult.Text = objectType.ToString() + " located successfully.";
                 btnSave.Enabled = true;
-            } else
+            }
+            else
             {
                 lblFileResult.Text = "Failed to locate file.";
                 btnSave.Enabled = false;
@@ -49,12 +87,8 @@ namespace AstroDAM
 
         private void btnSearchFile_Click(object sender, EventArgs e)
         {
-            DialogResult = openFileDialog1.ShowDialog();
-
-            if (DialogResult == DialogResult.OK)
-            {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 tbFilePath.Text = openFileDialog1.FileName;
-            }
 
             FileChecker();
         }
@@ -73,29 +107,66 @@ namespace AstroDAM
         private void btnSave_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
-            DialogRes = new DialogRes(tbFilePath.Text, cbImportData.Checked);
-            DialogRes.Metadata = new Dictionary<string, string>();
+
+            DialogRes dialogRes = new DialogRes(tbFilePath.Text, cbImportData.Checked);
+            dialogRes.Metadata = new Dictionary<string, string>();
+
+            List<string> unparsableLines = new List<string>();
 
             if (FileType == FileTypes.MetadataFile)
             {
+                // basic text processing for metadata parsing.
                 string[] metadataLines = File.ReadAllLines(tbFilePath.Text);
                 string[] line;
-                List<string> unparsableLines = new List<string>();
 
                 for (int i = 0; i < metadataLines.Length; i++)
                 {
                     if (metadataLines[i].Contains("="))
                     {
                         line = metadataLines[i].Split('=');
-                        DialogRes.Metadata.Add(line[0], line[1]);
-                    } else
+                        dialogRes.Metadata.Add(line[0], line[1]);
+                    }
+                    else
                     {
                         unparsableLines.Add(metadataLines[i]);
                     }
                 }
+
+                dialogRes.UnparsableLines = unparsableLines.ToArray();
+            }
+            else
+            {
+                // we only send file/folder path and whether to analyze this file or not.
+                dialogRes = new DialogRes(tbFilePath.Text, cbImportData.Checked);
             }
 
+            DialogRes = dialogRes;
             Close();
+        }
+
+        public static ObjectTypes GetObjectType(string path)
+        {
+            try
+            {
+                FileAttributes attr = File.GetAttributes(path);
+
+                if (attr.HasFlag(FileAttributes.Directory))
+                    return ObjectTypes.Directory;
+                else
+                    return ObjectTypes.File;
+            }
+            catch (Exception)
+            {
+                return ObjectTypes.File;
+            }
+        }
+
+        private void btnSearchFolder_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                tbFilePath.Text = folderBrowserDialog1.SelectedPath;
+
+            FileChecker();
         }
     }
 

@@ -74,6 +74,8 @@ namespace AstroDAM
         private void frmManager_Load(object sender, EventArgs e)
         {
             PrepareDataLists();
+
+            lblStatus.Text = "Imported assets.";
         }
 
         void PrepareDataLists()
@@ -154,21 +156,6 @@ namespace AstroDAM
                 cbCamerasColorSpaces.Items.Add(item.Name);
         }
 
-        void ShowPreparing()
-        {
-            pnlPreparing.Location = new Point(
-                ClientSize.Width / 2 - pnlPreparing.Size.Width / 2,
-                ClientSize.Height / 2 - pnlPreparing.Size.Height / 2);
-            pnlPreparing.Anchor = AnchorStyles.None;
-
-            pnlPreparing.Visible = true;
-        }
-
-        void HidePreparing()
-        {
-            pnlPreparing.Visible = false;
-        }
-
         private void UpdateEditingMode(EditingModes em, ref EditingModes editingModeVariable, ref Label tabLabel, string tabLabelText)
         {
             switch (em)
@@ -176,11 +163,13 @@ namespace AstroDAM
                 case EditingModes.Add:
                     editingModeVariable = EditingModes.Add;
                     tabLabel.Text = tabLabelText + " (adding)";
+                    lblStatus.Text = "Switched to adding mode.";
 
                     break;
                 case EditingModes.Edit:
                     editingModeVariable = EditingModes.Edit;
                     tabLabel.Text = tabLabelText + " (editing)";
+                    lblStatus.Text = "Switched to editing mode.";
 
                     break;
                 default:
@@ -253,10 +242,11 @@ namespace AstroDAM
                 Operations.EditCamera(id, candidate);
            
             // Reload data:
-            
+            lblStatus.Text = "Issuing camera saving command... ";
             currentCamera = Operations.GetCameras(new List<int>() { id })[0];
             LoadCameraData(currentCamera);
             PrepareDataLists();
+            lblStatus.Text += "Complete.";
         }
 
         private void btnCamerasNew_Click(object sender, EventArgs e)
@@ -356,9 +346,11 @@ namespace AstroDAM
 
             // Reload data:
 
+            lblStatus.Text = "Issuing catalogue saving command... ";
             currentCatalogue = Operations.GetCatalogues(new List<int>() { id })[0];
             LoadCatalogueData(currentCatalogue);
             PrepareDataLists();
+            lblStatus.Text += "Complete.";
         }
 
         private void btnCataloguesNew_Click(object sender, EventArgs e)
@@ -431,9 +423,11 @@ namespace AstroDAM
 
             // Reload data:
 
+            lblStatus.Text = "Issuing color space saving command... ";
             currentColorSpace = Operations.GetColorSpaces(new List<int>() { id })[0];
             LoadColorSpaceData(currentColorSpace);
             PrepareDataLists();
+            lblStatus.Text += "Complete.";
         }
 
         private void btnColorSpacesNew_Click(object sender, EventArgs e)
@@ -499,9 +493,11 @@ namespace AstroDAM
 
             // Reload data:
 
+            lblStatus.Text = "Issuing file formats saving command... ";
             currentFileFormat = Operations.GetFileFormats(new List<int>() { id })[0];
             LoadFileFormatData(currentFileFormat);
             PrepareDataLists();
+            lblStatus.Text += "Complete.";
         }
 
         private void btnFileFormatsNew_Click(object sender, EventArgs e)
@@ -580,9 +576,11 @@ namespace AstroDAM
 
             // Reload data:
 
+            lblStatus.Text = "Issuing optics saving command... ";
             currentOptic = Operations.GetOptics(new List<int>() { id })[0];
             LoadOpticData(currentOptic);
             PrepareDataLists();
+            lblStatus.Text += "Complete.";
         }
 
         private void btnOpticsNew_Click(object sender, EventArgs e)
@@ -646,9 +644,11 @@ namespace AstroDAM
 
             // Reload data:
 
+            lblStatus.Text = "Issuing photographer saving command... ";
             currentPhotographer = Operations.GetPhotographers(new List<int>() { id })[0];
             LoadPhotographerData(currentPhotographer);
             PrepareDataLists();
+            lblStatus.Text += "Complete.";
         }
 
         private void btnPhotographersNew_Click(object sender, EventArgs e)
@@ -746,9 +746,11 @@ namespace AstroDAM
 
             // Reload data:
 
+            lblStatus.Text = "Issuing scopes saving command... ";
             currentScope = Operations.GetScopes(new List<int>() { id })[0];
             LoadScopeData(currentScope);
             PrepareDataLists();
+            lblStatus.Text += "Complete.";
         }
 
         private void btnScopesNew_Click(object sender, EventArgs e)
@@ -850,9 +852,11 @@ namespace AstroDAM
 
             // Reload data:
 
+            lblStatus.Text = "Issuing sites saving command... ";
             currentSite = Operations.GetSites(new List<int>() { id })[0];
             LoadSiteData(currentSite);
             PrepareDataLists();
+            lblStatus.Text += "Complete.";
         }
 
         private void btnSitesNew_Click(object sender, EventArgs e)

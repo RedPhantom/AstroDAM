@@ -195,9 +195,9 @@
             this.lblTestResult.AutoSize = true;
             this.lblTestResult.Location = new System.Drawing.Point(98, 257);
             this.lblTestResult.Name = "lblTestResult";
-            this.lblTestResult.Size = new System.Drawing.Size(117, 15);
+            this.lblTestResult.Size = new System.Drawing.Size(197, 15);
             this.lblTestResult.TabIndex = 8;
-            this.lblTestResult.Text = "Connection Timeout";
+            this.lblTestResult.Text = "Click \"Test...\" to test the connection.";
             // 
             // label8
             // 
