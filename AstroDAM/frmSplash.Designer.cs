@@ -102,7 +102,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::AstroDAM.Properties.Resources.SplashSquence;
             this.pictureBox1.Location = new System.Drawing.Point(-1, 110);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(496, 347);

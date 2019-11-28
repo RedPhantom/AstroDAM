@@ -18,6 +18,9 @@ namespace AstroDAM
         {
             InitializeComponent();
 
+            if (Properties.Preferences.Default.PlaySplashClip)
+                pictureBox1.Image = Properties.Resources.SplashSquence;
+
             BackgroundWorker bgwStartupCheck = new BackgroundWorker();
 
             bgwStartupCheck.DoWork += BgwStartupCheck_DoWork;

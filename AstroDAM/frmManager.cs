@@ -780,7 +780,7 @@ namespace AstroDAM
             tbScopeFocalLength.Text = scope.FocalLength.ToString();
             tbScopeCentralObstructionDiameter.Text = scope.CentralObstructionDiameter.ToString();
             rbScopeRoboticYes.Checked = scope.Robotic;
-            rbScopeRoboticYes.Checked = !scope.Robotic;
+            rbScopeRoboticNo.Checked = !scope.Robotic;
             cbScopeMountType.SelectedIndex = (int)scope.MountType;
         }
 
@@ -832,7 +832,7 @@ namespace AstroDAM
 
             int id = 0;
             string name = tbSiteName.Text;
-            float longtitude = float.Parse(tbSiteLatitude.Text);
+            float longtitude = float.Parse(tbSiteLongtitude.Text);
             float latitude = float.Parse(tbSiteLatitude.Text);
             Site.LongtitudeTypes longtitudeType = (Site.LongtitudeTypes)cbSiteLongtitudeType.SelectedIndex;
             Site.LatitudeTypes latitudeType = (Site.LatitudeTypes)cbSiteLatitudeType.SelectedIndex;

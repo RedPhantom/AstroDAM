@@ -25,13 +25,25 @@ namespace AstroDAM.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{dt|hh:mm:ss} - {on}")]
         public string TreeNodeFormat {
             get {
                 return ((string)(this["TreeNodeFormat"]));
             }
             set {
                 this["TreeNodeFormat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PlaySplashClip {
+            get {
+                return ((bool)(this["PlaySplashClip"]));
+            }
+            set {
+                this["PlaySplashClip"] = value;
             }
         }
     }

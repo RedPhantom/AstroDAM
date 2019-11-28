@@ -107,10 +107,11 @@ namespace AstroDAM
                 }
             }
 
-            LoadData();
+            PopulateTreeView();
+            ClearData();
         }
 
-        private void LoadData()
+        private void ClearData()
         {
             listCameras = Operations.GetCameras();
             listCatalogues = Operations.GetCatalogues();
@@ -121,7 +122,16 @@ namespace AstroDAM
             listScopes = Operations.GetScopes();
             listSites = Operations.GetSites();
 
-            tbCollectionUuid.Text = "(adding)";
+            tbCollectionId.Text = "(adding)";
+            tbDateTime.Text = "";
+            tbComments.Text = "";
+            tbFile.Text = "";
+            tbMetadataFile.Text = "";
+            tbObjectId.Text = "";
+            tbObjectTitle.Text = "";
+            tbResolutionX.Text = "";
+            tbResolutionY.Text = "";
+            tbTotalFrames.Value = 1;
 
             cbCamera.Items.Clear();
             foreach (var item in listCameras)
@@ -139,9 +149,9 @@ namespace AstroDAM
             foreach (var item in listFileFormats)
                 cbFileFormat.Items.Add(item.LongName);
 
-            cbPhotographers.Items.Clear();
+            cbPhotographer.Items.Clear();
             foreach (var item in listPhotographers)
-                cbPhotographers.Items.Add(item.GetInformalName());
+                cbPhotographer.Items.Add(item.GetInformalName());
 
             cbScope.Items.Clear();
             foreach (var item in listScopes)
@@ -151,12 +161,9 @@ namespace AstroDAM
             foreach (var item in listOptics)
                 clbOptics.Items.Add(item.Id + "|  " + item.GetOpticName());
 
-            cbSites.Items.Clear();
+            cbSite.Items.Clear();
             foreach (var item in listSites)
-                cbSites.Items.Add(item.Name);
-
-            tvCollections.Nodes.Clear();
-            Operations.PopulateTreeView(ref tvCollections, ascendingToolStripMenuItem.Checked);
+                cbSite.Items.Add(item.Name);
 
             lblStatus.Text = "Loaded all assets.";
         }
@@ -181,49 +188,49 @@ namespace AstroDAM
         private void camerasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManager(frmManager.ManagerTabs.Cameras).ShowDialog();
-            LoadData();
+            ClearData();
         }
 
         private void cataloguesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManager(frmManager.ManagerTabs.Catalogues).ShowDialog();
-            LoadData();
+            ClearData();
         }
 
         private void colorSpacesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManager(frmManager.ManagerTabs.ColorSpaces).ShowDialog();
-            LoadData();
+            ClearData();
         }
 
         private void formatsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManager(frmManager.ManagerTabs.FileFormats).ShowDialog();
-            LoadData();
+            ClearData();
         }
 
         private void opticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManager(frmManager.ManagerTabs.Optics).ShowDialog();
-            LoadData();
+            ClearData();
         }
 
         private void photographersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManager(frmManager.ManagerTabs.Photographers).ShowDialog();
-            LoadData();
+            ClearData();
         }
 
         private void scopesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManager(frmManager.ManagerTabs.Scopes).ShowDialog();
-            LoadData();
+            ClearData();
         }
 
         private void sitesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmManager(frmManager.ManagerTabs.Sites).ShowDialog();
-            LoadData();
+            ClearData();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -231,7 +238,7 @@ namespace AstroDAM
             try
             {
                 int id = 0;
-                int.TryParse(tbCollectionUuid.Text, out id);
+                int.TryParse(tbCollectionId.Text, out id);
 
                 DateTime captureDateTime = DateTime.Parse(tbDateTime.Text);
                 Catalogue catalogue = listCatalogues[cbCatalogue.SelectedIndex];
@@ -242,7 +249,7 @@ namespace AstroDAM
                 ColorSpace colorSpace = listColorSpaces[cbColorSpace.SelectedIndex];
                 Camera camera = listCameras[cbCamera.SelectedIndex];
                 Scope scope = listScopes[cbScope.SelectedIndex];
-                Site site = listSites[cbSites.SelectedIndex];
+                Site site = listSites[cbSite.SelectedIndex];
                 List<Optic> optics = new List<Optic>();
 
                 foreach (var item in clbOptics.CheckedItems)
@@ -251,7 +258,7 @@ namespace AstroDAM
                     optics.Add(listOptics.Where(x => x.Id == opticId).ToList()[0]);
                 }
 
-                Photographer photographer = listPhotographers[cbPhotographers.SelectedIndex];
+                Photographer photographer = listPhotographers[cbPhotographer.SelectedIndex];
                 Size resolution = Operations.ParseResolution(tbResolutionX.Text + ";" + tbResolutionY.Text);
                 string comments = tbComments.Text;
                 string fileName = tbFile.Text;
@@ -272,12 +279,13 @@ namespace AstroDAM
                 //return;
                 throw;
             }
-            LoadData();
+            ClearData();
+            PopulateTreeView();
         }
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tbCollectionUuid.Text = "(adding)";
+            tbCollectionId.Text = "(adding)";
             tbDateTime.Text = "";
             cbCatalogue.SelectedIndex = -1;
             tbObjectId.Text = "";
@@ -287,12 +295,12 @@ namespace AstroDAM
             cbColorSpace.SelectedIndex = -1;
             cbCamera.SelectedIndex = -1;
             cbScope.SelectedIndex = -1;
-            cbSites.SelectedIndex = -1;
-            cbPhotographers.SelectedIndex = -1;
+            cbSite.SelectedIndex = -1;
+            cbPhotographer.SelectedIndex = -1;
             tbResolutionX.Text = "";
             tbResolutionY.Text = "";
             tbComments.Text = "";
-            LoadData();
+            ClearData();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -307,16 +315,43 @@ namespace AstroDAM
         {
             if (e.Node.Name[0] == 'i') // if the selected node is a collection item.
             {
-                string uuid = e.Node.Name.Substring(1);
-                LoadData();
-                PopulateFields(uuid);
+                int id = int.Parse(e.Node.Name.Substring(1));
+                ClearData();
+                PopulateFields(id);
             }
         }
 
         // fills the different fields in the collection view.
-        private void PopulateFields(string uuid)
+        private void PopulateFields(int id)
         {
-            Collection collection = Operations.GetCollections(new List<int>() { int.Parse(uuid) })[0];
+            Collection collection = Operations.GetCollections(new List<int>() { id })[0];
+
+            tbCollectionId.Text = collection.Id.ToString();
+            tbDateTime.Text = collection.CaptureDateTime.ToString("yyyy-MM-Dd hh:mm:ss");
+            cbCatalogue.SelectedIndex = listCatalogues.IndexOf(listCatalogues.Find(x => x.Id == collection.Catalogue.Id));
+            tbObjectId.Text = collection.Object.ToString();
+            tbObjectTitle.Text = collection.ObjectTitle;
+            tbMetadataFile.Text = collection.MetaDataFileName;
+            tbFile.Text = collection.FileName;
+            tbTotalFrames.Value = collection.NumberFrames;
+            cbFileFormat.SelectedIndex = listFileFormats.IndexOf(listFileFormats.Find(x => x.Id == collection.FileFormat.Id));
+            cbColorSpace.SelectedIndex = listColorSpaces.IndexOf(listColorSpaces.Find(x => x.Id == collection.ColorSpace.Id));
+            tbResolutionX.Text = collection.Resolution.Width.ToString();
+            tbResolutionY.Text = collection.Resolution.Height.ToString();
+            cbPhotographer.SelectedIndex = listPhotographers.IndexOf(listPhotographers.Find(x => x.Id == collection.Photographer.Id));
+            cbSite.SelectedIndex = listSites.IndexOf(listSites.Find(x => x.Id == collection.Site.Id));
+            tbComments.Text = collection.Comments;
+            cbScope.SelectedIndex = listScopes.IndexOf(listScopes.Find(x => x.Id == collection.Scope.Id));
+            cbCamera.SelectedIndex = listCameras.IndexOf(listCameras.Find(x => x.Id == collection.Camera.Id));
+
+            clbOptics.Items.Clear();
+            bool opticChecked;
+
+            foreach (var item in listOptics)
+            {
+                opticChecked = collection.Optics.Contains(item);
+                clbOptics.Items.Add(item.Id + "|  " + item.OpticType + " " + item.Value, opticChecked);
+            }
         }
 
         // Context Menu Strips
@@ -382,8 +417,6 @@ namespace AstroDAM
         private void ParseMetadataFile(Dictionary<string, string> metadata, string[] unparsableLines)
         {
             int numPramsImported = 0;
-
-            rbHasMetadataYes.Checked = true;
 
             // -- FireCapture file: --
 
@@ -472,9 +505,25 @@ namespace AstroDAM
 
                 if (importer.DialogRes.ImportFileMetadata)
                 {
-                    ParseCaptureFile(importer.DialogRes.FilePath);
+                    //ParseCaptureFile(importer.DialogRes.FilePath); TODO
                 }
             }
+        }
+
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmPreferences().ShowDialog();
+        }
+
+        private void PopulateTreeView()
+        {
+            tvCollections.Nodes.Clear();
+            Operations.PopulateTreeView(ref tvCollections, ascendingToolStripMenuItem.Checked);
+        }
+
+        private void refreshNavtreeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PopulateTreeView();
         }
     }
 }

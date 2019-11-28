@@ -3,7 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="TreeNodeFormat" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">{dt|hh:mm:ss} - {on}</Value>
+    </Setting>
+    <Setting Name="PlaySplashClip" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

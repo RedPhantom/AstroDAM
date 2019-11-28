@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -202,9 +203,9 @@ namespace AstroDAM
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
 
-            cmd.CommandText = "SELECT [CaptureDateTime],[Catalogue],[Object],[ObjectTitle]," +
+            cmd.CommandText = "SELECT [Id],[CaptureDateTime],[Catalogue],[Object],[ObjectTitle]," +
                 "[NumberFrames],[FileFormat],[ColorSpace],[Camera],[Scope],[Site],[Optics]," +
-                "[Photographer],[Resolution],[Comments],[FilePath],[MetadataFile] " +
+                "[Photographer],[Resolution],[Comments],[FilePath],[MetadataFilePath] " +
                 "FROM [tblCollections] " + selector;
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -270,7 +271,7 @@ namespace AstroDAM
                 "[Resolution] = @Resolution, " +
                 "[Comments] = @Comments, " +
                 "[FilePath] = @FilePath, " +
-                "[MetadataFile] = @MetadataFile " +
+                "[MetadataFilePath] = @MetadataFile " +
                 "WHERE [Id] = @Id";
 
             cmd.Parameters.AddWithValue("@CaptureDateTime", collection.CaptureDateTime);
@@ -299,15 +300,14 @@ namespace AstroDAM
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
 
-            cmd.CommandText = "INSERT INTO [tblCollections] ([Id],[CaptureDateTime],[Catalogue],[Object],[ObjectTitle]," +
+            cmd.CommandText = "INSERT INTO [tblCollections] ([CaptureDateTime],[Catalogue],[Object],[ObjectTitle]," +
                 "[NumberFrames],[FileFormat],[ColorSpace],[Camera],[Scope],[Site],[Optics]," +
-                "[Photographer],[Resolution],[Comments],[FilePath],[MetadataFile]) " +
+                "[Photographer],[Resolution],[Comments],[FilePath],[MetadataFilePath]) " +
                 "OUTPUT INSERTED.Id " +
-                "VALUES (@Id,@CaptureDateTime,@CatalogueId,@ObjectId,@ObjectTitle," +
+                "VALUES (@CaptureDateTime,@CatalogueId,@ObjectId,@ObjectTitle," +
                 "@NumberFrames,@FileFormat,@ColorSpace,@Camera,@Scope,@Site,@Optics," +
                 "@Photographer,@Resolution,@Comments,@FilePath,@MetadataFile)";
 
-            cmd.Parameters.AddWithValue("@Id", collection.Id);
             cmd.Parameters.AddWithValue("@CaptureDateTime", collection.CaptureDateTime);
             cmd.Parameters.AddWithValue("@CatalogueId", collection.Catalogue.Id);
             cmd.Parameters.AddWithValue("@ObjectId", collection.Object);
@@ -848,6 +848,9 @@ namespace AstroDAM
 
         public static List<int> ParseIntList(string str)
         {
+            if (string.IsNullOrEmpty(str))
+                return new List<int>();
+
             string[] nums = str.Split(';');
             List<int> numList = new List<int>(nums.Length);
 
@@ -903,24 +906,87 @@ namespace AstroDAM
             return true;
         }
 
-        public static void PopulateTreeView(ref TreeView treeView, bool isAscending)
+        public static void PopulateTreeView(ref TreeView treeView, bool isAscending, string format = "")
         {
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
 
             // returns dates, ids and object titles of collections
-            cmd.CommandText = "SELECT [Id],CAST(FLOOR(CAST([CaptureDateTime] as FLOAT)) as DateTime),[ObjectTitle],[CaptureDateTime] FROM tblCollections ORDER BY [CaptureDateTime] " + (isAscending ? "ASC" : "DESC");
+            cmd.CommandText = "SELECT [Id],CAST(FLOOR(CAST([CaptureDateTime] as FLOAT)) as DateTime) FROM tblCollections ORDER BY [CaptureDateTime] " + (isAscending ? "ASC" : "DESC");
 
             SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-                string posibleKey = "f" + reader.GetDateTime(1).ToString("yyyy-MM-dd"); // f is for folder.
-                if (!treeView.Nodes.ContainsKey(posibleKey))
-                    treeView.Nodes.Add(posibleKey, posibleKey);
+                // for every collection, add to a new or existing group - by date.
+                int id = reader.GetInt32(0);
+                string collectionDate = reader.GetDateTime(1).ToString("yyyy-MM-dd");
 
-                treeView.Nodes[posibleKey].Nodes.Add("i" + reader.GetString(0), // key. i for item.
-                    reader.GetDateTime(3).ToString("hh:mm:ss") + " - " + reader.GetString(2));
+                Collection col = GetCollections(new List<int>() { id })[0];
+
+                string posibleKey = "f" + collectionDate; // f is for folder.
+                if (!treeView.Nodes.ContainsKey(posibleKey))
+                    treeView.Nodes.Add(posibleKey, posibleKey.Substring(1));
+
+                string namingFormat = string.IsNullOrEmpty(format) ? Properties.Preferences.Default.TreeNodeFormat : format;
+
+                foreach (Match match in Regex.Matches(namingFormat, @"\{([^}]+)\}"))
+                {
+                    // parse the match:
+                    string matchVal = match.Value.Replace("{", "").Replace("}", "");
+
+                    string command, parameter = "";
+                    if (matchVal.Contains("|"))
+                    {
+                        command = matchVal.Split('|')[0];
+                        parameter = matchVal.Split('|')[1];
+                    }
+                    else
+                        command = matchVal;
+
+                    matchVal = "{" + matchVal + "}";
+
+                    switch (command)
+                    {
+                        case "dt":
+                            namingFormat = namingFormat.Replace(matchVal, col.CaptureDateTime.ToString(parameter));
+
+                            break;
+
+                        case "o":
+                            if (parameter == "id")
+                                namingFormat = namingFormat.Replace(matchVal, col.Object.ToString());
+
+                            if (parameter == "n")
+                                namingFormat = namingFormat.Replace(matchVal, col.ObjectTitle);
+
+                            break;
+
+                        case "c":
+                            if (parameter == "id")
+                                namingFormat = namingFormat.Replace(matchVal, col.Catalogue.Id.ToString());
+                            
+                            if (parameter == "sn")
+                                namingFormat = namingFormat.Replace(matchVal, col.Catalogue.ShortName);
+                            
+                            if (parameter == "ln")
+                                namingFormat = namingFormat.Replace(matchVal, col.Catalogue.LongName);
+
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                
+
+                //treeView.Nodes[posibleKey].Nodes.Add("i" + reader.GetString(0), // key. i for item.
+                //    reader.GetDateTime(3).ToString("hh:mm:ss") + " - " + reader.GetString(2));
+
+                treeView.Nodes[posibleKey].Nodes.Add("i" + id.ToString(), // key. i for item.
+                    namingFormat);
+
+                treeView.ExpandAll();
             }
         }
 

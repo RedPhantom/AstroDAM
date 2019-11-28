@@ -61,19 +61,16 @@
             this.cbScope = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tbComments = new System.Windows.Forms.TextBox();
-            this.cbSites = new System.Windows.Forms.ComboBox();
-            this.cbPhotographers = new System.Windows.Forms.ComboBox();
+            this.cbSite = new System.Windows.Forms.ComboBox();
+            this.cbPhotographer = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnLinkFile = new System.Windows.Forms.Button();
             this.btnLinkMetadataFile = new System.Windows.Forms.Button();
             this.tbMetadataFile = new System.Windows.Forms.TextBox();
             this.tbFile = new System.Windows.Forms.TextBox();
-            this.rbHasMetadataNo = new System.Windows.Forms.RadioButton();
-            this.rbHasMetadataYes = new System.Windows.Forms.RadioButton();
             this.label18 = new System.Windows.Forms.Label();
             this.tbResolutionY = new System.Windows.Forms.TextBox();
             this.tbResolutionX = new System.Windows.Forms.TextBox();
@@ -83,18 +80,16 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tbTotalFrames = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbObjectId = new System.Windows.Forms.TextBox();
             this.lnkHelp1 = new System.Windows.Forms.LinkLabel();
             this.tbObjectTitle = new System.Windows.Forms.TextBox();
             this.cbCatalogue = new System.Windows.Forms.ComboBox();
             this.tbDateTime = new System.Windows.Forms.MaskedTextBox();
-            this.tbCollectionUuid = new System.Windows.Forms.TextBox();
+            this.tbCollectionId = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -123,6 +118,8 @@
             this.aboutAstroDAMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTipInfo = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.refreshNavtreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -226,32 +223,34 @@
             this.option2ToolStripMenuItem,
             this.toolStripSeparator2,
             this.ascendingToolStripMenuItem,
-            this.descendingToolStripMenuItem});
+            this.descendingToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.refreshNavtreeToolStripMenuItem});
             this.cmsSortingOptions.Name = "cmsSortingOptions";
-            this.cmsSortingOptions.Size = new System.Drawing.Size(150, 106);
+            this.cmsSortingOptions.Size = new System.Drawing.Size(200, 136);
             // 
             // option1ToolStripMenuItem
             // 
             this.option1ToolStripMenuItem.Name = "option1ToolStripMenuItem";
-            this.option1ToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.option1ToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.option1ToolStripMenuItem.Text = "Option 1";
             // 
             // option2ToolStripMenuItem
             // 
             this.option2ToolStripMenuItem.Name = "option2ToolStripMenuItem";
-            this.option2ToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.option2ToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.option2ToolStripMenuItem.Text = "Option 2";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(146, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
             // 
             // ascendingToolStripMenuItem
             // 
             this.ascendingToolStripMenuItem.CheckOnClick = true;
             this.ascendingToolStripMenuItem.Name = "ascendingToolStripMenuItem";
-            this.ascendingToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.ascendingToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.ascendingToolStripMenuItem.Text = "Ascending";
             this.ascendingToolStripMenuItem.Click += new System.EventHandler(this.ascendingToolStripMenuItem_Click);
             // 
@@ -259,7 +258,7 @@
             // 
             this.descendingToolStripMenuItem.CheckOnClick = true;
             this.descendingToolStripMenuItem.Name = "descendingToolStripMenuItem";
-            this.descendingToolStripMenuItem.Size = new System.Drawing.Size(149, 24);
+            this.descendingToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
             this.descendingToolStripMenuItem.Text = "Descending";
             this.descendingToolStripMenuItem.Click += new System.EventHandler(this.descendingToolStripMenuItem_Click);
             // 
@@ -343,9 +342,7 @@
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Controls.Add(this.groupBox4);
             this.panel2.Controls.Add(this.groupBox3);
-            this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.groupBox2);
-            this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 47);
@@ -355,7 +352,7 @@
             // 
             // label17
             // 
-            this.label17.Location = new System.Drawing.Point(323, 217);
+            this.label17.Location = new System.Drawing.Point(323, 159);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(179, 24);
             this.label17.TabIndex = 5;
@@ -366,7 +363,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(323, 64);
+            this.pictureBox1.Location = new System.Drawing.Point(323, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(179, 150);
             this.pictureBox1.TabIndex = 4;
@@ -380,7 +377,7 @@
             this.groupBox4.Controls.Add(this.label14);
             this.groupBox4.Controls.Add(this.cbCamera);
             this.groupBox4.Controls.Add(this.cbScope);
-            this.groupBox4.Location = new System.Drawing.Point(6, 542);
+            this.groupBox4.Location = new System.Drawing.Point(6, 514);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(311, 182);
             this.groupBox4.TabIndex = 3;
@@ -441,12 +438,12 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.tbComments);
-            this.groupBox3.Controls.Add(this.cbSites);
-            this.groupBox3.Controls.Add(this.cbPhotographers);
+            this.groupBox3.Controls.Add(this.cbSite);
+            this.groupBox3.Controls.Add(this.cbPhotographer);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(6, 395);
+            this.groupBox3.Location = new System.Drawing.Point(6, 367);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(311, 141);
             this.groupBox3.TabIndex = 2;
@@ -462,21 +459,21 @@
             this.tbComments.Size = new System.Drawing.Size(162, 57);
             this.tbComments.TabIndex = 18;
             // 
-            // cbSites
+            // cbSite
             // 
-            this.cbSites.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSites.Location = new System.Drawing.Point(120, 46);
-            this.cbSites.Name = "cbSites";
-            this.cbSites.Size = new System.Drawing.Size(130, 21);
-            this.cbSites.TabIndex = 17;
+            this.cbSite.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSite.Location = new System.Drawing.Point(120, 46);
+            this.cbSite.Name = "cbSite";
+            this.cbSite.Size = new System.Drawing.Size(130, 21);
+            this.cbSite.TabIndex = 17;
             // 
-            // cbPhotographers
+            // cbPhotographer
             // 
-            this.cbPhotographers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPhotographers.Location = new System.Drawing.Point(120, 19);
-            this.cbPhotographers.Name = "cbPhotographers";
-            this.cbPhotographers.Size = new System.Drawing.Size(130, 21);
-            this.cbPhotographers.TabIndex = 16;
+            this.cbPhotographer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPhotographer.Location = new System.Drawing.Point(120, 19);
+            this.cbPhotographer.Name = "cbPhotographer";
+            this.cbPhotographer.Size = new System.Drawing.Size(130, 21);
+            this.cbPhotographer.TabIndex = 16;
             // 
             // label1
             // 
@@ -505,25 +502,12 @@
             this.label12.TabIndex = 8;
             this.label12.Text = "Photographer";
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(323, 35);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(115, 23);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Fetch from File...";
-            this.toolTipInfo.SetToolTip(this.button3, "Auto-fill this form with data from a capture file.\r\nAny previous information will" +
-        " be removed.");
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnLinkFile);
             this.groupBox2.Controls.Add(this.btnLinkMetadataFile);
             this.groupBox2.Controls.Add(this.tbMetadataFile);
             this.groupBox2.Controls.Add(this.tbFile);
-            this.groupBox2.Controls.Add(this.rbHasMetadataNo);
-            this.groupBox2.Controls.Add(this.rbHasMetadataYes);
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.tbResolutionY);
             this.groupBox2.Controls.Add(this.tbResolutionX);
@@ -533,13 +517,12 @@
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.tbTotalFrames);
-            this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Location = new System.Drawing.Point(6, 174);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(311, 215);
+            this.groupBox2.Size = new System.Drawing.Size(311, 187);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File Information";
@@ -582,32 +565,10 @@
             this.tbFile.Size = new System.Drawing.Size(162, 20);
             this.tbFile.TabIndex = 16;
             // 
-            // rbHasMetadataNo
-            // 
-            this.rbHasMetadataNo.AutoSize = true;
-            this.rbHasMetadataNo.Location = new System.Drawing.Point(171, 99);
-            this.rbHasMetadataNo.Name = "rbHasMetadataNo";
-            this.rbHasMetadataNo.Size = new System.Drawing.Size(41, 19);
-            this.rbHasMetadataNo.TabIndex = 11;
-            this.rbHasMetadataNo.TabStop = true;
-            this.rbHasMetadataNo.Text = "No";
-            this.rbHasMetadataNo.UseVisualStyleBackColor = true;
-            // 
-            // rbHasMetadataYes
-            // 
-            this.rbHasMetadataYes.AutoSize = true;
-            this.rbHasMetadataYes.Location = new System.Drawing.Point(120, 99);
-            this.rbHasMetadataYes.Name = "rbHasMetadataYes";
-            this.rbHasMetadataYes.Size = new System.Drawing.Size(45, 19);
-            this.rbHasMetadataYes.TabIndex = 10;
-            this.rbHasMetadataYes.TabStop = true;
-            this.rbHasMetadataYes.Text = "Yes";
-            this.rbHasMetadataYes.UseVisualStyleBackColor = true;
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(180, 181);
+            this.label18.Location = new System.Drawing.Point(180, 159);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(14, 15);
             this.label18.TabIndex = 13;
@@ -615,14 +576,14 @@
             // 
             // tbResolutionY
             // 
-            this.tbResolutionY.Location = new System.Drawing.Point(200, 178);
+            this.tbResolutionY.Location = new System.Drawing.Point(200, 156);
             this.tbResolutionY.Name = "tbResolutionY";
             this.tbResolutionY.Size = new System.Drawing.Size(53, 20);
             this.tbResolutionY.TabIndex = 15;
             // 
             // tbResolutionX
             // 
-            this.tbResolutionX.Location = new System.Drawing.Point(120, 178);
+            this.tbResolutionX.Location = new System.Drawing.Point(120, 156);
             this.tbResolutionX.Name = "tbResolutionX";
             this.tbResolutionX.Size = new System.Drawing.Size(53, 20);
             this.tbResolutionX.TabIndex = 14;
@@ -630,16 +591,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 181);
+            this.label2.Location = new System.Drawing.Point(10, 159);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 15);
+            this.label2.Size = new System.Drawing.Size(73, 15);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Color Space";
+            this.label2.Text = "Dimensions";
             // 
             // cbColorSpace
             // 
             this.cbColorSpace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbColorSpace.Location = new System.Drawing.Point(120, 151);
+            this.cbColorSpace.Location = new System.Drawing.Point(120, 129);
             this.cbColorSpace.Name = "cbColorSpace";
             this.cbColorSpace.Size = new System.Drawing.Size(130, 21);
             this.cbColorSpace.TabIndex = 13;
@@ -647,7 +608,7 @@
             // cbFileFormat
             // 
             this.cbFileFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFileFormat.Location = new System.Drawing.Point(120, 124);
+            this.cbFileFormat.Location = new System.Drawing.Point(120, 102);
             this.cbFileFormat.Name = "cbFileFormat";
             this.cbFileFormat.Size = new System.Drawing.Size(130, 21);
             this.cbFileFormat.TabIndex = 12;
@@ -655,7 +616,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(10, 154);
+            this.label11.Location = new System.Drawing.Point(10, 132);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(74, 15);
             this.label11.TabIndex = 8;
@@ -664,7 +625,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(10, 127);
+            this.label10.Location = new System.Drawing.Point(10, 105);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 15);
             this.label10.TabIndex = 8;
@@ -691,16 +652,6 @@
             0,
             0,
             0});
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 101);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(91, 15);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Has Metadata?";
-            this.toolTipInfo.SetToolTip(this.label9, "Whether the capture has a metadata file saved next to it.");
             // 
             // label20
             // 
@@ -729,17 +680,6 @@
             this.label8.TabIndex = 5;
             this.label8.Text = "Total Frames";
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(323, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Fetch Metadata...";
-            this.toolTipInfo.SetToolTip(this.button2, "Auto-fill this form with data from a metadata file.\r\nAny previous information wil" +
-        "l be removed.");
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tbObjectId);
@@ -747,7 +687,7 @@
             this.groupBox1.Controls.Add(this.tbObjectTitle);
             this.groupBox1.Controls.Add(this.cbCatalogue);
             this.groupBox1.Controls.Add(this.tbDateTime);
-            this.groupBox1.Controls.Add(this.tbCollectionUuid);
+            this.groupBox1.Controls.Add(this.tbCollectionId);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
@@ -804,15 +744,15 @@
             this.tbDateTime.Size = new System.Drawing.Size(130, 20);
             this.tbDateTime.TabIndex = 4;
             // 
-            // tbCollectionUuid
+            // tbCollectionId
             // 
-            this.tbCollectionUuid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(205)))));
-            this.tbCollectionUuid.Font = new System.Drawing.Font("Consolas", 7.471698F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCollectionUuid.Location = new System.Drawing.Point(120, 23);
-            this.tbCollectionUuid.Name = "tbCollectionUuid";
-            this.tbCollectionUuid.ReadOnly = true;
-            this.tbCollectionUuid.Size = new System.Drawing.Size(130, 20);
-            this.tbCollectionUuid.TabIndex = 2;
+            this.tbCollectionId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(205)))));
+            this.tbCollectionId.Font = new System.Drawing.Font("Consolas", 7.471698F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCollectionId.Location = new System.Drawing.Point(120, 23);
+            this.tbCollectionId.Name = "tbCollectionId";
+            this.tbCollectionId.ReadOnly = true;
+            this.tbCollectionId.Size = new System.Drawing.Size(130, 20);
+            this.tbCollectionId.TabIndex = 2;
             // 
             // label7
             // 
@@ -882,7 +822,7 @@
             this.exitToolStripMenuItem});
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
             this.applicationToolStripMenuItem.Size = new System.Drawing.Size(89, 23);
-            this.applicationToolStripMenuItem.Text = "Application";
+            this.applicationToolStripMenuItem.Text = "&Application";
             // 
             // preferencesToolStripMenuItem
             // 
@@ -890,14 +830,15 @@
             this.preferencesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.P)));
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-            this.preferencesToolStripMenuItem.Text = "Preferences";
+            this.preferencesToolStripMenuItem.Text = "&Preferences";
             this.preferencesToolStripMenuItem.ToolTipText = "Show the preferences dialog.";
+            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // databaseConnectionToolStripMenuItem
             // 
             this.databaseConnectionToolStripMenuItem.Name = "databaseConnectionToolStripMenuItem";
             this.databaseConnectionToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-            this.databaseConnectionToolStripMenuItem.Text = "Database Connection";
+            this.databaseConnectionToolStripMenuItem.Text = "&Database Connection";
             this.databaseConnectionToolStripMenuItem.ToolTipText = "Configure the database connection.";
             this.databaseConnectionToolStripMenuItem.Click += new System.EventHandler(this.databaseConnectionToolStripMenuItem_Click);
             // 
@@ -912,7 +853,7 @@
             this.exitToolStripMenuItem.ShortcutKeyDisplayString = "";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.ToolTipText = "Exit the application.";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -924,14 +865,14 @@
             this.saveToolStripMenuItem});
             this.collectionsToolStripMenuItem.Name = "collectionsToolStripMenuItem";
             this.collectionsToolStripMenuItem.Size = new System.Drawing.Size(87, 23);
-            this.collectionsToolStripMenuItem.Text = "Collections";
+            this.collectionsToolStripMenuItem.Text = "&Collections";
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
-            this.addToolStripMenuItem.Text = "Add";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.addToolStripMenuItem.Text = "&Add";
             this.addToolStripMenuItem.ToolTipText = "Add a new collection.";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
@@ -939,8 +880,8 @@
             // 
             this.findToolStripMenuItem.Name = "findToolStripMenuItem";
             this.findToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
-            this.findToolStripMenuItem.Text = "Find";
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.findToolStripMenuItem.Text = "&Find";
             this.findToolStripMenuItem.ToolTipText = "Find a collection.";
             this.findToolStripMenuItem.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
             // 
@@ -948,8 +889,8 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.ToolTipText = "Save the current collection.";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -966,63 +907,63 @@
             this.sitesToolStripMenuItem});
             this.managementToolStripMenuItem.Name = "managementToolStripMenuItem";
             this.managementToolStripMenuItem.Size = new System.Drawing.Size(103, 23);
-            this.managementToolStripMenuItem.Text = "Management";
+            this.managementToolStripMenuItem.Text = "&Management";
             this.managementToolStripMenuItem.ToolTipText = "Show different dialogues for preset management.";
             // 
             // camerasToolStripMenuItem
             // 
             this.camerasToolStripMenuItem.Name = "camerasToolStripMenuItem";
-            this.camerasToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
-            this.camerasToolStripMenuItem.Text = "Cameras...";
+            this.camerasToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.camerasToolStripMenuItem.Text = "&Cameras...";
             this.camerasToolStripMenuItem.Click += new System.EventHandler(this.camerasToolStripMenuItem_Click);
             // 
             // cataloguesToolStripMenuItem
             // 
             this.cataloguesToolStripMenuItem.Name = "cataloguesToolStripMenuItem";
-            this.cataloguesToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
-            this.cataloguesToolStripMenuItem.Text = "Catalogues...";
+            this.cataloguesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.cataloguesToolStripMenuItem.Text = "C&atalogues...";
             this.cataloguesToolStripMenuItem.Click += new System.EventHandler(this.cataloguesToolStripMenuItem_Click);
             // 
             // colorSpacesToolStripMenuItem
             // 
             this.colorSpacesToolStripMenuItem.Name = "colorSpacesToolStripMenuItem";
-            this.colorSpacesToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
-            this.colorSpacesToolStripMenuItem.Text = "Color Spaces...";
+            this.colorSpacesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.colorSpacesToolStripMenuItem.Text = "C&olor Spaces...";
             this.colorSpacesToolStripMenuItem.Click += new System.EventHandler(this.colorSpacesToolStripMenuItem_Click);
             // 
             // formatsToolStripMenuItem
             // 
             this.formatsToolStripMenuItem.Name = "formatsToolStripMenuItem";
-            this.formatsToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
-            this.formatsToolStripMenuItem.Text = "File Formats...";
+            this.formatsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.formatsToolStripMenuItem.Text = "&File Formats...";
             this.formatsToolStripMenuItem.Click += new System.EventHandler(this.formatsToolStripMenuItem_Click);
             // 
             // opticsToolStripMenuItem
             // 
             this.opticsToolStripMenuItem.Name = "opticsToolStripMenuItem";
-            this.opticsToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
-            this.opticsToolStripMenuItem.Text = "Optics...";
+            this.opticsToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.opticsToolStripMenuItem.Text = "O&ptics...";
             this.opticsToolStripMenuItem.Click += new System.EventHandler(this.opticsToolStripMenuItem_Click);
             // 
             // photographersToolStripMenuItem
             // 
             this.photographersToolStripMenuItem.Name = "photographersToolStripMenuItem";
-            this.photographersToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
-            this.photographersToolStripMenuItem.Text = "Photographers...";
+            this.photographersToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.photographersToolStripMenuItem.Text = "P&hotographers...";
             this.photographersToolStripMenuItem.Click += new System.EventHandler(this.photographersToolStripMenuItem_Click);
             // 
             // scopesToolStripMenuItem
             // 
             this.scopesToolStripMenuItem.Name = "scopesToolStripMenuItem";
-            this.scopesToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
-            this.scopesToolStripMenuItem.Text = "Scopes...";
+            this.scopesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.scopesToolStripMenuItem.Text = "&Scopes...";
             this.scopesToolStripMenuItem.Click += new System.EventHandler(this.scopesToolStripMenuItem_Click);
             // 
             // sitesToolStripMenuItem
             // 
             this.sitesToolStripMenuItem.Name = "sitesToolStripMenuItem";
-            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
-            this.sitesToolStripMenuItem.Text = "Sites...";
+            this.sitesToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.sitesToolStripMenuItem.Text = "Si&tes...";
             this.sitesToolStripMenuItem.Click += new System.EventHandler(this.sitesToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -1031,13 +972,13 @@
             this.aboutAstroDAMToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(49, 23);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutAstroDAMToolStripMenuItem
             // 
             this.aboutAstroDAMToolStripMenuItem.Name = "aboutAstroDAMToolStripMenuItem";
             this.aboutAstroDAMToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
-            this.aboutAstroDAMToolStripMenuItem.Text = "About AstroDAM...";
+            this.aboutAstroDAMToolStripMenuItem.Text = "&About AstroDAM...";
             this.aboutAstroDAMToolStripMenuItem.Click += new System.EventHandler(this.aboutAstroDAMToolStripMenuItem_Click);
             // 
             // toolTipInfo
@@ -1049,6 +990,19 @@
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 3;
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(196, 6);
+            // 
+            // refreshNavtreeToolStripMenuItem
+            // 
+            this.refreshNavtreeToolStripMenuItem.Name = "refreshNavtreeToolStripMenuItem";
+            this.refreshNavtreeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.refreshNavtreeToolStripMenuItem.Size = new System.Drawing.Size(199, 24);
+            this.refreshNavtreeToolStripMenuItem.Text = "Refresh Navtree";
+            this.refreshNavtreeToolStripMenuItem.Click += new System.EventHandler(this.refreshNavtreeToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -1113,16 +1067,14 @@
         private System.Windows.Forms.ToolStripMenuItem collectionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.NumericUpDown tbTotalFrames;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox tbObjectTitle;
         private System.Windows.Forms.ComboBox cbCatalogue;
         private System.Windows.Forms.MaskedTextBox tbDateTime;
-        private System.Windows.Forms.TextBox tbCollectionUuid;
+        private System.Windows.Forms.TextBox tbCollectionId;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -1133,10 +1085,9 @@
         private System.Windows.Forms.ToolStripMenuItem cataloguesToolStripMenuItem;
         private System.Windows.Forms.ComboBox cbFileFormat;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox tbComments;
-        private System.Windows.Forms.ComboBox cbPhotographers;
+        private System.Windows.Forms.ComboBox cbPhotographer;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cbColorSpace;
@@ -1174,14 +1125,12 @@
         private System.Windows.Forms.ToolStripMenuItem descendingToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTipInfo;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ComboBox cbSites;
+        private System.Windows.Forms.ComboBox cbSite;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbResolutionY;
         private System.Windows.Forms.TextBox tbResolutionX;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.RadioButton rbHasMetadataNo;
-        private System.Windows.Forms.RadioButton rbHasMetadataYes;
         private System.Windows.Forms.Button btnLinkFile;
         private System.Windows.Forms.Button btnLinkMetadataFile;
         private System.Windows.Forms.TextBox tbMetadataFile;
@@ -1190,6 +1139,8 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutAstroDAMToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem refreshNavtreeToolStripMenuItem;
     }
 }
 
