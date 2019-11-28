@@ -46,5 +46,29 @@ namespace AstroDAM.Properties {
                 this["PlaySplashClip"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int NodeGrouping {
+            get {
+                return ((int)(this["NodeGrouping"]));
+            }
+            set {
+                this["NodeGrouping"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TreeIsAscending {
+            get {
+                return ((bool)(this["TreeIsAscending"]));
+            }
+            set {
+                this["TreeIsAscending"] = value;
+            }
+        }
     }
 }

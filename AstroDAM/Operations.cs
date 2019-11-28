@@ -15,10 +15,25 @@ namespace AstroDAM
     {
         public static SqlConnection GetCon()
         {
-            SqlConnection con = new SqlConnection(Properties.Settings.Default.ConnectionString);
-            con.Open();
+            for (int i = 1; i < 6; i++)
+            {
+                try
+                {
+                    SqlConnection con = new SqlConnection(Properties.Settings.Default.ConnectionString);
+                    con.Open();
 
-            return con;
+                    return con;
+                }
+                catch (Exception ex)
+                {
+                    DialogResult dr = MessageBox.Show(string.Format("An error occured while approaching the server:\n{0}\nTrying again ({1}/5). Quit?", ex.Message, i), "Database Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                    if (dr == DialogResult.Yes)
+                        Application.Exit();
+                }
+            }
+
+            throw new Exception("Repeating database exception.");
         }
 
         public static bool TestDbConnection(string ConnectionString = "")
@@ -38,7 +53,9 @@ namespace AstroDAM
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "SELECT 1";
 
-                return cmd.ExecuteScalar().ToString() == "1";
+                bool res = cmd.ExecuteScalar().ToString() == "1";
+                con.Close();
+                return res;
             }
             catch (Exception)
             {
@@ -72,6 +89,7 @@ namespace AstroDAM
                 Cameras.Add(new Camera(id, shortName, longName, maxResolution, colorSpaces));
             }
 
+            con.Close();
             return Cameras;
         }
 
@@ -85,6 +103,7 @@ namespace AstroDAM
             cmd.CommandText = "DELETE FROM [tblCameras] " + selector;
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static void EditCamera(int Id, Camera camera)
@@ -106,6 +125,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static int AddCamera(Camera camera)
@@ -122,6 +142,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@MaxResolution", MakeResolution(camera.MaxResolution));
             cmd.Parameters.AddWithValue("@ColorSpaces", MakeIntList(camera.ColorSpaces.Select(x => x.Id).ToList()));
 
+            con.Close();
             return int.Parse(cmd.ExecuteScalar().ToString());
         }
 
@@ -147,6 +168,7 @@ namespace AstroDAM
                 catalogues.Add(new Catalogue(id, shortName, longName));
             }
 
+            con.Close();
             return catalogues;
         }
 
@@ -160,6 +182,7 @@ namespace AstroDAM
             cmd.CommandText = "DELETE FROM [tblCatalogues] " + selector;
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static void EditCatalogue(int Id, Catalogue catalogue)
@@ -177,6 +200,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Id", "Id");
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static int AddCatalogue(Catalogue catalogue)
@@ -191,6 +215,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@ShortName", catalogue.ShortName);
             cmd.Parameters.AddWithValue("@LongName", catalogue.LongName);
 
+            con.Close();
             return int.Parse(cmd.ExecuteScalar().ToString());
         }
 
@@ -235,6 +260,7 @@ namespace AstroDAM
                     resolution, comments, filePath, metadataFile));
             }
 
+            con.Close();
             return collections;
         }
 
@@ -248,6 +274,7 @@ namespace AstroDAM
             cmd.CommandText = "DELETE FROM [tblCollections] " + selector;
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static void EditCollection(int Id, Collection collection)
@@ -293,6 +320,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static bool AddCollection(Collection collection)
@@ -325,7 +353,9 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@FilePath", collection.FileName);
             cmd.Parameters.AddWithValue("@MetadataFile", collection.MetaDataFileName);
 
-            return cmd.ExecuteNonQuery() == 1;
+            bool res = cmd.ExecuteNonQuery() == 1;
+            con.Close();
+            return res;
         }
 
         public static List<ColorSpace> GetColorSpaces(List<int> Ids = null)
@@ -351,6 +381,7 @@ namespace AstroDAM
                 ColorSpaces.Add(new ColorSpace(id, name, bitsPerChannel, isMultiChannel));
             }
 
+            con.Close();
             return ColorSpaces;
         }
 
@@ -364,6 +395,7 @@ namespace AstroDAM
             cmd.CommandText = "DELETE FROM [tblColorSpaces] " + selector;
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static void EditColorSpace(int Id, ColorSpace colorSpace)
@@ -383,6 +415,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static int AddColorSpace(ColorSpace colorSpace)
@@ -398,7 +431,9 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@BitsPerChannel", colorSpace.BitsPerChannel);
             cmd.Parameters.AddWithValue("@IsMultiChannel", colorSpace.IsMultiChannel);
 
-            return int.Parse(cmd.ExecuteScalar().ToString());
+            int res = int.Parse(cmd.ExecuteScalar().ToString());
+            con.Close();
+            return res;
         }
 
         public static List<FileFormat> GetFileFormats(List<int> Ids = null)
@@ -423,6 +458,7 @@ namespace AstroDAM
                 fileFormats.Add(new FileFormat(id, shortName, longName));
             }
 
+            con.Close();
             return fileFormats;
         }
 
@@ -436,6 +472,7 @@ namespace AstroDAM
             cmd.CommandText = "DELETE FROM [tblFileFormats] " + selector;
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static void EditFileFormat(int Id, FileFormat fileFormat)
@@ -453,6 +490,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static int AddFileFormat(FileFormat fileFormat)
@@ -467,7 +505,9 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@ShortName", fileFormat.ShortName);
             cmd.Parameters.AddWithValue("@LongName", fileFormat.LongName);
 
-            return int.Parse(cmd.ExecuteScalar().ToString());
+            int res = int.Parse(cmd.ExecuteScalar().ToString());
+            con.Close();
+            return res;
         }
 
         public static List<Optic> GetOptics(List<int> Ids = null)
@@ -492,6 +532,7 @@ namespace AstroDAM
                 optics.Add(new Optic(id, (Optic.OpticTypes)type, value));
             }
 
+            con.Close();
             return optics;
         }
 
@@ -505,6 +546,7 @@ namespace AstroDAM
             cmd.CommandText = "DELETE FROM [tblOptics] " + selector;
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static void EditOptics(int Id, Optic optic)
@@ -522,6 +564,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static int AddOptics(Optic optic)
@@ -536,7 +579,9 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Type", (int)optic.OpticType);
             cmd.Parameters.AddWithValue("@Value", optic.Value);
 
-            return int.Parse(cmd.ExecuteScalar().ToString());
+            int res = int.Parse(cmd.ExecuteScalar().ToString());
+            con.Close();
+            return res;
         }
 
         public static List<Photographer> GetPhotographers(List<int> Ids = null)
@@ -561,6 +606,7 @@ namespace AstroDAM
                 photographers.Add(new Photographer(id, firstName, lastName));
             }
 
+            con.Close();
             return photographers;
         }
 
@@ -574,6 +620,7 @@ namespace AstroDAM
             cmd.CommandText = "DELETE FROM [tblPhotographers] " + selector;
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static void EditPhotographer(int Id, Photographer photographer)
@@ -591,6 +638,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static int AddPhotographer(Photographer photographer)
@@ -605,7 +653,9 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@FirstName", photographer.FirstName);
             cmd.Parameters.AddWithValue("@LastName", photographer.LastName);
 
-            return int.Parse(cmd.ExecuteScalar().ToString());
+            int res = int.Parse(cmd.ExecuteScalar().ToString());
+            con.Close();
+            return res;
         }
 
         public static List<Scope> GetScopes(List<int> Ids = null)
@@ -636,6 +686,7 @@ namespace AstroDAM
             }
 
             return scopes;
+            con.Close();
         }
 
         public static void DeleteScopes(List<int> Ids = null)
@@ -648,6 +699,7 @@ namespace AstroDAM
             cmd.CommandText = "DELETE FROM [tblScopes] " + selector;
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static void EditScope(int Id, Scope scope)
@@ -675,6 +727,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static int AddScope(Scope scope)
@@ -694,7 +747,9 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Robotic", scope.Robotic);
             cmd.Parameters.AddWithValue("@MountType", (int)scope.MountType);
 
-            return int.Parse(cmd.ExecuteScalar().ToString());
+            int res = int.Parse(cmd.ExecuteScalar().ToString());
+            con.Close();
+            return res;
         }
 
         public static List<Site> GetSites(List<int> Ids = null)
@@ -723,6 +778,7 @@ namespace AstroDAM
                     latitude, latitudeType ? Site.LatitudeTypes.East : Site.LatitudeTypes.West));
             }
 
+            con.Close();
             return sites;
         }
 
@@ -736,6 +792,7 @@ namespace AstroDAM
             cmd.CommandText = "DELETE FROM [tblSites] " + selector;
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static void EditSite(int Id, Site site)
@@ -759,6 +816,7 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public static int AddSite(Site site)
@@ -776,7 +834,9 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@Latitude", site.Latitude);
             cmd.Parameters.AddWithValue("@LatitudeType", (int)site.LatitudeType);
 
-            return int.Parse(cmd.ExecuteScalar().ToString());
+            int res = int.Parse(cmd.ExecuteScalar().ToString());
+            con.Close();
+            return res;
         }
 
         #region Utility Functions
@@ -911,6 +971,8 @@ namespace AstroDAM
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
 
+            treeView.Nodes.Clear();
+
             // returns dates, ids and object titles of collections
             cmd.CommandText = "SELECT [Id],CAST(FLOOR(CAST([CaptureDateTime] as FLOAT)) as DateTime) FROM tblCollections ORDER BY [CaptureDateTime] " + (isAscending ? "ASC" : "DESC");
 
@@ -920,11 +982,18 @@ namespace AstroDAM
             {
                 // for every collection, add to a new or existing group - by date.
                 int id = reader.GetInt32(0);
-                string collectionDate = reader.GetDateTime(1).ToString("yyyy-MM-dd");
-
                 Collection col = GetCollections(new List<int>() { id })[0];
 
-                string posibleKey = "f" + collectionDate; // f is for folder.
+                string folderKey;
+
+                if (Properties.Preferences.Default.NodeGrouping == 0)
+                    folderKey = reader.GetDateTime(1).ToString("yyyy-MM-dd");
+                else if (Properties.Preferences.Default.NodeGrouping == 1)
+                    folderKey = col.Catalogue.LongName;
+                else
+                    folderKey = col.ObjectTitle;
+
+                string posibleKey = "f" + folderKey; // f is for folder.
                 if (!treeView.Nodes.ContainsKey(posibleKey))
                     treeView.Nodes.Add(posibleKey, posibleKey.Substring(1));
 

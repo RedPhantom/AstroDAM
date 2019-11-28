@@ -43,7 +43,7 @@ namespace AstroDAM
                     break;
                 case FileTypes.MetadataFile:
                     btnSearchFolder.Enabled = false;
-
+                    OpenFileDialog(); // we want to save the user clicks. 
                     break;
                 default:
                     break;
@@ -86,6 +86,11 @@ namespace AstroDAM
         }
 
         private void btnSearchFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog();
+        }
+
+        void OpenFileDialog()
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 tbFilePath.Text = openFileDialog1.FileName;
@@ -144,8 +149,12 @@ namespace AstroDAM
             Close();
         }
 
+        // TODO nullable?
         public static ObjectTypes GetObjectType(string path)
         {
+            if (string.IsNullOrEmpty(path))
+                return ObjectTypes.File;
+
             try
             {
                 FileAttributes attr = File.GetAttributes(path);

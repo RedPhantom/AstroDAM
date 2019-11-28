@@ -67,6 +67,10 @@ namespace AstroDAM
                              .Select(s => s.SplitterDistance));
 
             Settings.Default.Save();
+
+            Preferences.Default.TreeIsAscending = ascendingToolStripMenuItem.Checked;
+            Preferences.Default.Save();
+
             Application.Exit();
         }
 
@@ -106,6 +110,9 @@ namespace AstroDAM
                     splitContainers[x].SplitterDistance = positions[x];
                 }
             }
+
+            ascendingToolStripMenuItem.Checked = Preferences.Default.TreeIsAscending;
+            descendingToolStripMenuItem.Checked = !Preferences.Default.TreeIsAscending;
 
             PopulateTreeView();
             ClearData();
@@ -235,8 +242,6 @@ namespace AstroDAM
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
                 int id = 0;
                 int.TryParse(tbCollectionId.Text, out id);
 
@@ -272,13 +277,7 @@ namespace AstroDAM
                     Operations.AddCollection(collection);
                 else
                     Operations.EditCollection(id, collection);
-            }
-            catch (Exception ex)
-            {
-                //MessageBox.Show(ex.Message);
-                //return;
-                throw;
-            }
+            
             ClearData();
             PopulateTreeView();
         }
@@ -332,7 +331,9 @@ namespace AstroDAM
             tbObjectId.Text = collection.Object.ToString();
             tbObjectTitle.Text = collection.ObjectTitle;
             tbMetadataFile.Text = collection.MetaDataFileName;
+            toolTipInfo.SetToolTip(tbMetadataFile, tbMetadataFile.Text);
             tbFile.Text = collection.FileName;
+            toolTipInfo.SetToolTip(tbFile, tbFile.Text);
             tbTotalFrames.Value = collection.NumberFrames;
             cbFileFormat.SelectedIndex = listFileFormats.IndexOf(listFileFormats.Find(x => x.Id == collection.FileFormat.Id));
             cbColorSpace.SelectedIndex = listColorSpaces.IndexOf(listColorSpaces.Find(x => x.Id == collection.ColorSpace.Id));
@@ -359,11 +360,13 @@ namespace AstroDAM
         private void ascendingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             descendingToolStripMenuItem.Checked = !ascendingToolStripMenuItem.Checked;
+            PopulateTreeView();
         }
 
         private void descendingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ascendingToolStripMenuItem.Checked = !descendingToolStripMenuItem.Checked;
+            PopulateTreeView();
         }
 
         private void btnSortOptions_Click(object sender, EventArgs e)
@@ -513,11 +516,11 @@ namespace AstroDAM
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new frmPreferences().ShowDialog();
+            PopulateTreeView(); // reflect possible changes to the treeview.
         }
 
         private void PopulateTreeView()
         {
-            tvCollections.Nodes.Clear();
             Operations.PopulateTreeView(ref tvCollections, ascendingToolStripMenuItem.Checked);
         }
 

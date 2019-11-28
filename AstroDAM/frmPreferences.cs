@@ -55,7 +55,10 @@ namespace AstroDAM
 
             Properties.Preferences.Default.TreeNodeFormat = tbEndNodeFormat.Text;
             Properties.Preferences.Default.PlaySplashClip = cbPlaySplashClip.Checked;
-            
+
+            if (cbNodeGrouping.SelectedIndex != -1)
+                Properties.Preferences.Default.NodeGrouping = cbNodeGrouping.SelectedIndex;
+
             Properties.Preferences.Default.Save();
         }
 
@@ -68,6 +71,7 @@ namespace AstroDAM
         {
             tbEndNodeFormat.Text = Properties.Preferences.Default.TreeNodeFormat;
             cbPlaySplashClip.Checked = Properties.Preferences.Default.PlaySplashClip;
+            cbNodeGrouping.SelectedIndex = Properties.Preferences.Default.NodeGrouping;
         }
 
         private void btnTestTree_Click(object sender, EventArgs e)

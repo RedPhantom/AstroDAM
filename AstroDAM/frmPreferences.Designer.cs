@@ -40,9 +40,6 @@
             this.tbEndNodeFormat = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -51,6 +48,7 @@
             this.cbPlaySplashClip = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnTestTree = new System.Windows.Forms.Button();
+            this.cbNodeGrouping = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -167,9 +165,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.radioButton3);
-            this.tabPage2.Controls.Add(this.radioButton2);
-            this.tabPage2.Controls.Add(this.radioButton1);
+            this.tabPage2.Controls.Add(this.cbNodeGrouping);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -179,43 +175,10 @@
             this.tabPage2.Text = "Node Grouping";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(22, 71);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(86, 19);
-            this.radioButton3.TabIndex = 1;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Object Title";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(22, 46);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(116, 19);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Collection Name";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(22, 21);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(97, 19);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Capture Date";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 3);
+            this.label3.Location = new System.Drawing.Point(3, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(111, 15);
             this.label3.TabIndex = 0;
@@ -281,6 +244,19 @@
             this.btnTestTree.UseVisualStyleBackColor = true;
             this.btnTestTree.Click += new System.EventHandler(this.btnTestTree_Click);
             // 
+            // cbNodeGrouping
+            // 
+            this.cbNodeGrouping.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbNodeGrouping.FormattingEnabled = true;
+            this.cbNodeGrouping.Items.AddRange(new object[] {
+            "Capture Date",
+            "Catalogue Name",
+            "Object Title"});
+            this.cbNodeGrouping.Location = new System.Drawing.Point(120, 15);
+            this.cbNodeGrouping.Name = "cbNodeGrouping";
+            this.cbNodeGrouping.Size = new System.Drawing.Size(121, 21);
+            this.cbNodeGrouping.TabIndex = 2;
+            // 
             // frmPreferences
             // 
             this.AcceptButton = this.btnSave;
@@ -322,16 +298,14 @@
         private System.Windows.Forms.Button btnBbDateTime;
         private System.Windows.Forms.TextBox tbEndNodeFormat;
         private System.Windows.Forms.Button btnBbObjectTitle;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.Button btnBbCollection;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.CheckBox cbPlaySplashClip;
         private System.Windows.Forms.Button btnTestTree;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ComboBox cbNodeGrouping;
     }
 }
