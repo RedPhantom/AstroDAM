@@ -207,6 +207,7 @@ namespace AstroDAM
         {
             SqlConnection con = GetCon();
             SqlCommand cmd = con.CreateCommand();
+            int result = -1;
 
             cmd.CommandText = "INSERT INTO [tblCatalogues] ([ShortName],[LongName]) " +
                 "OUTPUT INSERTED.Id " +
@@ -215,8 +216,10 @@ namespace AstroDAM
             cmd.Parameters.AddWithValue("@ShortName", catalogue.ShortName);
             cmd.Parameters.AddWithValue("@LongName", catalogue.LongName);
 
+            result = int.Parse(cmd.ExecuteScalar().ToString());
             con.Close();
-            return int.Parse(cmd.ExecuteScalar().ToString());
+            
+            return result;
         }
 
         public static List<Collection> GetCollections(List<int> Ids = null)

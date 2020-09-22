@@ -46,7 +46,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI Light", 29.88679F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(216, 60);
+            this.label1.Size = new System.Drawing.Size(194, 54);
             this.label1.TabIndex = 4;
             this.label1.Text = "AstroDAM";
             // 
@@ -56,7 +56,7 @@
             this.lblCaption.Font = new System.Drawing.Font("Segoe UI Light", 18.33962F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCaption.Location = new System.Drawing.Point(16, 70);
             this.lblCaption.Name = "lblCaption";
-            this.lblCaption.Size = new System.Drawing.Size(184, 37);
+            this.lblCaption.Size = new System.Drawing.Size(171, 35);
             this.lblCaption.TabIndex = 4;
             this.lblCaption.Text = "It\'s great, yeah.";
             // 
@@ -102,6 +102,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::AstroDAM.Properties.Resources.SplashSquence;
             this.pictureBox1.Location = new System.Drawing.Point(-1, 110);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(496, 347);

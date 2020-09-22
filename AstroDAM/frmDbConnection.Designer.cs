@@ -44,8 +44,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbConnectionString = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.lblTestResult = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.lblTestResult = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -53,7 +53,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(14, 75);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 15);
+            this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Data Source";
             // 
@@ -63,7 +63,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(12, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(269, 35);
+            this.label2.Size = new System.Drawing.Size(234, 30);
             this.label2.TabIndex = 4;
             this.label2.Text = "Connect to a database.";
             // 
@@ -80,7 +80,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(14, 101);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 15);
+            this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Initial Catalog";
             // 
@@ -97,7 +97,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(14, 127);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 15);
+            this.label4.Size = new System.Drawing.Size(96, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "Integrated Security";
             // 
@@ -106,7 +106,7 @@
             this.rbSecurityYes.AutoSize = true;
             this.rbSecurityYes.Location = new System.Drawing.Point(144, 124);
             this.rbSecurityYes.Name = "rbSecurityYes";
-            this.rbSecurityYes.Size = new System.Drawing.Size(45, 19);
+            this.rbSecurityYes.Size = new System.Drawing.Size(43, 17);
             this.rbSecurityYes.TabIndex = 2;
             this.rbSecurityYes.TabStop = true;
             this.rbSecurityYes.Text = "Yes";
@@ -118,7 +118,7 @@
             this.rbSecurityNo.AutoSize = true;
             this.rbSecurityNo.Location = new System.Drawing.Point(195, 124);
             this.rbSecurityNo.Name = "rbSecurityNo";
-            this.rbSecurityNo.Size = new System.Drawing.Size(41, 19);
+            this.rbSecurityNo.Size = new System.Drawing.Size(39, 17);
             this.rbSecurityNo.TabIndex = 3;
             this.rbSecurityNo.TabStop = true;
             this.rbSecurityNo.Text = "No";
@@ -130,7 +130,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(14, 152);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 15);
+            this.label5.Size = new System.Drawing.Size(102, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Connection Timeout";
             // 
@@ -146,9 +146,9 @@
             // 
             this.btnTest.Location = new System.Drawing.Point(17, 252);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 23);
+            this.btnTest.Size = new System.Drawing.Size(99, 23);
             this.btnTest.TabIndex = 6;
-            this.btnTest.Text = "Test...";
+            this.btnTest.Text = "Test Connection";
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
@@ -159,7 +159,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 7;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "&Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -168,7 +168,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(14, 205);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(104, 15);
+            this.label6.Size = new System.Drawing.Size(91, 13);
             this.label6.TabIndex = 8;
             this.label6.Text = "Connection String";
             // 
@@ -190,15 +190,6 @@
             this.label7.Text = "- or, define a connection string manually -";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblTestResult
-            // 
-            this.lblTestResult.AutoSize = true;
-            this.lblTestResult.Location = new System.Drawing.Point(98, 257);
-            this.lblTestResult.Name = "lblTestResult";
-            this.lblTestResult.Size = new System.Drawing.Size(197, 15);
-            this.lblTestResult.TabIndex = 8;
-            this.lblTestResult.Text = "Click \"Test...\" to test the connection.";
-            // 
             // label8
             // 
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -209,18 +200,27 @@
             this.label8.Text = "You can define basic settings for a connection string...";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblTestResult
+            // 
+            this.lblTestResult.AutoSize = true;
+            this.lblTestResult.Location = new System.Drawing.Point(122, 257);
+            this.lblTestResult.Name = "lblTestResult";
+            this.lblTestResult.Size = new System.Drawing.Size(130, 13);
+            this.lblTestResult.TabIndex = 9;
+            this.lblTestResult.Text = "Awating connection test...";
+            // 
             // frmDbConnection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 280);
+            this.Controls.Add(this.lblTestResult);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnTest);
             this.Controls.Add(this.tbConnectionTimeout);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.lblTestResult);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.rbSecurityNo);
             this.Controls.Add(this.rbSecurityYes);
@@ -260,7 +260,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbConnectionString;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblTestResult;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblTestResult;
     }
 }

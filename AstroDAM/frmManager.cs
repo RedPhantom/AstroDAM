@@ -284,7 +284,7 @@ namespace AstroDAM
             int index = lbCamerasColorSpaces.SelectedIndex;
             if (index != -1)
             {
-                ColorSpace candidate = listColorSpaces[index];
+                ColorSpace candidate = listColorSpaces.Find(x => x.Name == lbCamerasColorSpaces.SelectedItem.ToString());
 
                 lbCamerasColorSpaces.Items.Remove(candidate.Name);
                 currentCamera.ColorSpaces.Remove(candidate);

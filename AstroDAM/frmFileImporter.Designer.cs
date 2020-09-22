@@ -51,7 +51,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 16.30189F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(12, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(124, 35);
+            this.label2.Size = new System.Drawing.Size(108, 30);
             this.label2.TabIndex = 5;
             this.label2.Text = "Link a file.";
             // 
@@ -73,27 +73,27 @@
             this.lblFileResult.AutoSize = true;
             this.lblFileResult.Location = new System.Drawing.Point(4, 46);
             this.lblFileResult.Name = "lblFileResult";
-            this.lblFileResult.Size = new System.Drawing.Size(207, 15);
+            this.lblFileResult.Size = new System.Drawing.Size(182, 13);
             this.lblFileResult.TabIndex = 9;
             this.lblFileResult.Text = "Please type a file path or select a file.";
             // 
             // btnSearchFolder
             // 
-            this.btnSearchFolder.Location = new System.Drawing.Point(381, 21);
+            this.btnSearchFolder.Location = new System.Drawing.Point(367, 19);
             this.btnSearchFolder.Name = "btnSearchFolder";
-            this.btnSearchFolder.Size = new System.Drawing.Size(51, 23);
+            this.btnSearchFolder.Size = new System.Drawing.Size(65, 23);
             this.btnSearchFolder.TabIndex = 8;
-            this.btnSearchFolder.Text = "Folder";
+            this.btnSearchFolder.Text = "Folder...";
             this.btnSearchFolder.UseVisualStyleBackColor = true;
             this.btnSearchFolder.Click += new System.EventHandler(this.btnSearchFolder_Click);
             // 
             // btnSearchFile
             // 
-            this.btnSearchFile.Location = new System.Drawing.Point(338, 21);
+            this.btnSearchFile.Location = new System.Drawing.Point(318, 19);
             this.btnSearchFile.Name = "btnSearchFile";
-            this.btnSearchFile.Size = new System.Drawing.Size(37, 23);
+            this.btnSearchFile.Size = new System.Drawing.Size(43, 23);
             this.btnSearchFile.TabIndex = 8;
-            this.btnSearchFile.Text = "File";
+            this.btnSearchFile.Text = "File...";
             this.btnSearchFile.UseVisualStyleBackColor = true;
             this.btnSearchFile.Click += new System.EventHandler(this.btnSearchFile_Click);
             // 
@@ -103,7 +103,7 @@
             this.tbFilePath.Location = new System.Drawing.Point(7, 19);
             this.tbFilePath.MaxLength = 260;
             this.tbFilePath.Name = "tbFilePath";
-            this.tbFilePath.Size = new System.Drawing.Size(325, 24);
+            this.tbFilePath.Size = new System.Drawing.Size(305, 23);
             this.tbFilePath.TabIndex = 0;
             this.tbFilePath.TextChanged += new System.EventHandler(this.tbFilePath_TextChanged);
             // 
@@ -144,7 +144,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(6, 44);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(160, 19);
+            this.checkBox1.Size = new System.Drawing.Size(140, 17);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Import data from this file.";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -156,7 +156,7 @@
             this.cbImportData.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbImportData.Location = new System.Drawing.Point(7, 19);
             this.cbImportData.Name = "cbImportData";
-            this.cbImportData.Size = new System.Drawing.Size(160, 19);
+            this.cbImportData.Size = new System.Drawing.Size(140, 17);
             this.cbImportData.TabIndex = 0;
             this.cbImportData.Text = "Import data from this file.";
             this.cbImportData.UseVisualStyleBackColor = true;

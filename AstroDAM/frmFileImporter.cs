@@ -118,11 +118,13 @@ namespace AstroDAM
 
             List<string> unparsableLines = new List<string>();
 
+            string[] metadataLines = { "" };
+            string[] line = { "" };
+
             if (FileType == FileTypes.MetadataFile)
             {
                 // basic text processing for metadata parsing.
-                string[] metadataLines = File.ReadAllLines(tbFilePath.Text);
-                string[] line;
+                metadataLines = File.ReadAllLines(tbFilePath.Text);
 
                 for (int i = 0; i < metadataLines.Length; i++)
                 {

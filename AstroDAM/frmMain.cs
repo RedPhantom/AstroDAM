@@ -175,15 +175,6 @@ namespace AstroDAM
             lblStatus.Text = "Loaded all assets.";
         }
 
-        //private string GenerateUUID()
-        //{
-        //    // Regenerates a UUID.
-        //    byte[] uuid = System.Guid.NewGuid().ToByteArray();
-        //    string uuidString = Convert.ToBase64String(uuid).Replace("=", "").Replace("+", "").Replace("/", "").Substring(0, 16);
-
-        //    return uuidString;
-        //}
-
         // Buttons
 
         // Toolstrip

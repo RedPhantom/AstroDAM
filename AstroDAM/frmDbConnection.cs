@@ -31,6 +31,8 @@ namespace AstroDAM
 
         private void ParametersChanged(object sender, EventArgs e)
         {
+            int ConnectTimeout;
+
             // attempt to build a connection string and put it in the textbox.
 
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -39,7 +41,6 @@ namespace AstroDAM
             builder["Integrated Security"] = rbSecurityYes.Checked;
             builder["Initial Catalog"] = tbDatabaseFile.Text;
 
-            int ConnectTimeout;
             if (int.TryParse(tbConnectionTimeout.Text, out ConnectTimeout))
                 builder["Connect Timeout"] = ConnectTimeout;
              else
@@ -66,7 +67,6 @@ namespace AstroDAM
         private void BgwConnectionTester_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker bgw = (BackgroundWorker)sender;
-
             bool dbTestResult = Operations.TestDbConnection(e.Argument.ToString());
 
             e.Result = dbTestResult;

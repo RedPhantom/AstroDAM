@@ -20,11 +20,13 @@ namespace AstroDAM
 
         private void frmAbout_Load(object sender, EventArgs e)
         {
+            string version = "";
+            
             richTextBox1.Rtf = Properties.Resources.About;
 
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string version = fvi.FileVersion;
+            version = fvi.FileVersion;
 
             lblVersion.Text += version;
         }

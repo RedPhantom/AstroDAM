@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using AstroDAM.Properties;
 
 namespace AstroDAM
 {
@@ -40,7 +41,7 @@ namespace AstroDAM
                 "Ever listened to ABBA?",
                 "Sweet dreams are seven seas...",
                 "THANK YOU StackOverflow.",
-                "I heard this song witout lyrics, can't find its name...",
+                "I heard this song without lyrics, can't find its name...",
                 "Play video games, it's cool.",
                 "I stand with Hong Kong.",
                 "(random message here)",
@@ -106,9 +107,14 @@ namespace AstroDAM
             
             // If we are requested to show the entire startup sequence.
             if ((bool)e.Argument)
+            {
                 System.Threading.Thread.Sleep(22500);
+                pictureBox1.Image = Resources.SplashSquence;
+            }
             else
+            {
                 System.Threading.Thread.Sleep(200);
+            }
 
             e.Result = 0;
         }
