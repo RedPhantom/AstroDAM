@@ -255,7 +255,7 @@ namespace AstroDAM
                 }
 
                 Photographer photographer = listPhotographers[cbPhotographer.SelectedIndex];
-                Size resolution = Operations.ParseResolution(tbResolutionX.Text + ";" + tbResolutionY.Text);
+                Size resolution = Operations.StringToResolution(tbResolutionX.Text + ";" + tbResolutionY.Text);
                 string comments = tbComments.Text;
                 string fileName = tbFile.Text;
                 string metadataFile = tbMetadataFile.Text;

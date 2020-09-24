@@ -67,7 +67,7 @@ namespace AstroDAM
         private void BgwConnectionTester_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker bgw = (BackgroundWorker)sender;
-            bool dbTestResult = Operations.TestDbConnection(e.Argument.ToString());
+            bool dbTestResult = Operations.TestConnection(e.Argument.ToString());
 
             e.Result = dbTestResult;
         }
