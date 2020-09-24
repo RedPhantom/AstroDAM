@@ -167,5 +167,8 @@
     <Content Include="favicon.ico" />
     <None Include="Resources\SplashSquence.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

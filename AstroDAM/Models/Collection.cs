@@ -8,11 +8,37 @@ using System.Threading.Tasks;
 
 namespace AstroDAM.Models
 {
+    /// <summary>
+    /// A collection of captured frames (astronomical image).
+    /// </summary>
     [DataContract]
     public class Collection
     {
+        /// <summary>
+        /// Initialize a new collection.
+        /// </summary>
         public Collection() { }
 
+        /// <summary>
+        /// Initialize a new collection.
+        /// </summary>
+        /// <param name="id">Unique identifier of the collection in the database.</param>
+        /// <param name="captureDateTime">Date and time of capturing the first frame in the collection.</param>
+        /// <param name="catalogue">Catalogue of the object captured in this collection.</param>
+        /// <param name="objectId">Unique identifier of the object in the catalogue.</param>
+        /// <param name="objectTitle">Name of the object captured in this collection.</param>
+        /// <param name="numberFrames">Number of frames captured in this catalogue.</param>
+        /// <param name="fileFormat">Format of the file that contains the captured data.</param>
+        /// <param name="colorSpace">Color space of the file that contains the captured data.</param>
+        /// <param name="camera">Camera that captured this collection.</param>
+        /// <param name="scope">Telescope used to capture this collection.</param>
+        /// <param name="site">Physical site in which the collection was captured.</param>
+        /// <param name="optics">Optical peripherals used to capture the collection.</param>
+        /// <param name="photographer">Photographer that captured the collection.</param>
+        /// <param name="resolution"></param>
+        /// <param name="comments"></param>
+        /// <param name="fileName"></param>
+        /// <param name="metadataFile"></param>
         public Collection(int id, DateTime captureDateTime, Catalogue catalogue, int objectId, 
             string objectTitle, int numberFrames, FileFormat fileFormat, ColorSpace colorSpace, 
             Camera camera, Scope scope, Site site, List<Optic> optics, Photographer photographer, 
