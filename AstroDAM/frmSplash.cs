@@ -95,7 +95,7 @@ namespace AstroDAM
 
             // Test db connection:
             UpdateStatusLabel("Testing database connection...");
-            bool dbTestResult = Operations.TestDbConnection();
+            bool dbTestResult = Operations.TestConnection();
 
             if (!dbTestResult)
             {
