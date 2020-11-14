@@ -1,13 +1,9 @@
-﻿using AstroDAM.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using AstroDAM.Models;
+using AstroDAM.Controllers;
 
 namespace AstroDAM
 {
@@ -15,6 +11,7 @@ namespace AstroDAM
     {
         //BackgroundWorker bgwDataLoader = new BackgroundWorker();
 
+        // Records
         List<Camera> listCameras;
         List<Catalogue> listCatalogues;
         List<ColorSpace> listColorSpaces;
@@ -24,6 +21,7 @@ namespace AstroDAM
         List<Scope> listScopes;
         List<Site> listSites;
 
+        // Editing Modes
         EditingModes emCameras = EditingModes.Add;
         EditingModes emCatalogues = EditingModes.Add;
         EditingModes emColorSpaces = EditingModes.Add;
@@ -33,6 +31,7 @@ namespace AstroDAM
         EditingModes emScopes = EditingModes.Add;
         EditingModes emSites = EditingModes.Add;
 
+        // New/Edited Records
         Camera currentCamera = new Camera();
         Catalogue currentCatalogue = new Catalogue();
         ColorSpace currentColorSpace = new ColorSpace();
@@ -107,14 +106,14 @@ namespace AstroDAM
             }
 
             // Query database for all values.
-            listCameras = Operations.GetCameras();
-            listCatalogues = Operations.GetCatalogues();
-            listColorSpaces = Operations.GetColorSpaces();
-            listFileFormats = Operations.GetFileFormats();
-            listOptics = Operations.GetOptics();
-            listPhotographers = Operations.GetPhotographers();
-            listScopes = Operations.GetScopes();
-            listSites = Operations.GetSites();
+            listCameras = CameraController.GetCameras();
+            listCatalogues = CatalogueController.GetCatalogues();
+            listColorSpaces = ColorSpaceController.GetColorSpaces();
+            listFileFormats = FileFormatController.GetFileFormats();
+            listOptics = OpticsController.GetOptics();
+            listPhotographers = PhotographerController.GetPhotographers();
+            listScopes = ScopeController.GetScopes();
+            listSites = SiteController.GetSites();
 
             // Populate list boxes.
             lbCameras.Items.Clear();
@@ -182,21 +181,25 @@ namespace AstroDAM
         {
             // Valiations:
 
-            if (!Operations.IsDigitsOnly(tbCamerasXResolution.Text))
+            if (!Utilities.IsDigitsOnly(tbCamerasXResolution.Text))
             {
                 errorProvider.SetError(tbCamerasXResolution, "Must be a number.");
                 return;
             }
             else
+            {
                 errorProvider.SetError(tbCamerasXResolution, "");
+            }
 
-            if (!Operations.IsDigitsOnly(tbCamerasYResolution.Text))
+            if (!Utilities.IsDigitsOnly(tbCamerasYResolution.Text))
             {
                 errorProvider.SetError(tbCamerasYResolution, "Must be a number.");
                 return;
             }
             else
+            {
                 errorProvider.SetError(tbCamerasYResolution, "");
+            }
 
             if (tbCamerasShortName.Text.Length == 0)
             {
@@ -204,7 +207,9 @@ namespace AstroDAM
                 return;
             }
             else
+            {
                 errorProvider.SetError(tbCamerasYResolution, "");
+            }
 
             if (lbCamerasColorSpaces.Items.Count == 0)
             {
@@ -229,21 +234,28 @@ namespace AstroDAM
             }
 
             if (emCameras == EditingModes.Add)
+            {
                 id = 0;
+            }
             else
+            {
                 id = currentCamera.Id;
+            }
 
             Camera candidate = new Camera(id, shortName, longName, maxResolution, colorSpaces);
 
             if (emCameras == EditingModes.Add)
-            
-                id = Operations.AddCamera(candidate);
+            {
+                id = CameraController.AddCamera(candidate);
+            }
             else
-                Operations.EditCamera(id, candidate);
-           
+            {
+                CameraController.EditCamera(id, candidate);
+            }
+
             // Reload data:
             lblStatus.Text = "Issuing camera saving command... ";
-            currentCamera = Operations.GetCameras(new List<int>() { id })[0];
+            currentCamera = CameraController.GetCameras(new List<int>() { id })[0];
             LoadCameraData(currentCamera);
             PrepareDataLists();
             lblStatus.Text += "Complete.";
@@ -339,15 +351,18 @@ namespace AstroDAM
             Catalogue candidate = new Catalogue(id, shortName, longName);
 
             if (emCameras == EditingModes.Add)
-
-                id = Operations.AddCatalogue(candidate);
+            {
+                id = CatalogueController.AddCatalogue(candidate);
+            }
             else
-                Operations.EditCatalogue(id, candidate);
+            { 
+                CatalogueController.EditCatalogue(id, candidate);
+            }
 
             // Reload data:
 
             lblStatus.Text = "Issuing catalogue saving command... ";
-            currentCatalogue = Operations.GetCatalogues(new List<int>() { id })[0];
+            currentCatalogue = CatalogueController.GetCatalogues(new List<int>() { id })[0];
             LoadCatalogueData(currentCatalogue);
             PrepareDataLists();
             lblStatus.Text += "Complete.";
@@ -417,14 +432,18 @@ namespace AstroDAM
             ColorSpace candidate = new ColorSpace(id, name, bitsPerChannel, isMultiChannel);
 
             if (emColorSpaces == EditingModes.Add)
-                id = Operations.AddColorSpace(candidate);
+            {
+                id = ColorSpaceController.AddColorSpace(candidate);
+            }
             else
-                Operations.EditColorSpace(id, candidate);
+            {
+                ColorSpaceController.EditColorSpace(id, candidate);
+            }
 
             // Reload data:
 
             lblStatus.Text = "Issuing color space saving command... ";
-            currentColorSpace = Operations.GetColorSpaces(new List<int>() { id })[0];
+            currentColorSpace = ColorSpaceController.GetColorSpaces(new List<int>() { id })[0];
             LoadColorSpaceData(currentColorSpace);
             PrepareDataLists();
             lblStatus.Text += "Complete.";
@@ -486,15 +505,18 @@ namespace AstroDAM
             FileFormat candidate = new FileFormat(id, shortName, longName);
 
             if (emFileFormats == EditingModes.Add)
-
-                id = Operations.AddFileFormat(candidate);
+            {
+                id = FileFormatController.AddFileFormat(candidate);
+            }
             else
-                Operations.EditFileFormat(id, candidate);
+            {
+                FileFormatController.EditFileFormat(id, candidate);
+            }
 
             // Reload data:
 
             lblStatus.Text = "Issuing file formats saving command... ";
-            currentFileFormat = Operations.GetFileFormats(new List<int>() { id })[0];
+            currentFileFormat = FileFormatController.GetFileFormats(new List<int>() { id })[0];
             LoadFileFormatData(currentFileFormat);
             PrepareDataLists();
             lblStatus.Text += "Complete.";
@@ -569,15 +591,18 @@ namespace AstroDAM
             Optic candidate = new Optic(id, type, value);
 
             if (emOptics == EditingModes.Add)
-
-                id = Operations.AddOptics(candidate);
+            {
+                id = OpticsController.AddOptics(candidate);
+            }
             else
-                Operations.EditOptics(id, candidate);
+            {
+                OpticsController.EditOptics(id, candidate);
+            }
 
             // Reload data:
 
             lblStatus.Text = "Issuing optics saving command... ";
-            currentOptic = Operations.GetOptics(new List<int>() { id })[0];
+            currentOptic = OpticsController.GetOptics(new List<int>() { id })[0];
             LoadOpticData(currentOptic);
             PrepareDataLists();
             lblStatus.Text += "Complete.";
@@ -637,15 +662,18 @@ namespace AstroDAM
             Photographer candidate = new Photographer(id, FirstName, LastName);
 
             if (emPhotographers == EditingModes.Add)
-
-                id = Operations.AddPhotographer(candidate);
+            {
+                id = PhotographerController.AddPhotographer(candidate);
+            }
             else
-                Operations.EditPhotographer(id, candidate);
+            {
+                PhotographerController.EditPhotographer(id, candidate);
+            }
 
             // Reload data:
 
             lblStatus.Text = "Issuing photographer saving command... ";
-            currentPhotographer = Operations.GetPhotographers(new List<int>() { id })[0];
+            currentPhotographer = PhotographerController.GetPhotographers(new List<int>() { id })[0];
             LoadPhotographerData(currentPhotographer);
             PrepareDataLists();
             lblStatus.Text += "Complete.";
@@ -739,15 +767,18 @@ namespace AstroDAM
             Scope candidate = new Scope(id, manufacturer,name, aperture, focalLength, centralObstructionDiameter, robotic, mountType);
 
             if (emScopes == EditingModes.Add)
-
-                id = Operations.AddScope(candidate);
+            {
+                id = ScopeController.AddScope(candidate);
+            }
             else
-                Operations.EditScope(id, candidate);
+            {
+                ScopeController.EditScope(id, candidate);
+            }
 
             // Reload data:
 
             lblStatus.Text = "Issuing scopes saving command... ";
-            currentScope = Operations.GetScopes(new List<int>() { id })[0];
+            currentScope = ScopeController.GetScopes(new List<int>() { id })[0];
             LoadScopeData(currentScope);
             PrepareDataLists();
             lblStatus.Text += "Complete.";
@@ -845,15 +876,18 @@ namespace AstroDAM
             Site candidate = new Site(id, name, longtitude, longtitudeType, latitude, latitudeType); ;
 
             if (emSites == EditingModes.Add)
-
-                id = Operations.AddSite(candidate);
+            {
+                id = SiteController.AddSite(candidate);
+            }
             else
-                Operations.EditSite(id, candidate);
+            {
+                SiteController.EditSite(id, candidate);
+            }
 
             // Reload data:
 
             lblStatus.Text = "Issuing sites saving command... ";
-            currentSite = Operations.GetSites(new List<int>() { id })[0];
+            currentSite = SiteController.GetSites(new List<int>() { id })[0];
             LoadSiteData(currentSite);
             PrepareDataLists();
             lblStatus.Text += "Complete.";

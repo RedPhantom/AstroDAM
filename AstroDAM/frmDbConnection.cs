@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ComponentModel;
+using System.Data.SqlClient;
 
 namespace AstroDAM
 {
@@ -67,7 +62,7 @@ namespace AstroDAM
         private void BgwConnectionTester_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker bgw = (BackgroundWorker)sender;
-            bool dbTestResult = Operations.TestConnection(e.Argument.ToString());
+            bool dbTestResult = DbManager.TestConnection(e.Argument.ToString());
 
             e.Result = dbTestResult;
         }

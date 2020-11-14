@@ -1,10 +1,6 @@
-﻿using AstroDAM.Models;
-using System;
+﻿using System.Data.SqlClient;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AstroDAM.Models;
 
 namespace AstroDAM.Controllers
 {
@@ -39,9 +35,9 @@ namespace AstroDAM.Controllers
 
         public static void DeleteColorSpaces(List<int> Ids = null)
         {
-            string selector = SelectorBuilder(Ids, false);
+            string selector = DbManager.SelectorBuilder(Ids, false);
 
-            SqlConnection con = GetConnection();
+            SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
 
             cmd.CommandText = "DELETE FROM [tblColorSpaces] " + selector;

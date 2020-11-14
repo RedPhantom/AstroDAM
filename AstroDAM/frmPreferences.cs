@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstroDAM.Controllers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,7 +33,7 @@ namespace AstroDAM
             // test the navtree building:
             try
             {
-                Operations.PopulateTreeView(ref treeView1, true, tbEndNodeFormat.Text);
+                TreeViewController.PopulateTreeView(ref treeView1, true, tbEndNodeFormat.Text);
             }
             catch (Exception)
             {
@@ -77,7 +78,7 @@ namespace AstroDAM
         private void btnTestTree_Click(object sender, EventArgs e)
         {
             treeView1.Nodes.Clear();
-            Operations.PopulateTreeView(ref treeView1, true, tbEndNodeFormat.Text);
+            TreeViewController.PopulateTreeView(ref treeView1, true, tbEndNodeFormat.Text);
         }
     }
 }

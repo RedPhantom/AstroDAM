@@ -1,10 +1,8 @@
-﻿using AstroDAM.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Linq;
+using System.Drawing;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using AstroDAM.Models;
 
 namespace AstroDAM.Controllers
 {
@@ -30,8 +28,10 @@ namespace AstroDAM.Controllers
                 int id = reader.GetInt32(0);
                 string shortName = reader.GetString(1);
                 string longName = reader.GetString(2);
-                Size maxResolution = ParseResolution(reader.GetString(3));
-                List<ColorSpace> colorSpaces = GetColorSpaces(ParseIntList(reader.GetString(4)));
+                Size maxResolution = Utilities.StringToResolution(reader.GetString(3));
+                List<ColorSpace> colorSpaces = ColorSpaceController.GetColorSpaces(
+                    Utilities.StringToIntList(reader.GetString(4))
+                );
 
                 Cameras.Add(new Camera(id, shortName, longName, maxResolution, colorSpaces));
             }
@@ -67,8 +67,8 @@ namespace AstroDAM.Controllers
 
             cmd.Parameters.AddWithValue("@ShortName", camera.ShortName);
             cmd.Parameters.AddWithValue("@LongName", camera.LongName);
-            cmd.Parameters.AddWithValue("@MaxResolution", MakeResolution(camera.MaxResolution));
-            cmd.Parameters.AddWithValue("@ColorSpaces", MakeIntList(camera.ColorSpaces.Select(x => x.Id).ToList()));
+            cmd.Parameters.AddWithValue("@MaxResolution", Utilities.ResolutionToString(camera.MaxResolution));
+            cmd.Parameters.AddWithValue("@ColorSpaces", Utilities.IntListToString(camera.ColorSpaces.Select(x => x.Id).ToList()));
             cmd.Parameters.AddWithValue("@Id", Id);
 
             cmd.ExecuteNonQuery();
@@ -86,8 +86,8 @@ namespace AstroDAM.Controllers
 
             cmd.Parameters.AddWithValue("@ShortName", camera.ShortName);
             cmd.Parameters.AddWithValue("@LongName", camera.LongName);
-            cmd.Parameters.AddWithValue("@MaxResolution", MakeResolution(camera.MaxResolution));
-            cmd.Parameters.AddWithValue("@ColorSpaces", MakeIntList(camera.ColorSpaces.Select(x => x.Id).ToList()));
+            cmd.Parameters.AddWithValue("@MaxResolution", Utilities.ResolutionToString(camera.MaxResolution));
+            cmd.Parameters.AddWithValue("@ColorSpaces", Utilities.IntListToString(camera.ColorSpaces.Select(x => x.Id).ToList()));
 
             con.Close();
             return int.Parse(cmd.ExecuteScalar().ToString());
