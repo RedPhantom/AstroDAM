@@ -11,9 +11,8 @@ using System.Windows.Forms;
 
 namespace AstroDAM
 {
-    public static class Operations
+    public static class Utilities
     {
-        #region Utility Functions
         /// <summary>
         /// Checks whether a specific object is in use in the collections table before deletion.
         /// </summary>
@@ -208,7 +207,5 @@ namespace AstroDAM
                 treeView.ExpandAll();
             }
         }
-
-        #endregion
     }
 }
