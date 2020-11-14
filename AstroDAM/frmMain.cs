@@ -1,4 +1,5 @@
-﻿using AstroDAM.Models;
+﻿using AstroDAM.Controllers;
+using AstroDAM.Models;
 using AstroDAM.Properties;
 using System;
 using System.Collections.Generic;
@@ -120,14 +121,14 @@ namespace AstroDAM
 
         private void ClearData()
         {
-            listCameras = Operations.GetCameras();
-            listCatalogues = Operations.GetCatalogues();
-            listColorSpaces = Operations.GetColorSpaces();
-            listFileFormats = Operations.GetFileFormats();
-            listOptics = Operations.GetOptics();
-            listPhotographers = Operations.GetPhotographers();
-            listScopes = Operations.GetScopes();
-            listSites = Operations.GetSites();
+            listCameras = CameraController.GetCameras();
+            listCatalogues = CatalogueController.GetCatalogues();
+            listColorSpaces = ColorSpaceController.GetColorSpaces();
+            listFileFormats = FileFormatController.GetFileFormats();
+            listOptics = OpticsController.GetOptics();
+            listPhotographers = PhotographerController.GetPhotographers();
+            listScopes = ScopeController.GetScopes();
+            listSites = SiteController.GetSites();
 
             tbCollectionId.Text = "(adding)";
             tbDateTime.Text = "";
@@ -233,42 +234,46 @@ namespace AstroDAM
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                int id = 0;
-                int.TryParse(tbCollectionId.Text, out id);
+            int id = 0;
+            int.TryParse(tbCollectionId.Text, out id);
 
-                DateTime captureDateTime = DateTime.Parse(tbDateTime.Text);
-                Catalogue catalogue = listCatalogues[cbCatalogue.SelectedIndex];
-                int objectId = int.Parse(tbObjectId.Text);
-                string objectTitle = tbObjectTitle.Text;
-                int numberFrames = Convert.ToInt32(tbTotalFrames.Value);
-                FileFormat fileFormat = listFileFormats[cbFileFormat.SelectedIndex];
-                ColorSpace colorSpace = listColorSpaces[cbColorSpace.SelectedIndex];
-                Camera camera = listCameras[cbCamera.SelectedIndex];
-                Scope scope = listScopes[cbScope.SelectedIndex];
-                Site site = listSites[cbSite.SelectedIndex];
-                List<Optic> optics = new List<Optic>();
+            DateTime captureDateTime = DateTime.Parse(tbDateTime.Text);
+            Catalogue catalogue = listCatalogues[cbCatalogue.SelectedIndex];
+            int objectId = int.Parse(tbObjectId.Text);
+            string objectTitle = tbObjectTitle.Text;
+            int numberFrames = Convert.ToInt32(tbTotalFrames.Value);
+            FileFormat fileFormat = listFileFormats[cbFileFormat.SelectedIndex];
+            ColorSpace colorSpace = listColorSpaces[cbColorSpace.SelectedIndex];
+            Camera camera = listCameras[cbCamera.SelectedIndex];
+            Scope scope = listScopes[cbScope.SelectedIndex];
+            Site site = listSites[cbSite.SelectedIndex];
+            List<Optic> optics = new List<Optic>();
 
-                foreach (var item in clbOptics.CheckedItems)
-                {
-                    int opticId = int.Parse(item.ToString().Split('|')[0]);
-                    optics.Add(listOptics.Where(x => x.Id == opticId).ToList()[0]);
-                }
+            foreach (var item in clbOptics.CheckedItems)
+            {
+                int opticId = int.Parse(item.ToString().Split('|')[0]);
+                optics.Add(listOptics.Where(x => x.Id == opticId).ToList()[0]);
+            }
 
-                Photographer photographer = listPhotographers[cbPhotographer.SelectedIndex];
-                Size resolution = Operations.StringToResolution(tbResolutionX.Text + ";" + tbResolutionY.Text);
-                string comments = tbComments.Text;
-                string fileName = tbFile.Text;
-                string metadataFile = tbMetadataFile.Text;
+            Photographer photographer = listPhotographers[cbPhotographer.SelectedIndex];
+            Size resolution = Utilities.StringToResolution(tbResolutionX.Text + ";" + tbResolutionY.Text);
+            string comments = tbComments.Text;
+            string fileName = tbFile.Text;
+            string metadataFile = tbMetadataFile.Text;
 
-                Collection collection = new Collection(id, captureDateTime, catalogue, objectId, objectTitle,
-                    numberFrames, fileFormat, colorSpace, camera, scope, site, optics, photographer,
-                    resolution, comments, fileName, metadataFile);
+            Collection collection = new Collection(id, captureDateTime, catalogue, objectId, objectTitle,
+                numberFrames, fileFormat, colorSpace, camera, scope, site, optics, photographer,
+                resolution, comments, fileName, metadataFile);
 
-                if (EditingMode == frmManager.EditingModes.Add)
-                    Operations.AddCollection(collection);
-                else
-                    Operations.EditCollection(id, collection);
-            
+            if (EditingMode == frmManager.EditingModes.Add)
+            {
+                CollectionController.AddCollection(collection);
+            }
+            else
+            {
+                CollectionController.EditCollection(id, collection);
+            }
+
             ClearData();
             PopulateTreeView();
         }
@@ -314,7 +319,7 @@ namespace AstroDAM
         // fills the different fields in the collection view.
         private void PopulateFields(int id)
         {
-            Collection collection = Operations.GetCollections(new List<int>() { id })[0];
+            Collection collection = CollectionController.GetCollections(new List<int>() { id })[0];
 
             tbCollectionId.Text = collection.Id.ToString();
             tbDateTime.Text = collection.CaptureDateTime.ToString("yyyy-MM-Dd hh:mm:ss");
@@ -512,7 +517,7 @@ namespace AstroDAM
 
         private void PopulateTreeView()
         {
-            Operations.PopulateTreeView(ref tvCollections, ascendingToolStripMenuItem.Checked);
+            TreeViewController.PopulateTreeView(ref tvCollections, ascendingToolStripMenuItem.Checked);
         }
 
         private void refreshNavtreeToolStripMenuItem_Click(object sender, EventArgs e)

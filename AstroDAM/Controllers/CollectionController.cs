@@ -1,10 +1,9 @@
-﻿using AstroDAM.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
+using System.Data.SqlClient;
+using System.Collections.Generic;
+using AstroDAM.Models;
 
 namespace AstroDAM.Controllers
 {
@@ -30,18 +29,18 @@ namespace AstroDAM.Controllers
             {
                 int id = reader.GetInt32(0);
                 DateTime captureDateTime = reader.GetDateTime(1);
-                Catalogue catalogue = GetCatalogues(new List<int>() { reader.GetInt32(2) })[0];
+                Catalogue catalogue = CatalogueController.GetCatalogues(new List<int>() { reader.GetInt32(2) })[0];
                 int objectId = reader.GetInt32(3);
                 string objectTitle = reader.GetString(4);
                 int numberFrames = reader.GetInt32(5);
-                FileFormat fileFormat = GetFileFormats(new List<int>() { reader.GetInt32(6) })[0];
-                ColorSpace colorSpace = GetColorSpaces(new List<int>() { reader.GetInt32(7) })[0];
-                Camera camera = GetCameras(new List<int>() { reader.GetInt32(8) })[0];
-                Scope scope = GetScopes(new List<int>() { reader.GetInt32(9) })[0];
-                Site site = GetSites(new List<int>() { reader.GetInt32(10) })[0];
-                List<Optic> optics = GetOptics(StringToIntList(reader.GetString(11)));
-                Photographer photographer = GetPhotographers(new List<int>() { reader.GetInt32(12) })[0];
-                Size resolution = StringToResolution(reader.GetString(13));
+                FileFormat fileFormat = FileFormatController.GetFileFormats(new List<int>() { reader.GetInt32(6) })[0];
+                ColorSpace colorSpace = ColorSpaceController.GetColorSpaces(new List<int>() { reader.GetInt32(7) })[0];
+                Camera camera = CameraController.GetCameras(new List<int>() { reader.GetInt32(8) })[0];
+                Scope scope = ScopeController.GetScopes(new List<int>() { reader.GetInt32(9) })[0];
+                Site site = SiteController.GetSites(new List<int>() { reader.GetInt32(10) })[0];
+                List<Optic> optics = OpticsController.GetOptics(Utilities.StringToIntList(reader.GetString(11)));
+                Photographer photographer = PhotographerController.GetPhotographers(new List<int>() { reader.GetInt32(12) })[0];
+                Size resolution = Utilities.StringToResolution(reader.GetString(13));
                 string comments = reader.GetString(14);
                 string filePath = reader.GetString(15);
                 string metadataFile = reader.GetString(16);
@@ -57,9 +56,9 @@ namespace AstroDAM.Controllers
 
         public static void DeleteCollections(List<int> Ids = null)
         {
-            string selector = SelectorBuilder(Ids, false);
+            string selector = DbManager.SelectorBuilder(Ids, false);
 
-            SqlConnection con = GetConnection();
+            SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
 
             cmd.CommandText = "DELETE FROM [tblCollections] " + selector;
@@ -102,9 +101,9 @@ namespace AstroDAM.Controllers
             cmd.Parameters.AddWithValue("@Camera", collection.Camera.Id);
             cmd.Parameters.AddWithValue("@Scope", collection.Scope.Id);
             cmd.Parameters.AddWithValue("@Site", collection.Site.Id);
-            cmd.Parameters.AddWithValue("@Optics", IntListToString(collection.Optics.Select(x => x.Id).ToList()));
+            cmd.Parameters.AddWithValue("@Optics", Utilities.IntListToString(collection.Optics.Select(x => x.Id).ToList()));
             cmd.Parameters.AddWithValue("@Photographer", collection.Photographer.Id);
-            cmd.Parameters.AddWithValue("@Resolution", ResolutionToString(collection.Resolution));
+            cmd.Parameters.AddWithValue("@Resolution", Utilities.ResolutionToString(collection.Resolution));
             cmd.Parameters.AddWithValue("@Comments", collection.Comments);
             cmd.Parameters.AddWithValue("@FilePath", collection.FileName);
             cmd.Parameters.AddWithValue("@MetadataFile", collection.MetaDataFileName);
@@ -137,9 +136,9 @@ namespace AstroDAM.Controllers
             cmd.Parameters.AddWithValue("@Camera", collection.Camera.Id);
             cmd.Parameters.AddWithValue("@Scope", collection.Scope.Id);
             cmd.Parameters.AddWithValue("@Site", collection.Site.Id);
-            cmd.Parameters.AddWithValue("@Optics", IntListToString(collection.Optics.Select(x => x.Id).ToList()));
+            cmd.Parameters.AddWithValue("@Optics", Utilities.IntListToString(collection.Optics.Select(x => x.Id).ToList()));
             cmd.Parameters.AddWithValue("@Photographer", collection.Photographer.Id);
-            cmd.Parameters.AddWithValue("@Resolution", ResolutionToString(collection.Resolution));
+            cmd.Parameters.AddWithValue("@Resolution", Utilities.ResolutionToString(collection.Resolution));
             cmd.Parameters.AddWithValue("@Comments", collection.Comments);
             cmd.Parameters.AddWithValue("@FilePath", collection.FileName);
             cmd.Parameters.AddWithValue("@MetadataFile", collection.MetaDataFileName);

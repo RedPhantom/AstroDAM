@@ -1,10 +1,6 @@
-﻿using AstroDAM.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AstroDAM.Models;
 
 namespace AstroDAM.Controllers
 {
@@ -14,7 +10,7 @@ namespace AstroDAM.Controllers
         {
             List<Scope> scopes = new List<Scope>();
 
-            string selector = SelectorBuilder(Ids);
+            string selector = DbManager.SelectorBuilder(Ids);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();

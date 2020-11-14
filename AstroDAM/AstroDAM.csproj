@@ -62,6 +62,7 @@
     <Compile Include="Controllers\PhotographerController.cs" />
     <Compile Include="Controllers\ScopeController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
+    <Compile Include="Controllers\TreeViewController.cs" />
     <Compile Include="Data\DatabaseStructure.cs" />
     <Compile Include="DbManager.cs" />
     <Compile Include="frmAbout.cs">
