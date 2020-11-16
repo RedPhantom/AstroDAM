@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace AstroDAM
 {
-    public partial class frmMain : Form
+    public partial class MainForm : Form
     {
         List<Camera> listCameras;
         List<Catalogue> listCatalogues;
@@ -25,19 +25,19 @@ namespace AstroDAM
         List<Scope> listScopes;
         List<Site> listSites;
 
-        public frmMain()
+        public MainForm()
         {
             InitializeComponent();
         }
 
-        frmManager.EditingModes EditingMode = frmManager.EditingModes.Add;
+        readonly ManagerForm.EditingModes EditingMode = ManagerForm.EditingModes.Add;
 
-        private void lnkHelp1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LnkHelp1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show(this, "Format is in Universal Time (UT) format.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 
-        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Save states & UI preferences
             if (WindowState == FormWindowState.Maximized)
@@ -75,7 +75,7 @@ namespace AstroDAM
             Application.Exit();
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void FrmMain_Load(object sender, EventArgs e)
         {
             lblStatus.Text = "Adaptig to preferences...";
 
@@ -195,63 +195,62 @@ namespace AstroDAM
         // Buttons
 
         // Toolstrip
-        private void databaseConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DatabaseConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmDbConnection().ShowDialog();
+            new DbConnectionForm(true).ShowDialog();
         }
 
-        private void camerasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CamerasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManager(frmManager.ManagerTabs.Cameras).ShowDialog();
+            new ManagerForm(ManagerForm.ManagerTabs.Cameras).ShowDialog();
             ClearData();
         }
 
-        private void cataloguesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CataloguesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManager(frmManager.ManagerTabs.Catalogues).ShowDialog();
+            new ManagerForm(ManagerForm.ManagerTabs.Catalogues).ShowDialog();
             ClearData();
         }
 
-        private void colorSpacesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ColorSpacesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManager(frmManager.ManagerTabs.ColorSpaces).ShowDialog();
+            new ManagerForm(ManagerForm.ManagerTabs.ColorSpaces).ShowDialog();
             ClearData();
         }
 
-        private void formatsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FormatsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManager(frmManager.ManagerTabs.FileFormats).ShowDialog();
+            new ManagerForm(ManagerForm.ManagerTabs.FileFormats).ShowDialog();
             ClearData();
         }
 
-        private void opticsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpticsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManager(frmManager.ManagerTabs.Optics).ShowDialog();
+            new ManagerForm(ManagerForm.ManagerTabs.Optics).ShowDialog();
             ClearData();
         }
 
-        private void photographersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PhotographersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManager(frmManager.ManagerTabs.Photographers).ShowDialog();
+            new ManagerForm(ManagerForm.ManagerTabs.Photographers).ShowDialog();
             ClearData();
         }
 
-        private void scopesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ScopesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManager(frmManager.ManagerTabs.Scopes).ShowDialog();
+            new ManagerForm(ManagerForm.ManagerTabs.Scopes).ShowDialog();
             ClearData();
         }
 
-        private void sitesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SitesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmManager(frmManager.ManagerTabs.Sites).ShowDialog();
+            new ManagerForm(ManagerForm.ManagerTabs.Sites).ShowDialog();
             ClearData();
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int id = 0;
-            int.TryParse(tbCollectionId.Text, out id);
+            int.TryParse(tbCollectionId.Text, out int id);
 
             DateTime captureDateTime = DateTime.Parse(tbDateTime.Text);
             Catalogue catalogue = listCatalogues[cbCatalogue.SelectedIndex];
@@ -281,7 +280,7 @@ namespace AstroDAM
                 numberFrames, fileFormat, colorSpace, camera, scope, site, optics, photographer,
                 resolution, comments, fileName, metadataFile);
 
-            if (EditingMode == frmManager.EditingModes.Add)
+            if (EditingMode == ManagerForm.EditingModes.Add)
             {
                 CollectionController.AddCollection(collection);
             }
@@ -294,7 +293,7 @@ namespace AstroDAM
             PopulateTreeView();
         }
 
-        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tbCollectionId.Text = "(adding)";
             tbDateTime.Text = "";
@@ -314,7 +313,7 @@ namespace AstroDAM
             ClearData();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to quit?", "Quitting?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -322,7 +321,7 @@ namespace AstroDAM
             }
         }
 
-        private void tvCollections_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TvCollections_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Name[0] == 'i') // if the selected node is a collection item.
             {
@@ -369,24 +368,24 @@ namespace AstroDAM
 
         // Context Menu Strips
 
-        private void ascendingToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AscendingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             descendingToolStripMenuItem.Checked = !ascendingToolStripMenuItem.Checked;
             PopulateTreeView();
         }
 
-        private void descendingToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DescendingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ascendingToolStripMenuItem.Checked = !descendingToolStripMenuItem.Checked;
             PopulateTreeView();
         }
 
-        private void btnSortOptions_Click(object sender, EventArgs e)
+        private void BtnSortOptions_Click(object sender, EventArgs e)
         {
             cmsSortingOptions.Show(btnSortOptions, new Point(btnSortOptions.Width, btnSortOptions.Height));
         }
 
-        private void findToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FindToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FocusSearchBox();
         }
@@ -416,9 +415,9 @@ namespace AstroDAM
             }
         }
 
-        private void btnLinkMetadataFile_Click(object sender, EventArgs e)
+        private void BtnLinkMetadataFile_Click(object sender, EventArgs e)
         {
-            frmFileImporter importer = new frmFileImporter(frmFileImporter.FileTypes.MetadataFile);
+            FileImporterForm importer = new FileImporterForm(FileImporterForm.FileTypes.MetadataFile);
 
             if (importer.ShowDialog() == DialogResult.OK)
             {
@@ -511,14 +510,14 @@ namespace AstroDAM
             }
         }
 
-        private void aboutAstroDAMToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutAstroDAMToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmAbout().ShowDialog();
+            new AboutForm().ShowDialog();
         }
 
-        private void btnLinkFile_Click(object sender, EventArgs e)
+        private void BtnLinkFile_Click(object sender, EventArgs e)
         {
-            frmFileImporter importer = new frmFileImporter(frmFileImporter.FileTypes.CaptureFile);
+            FileImporterForm importer = new FileImporterForm(FileImporterForm.FileTypes.CaptureFile);
 
             if (importer.ShowDialog() == DialogResult.OK)
             {
@@ -531,9 +530,9 @@ namespace AstroDAM
             }
         }
 
-        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PreferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmPreferences().ShowDialog();
+            new PreferencesForm().ShowDialog();
             PopulateTreeView(); // reflect possible changes to the treeview.
         }
 
@@ -542,7 +541,7 @@ namespace AstroDAM
             TreeViewController.PopulateTreeView(ref tvCollections, ascendingToolStripMenuItem.Checked);
         }
 
-        private void refreshNavtreeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RefreshNavtreeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PopulateTreeView();
         }

@@ -60,10 +60,10 @@ namespace AstroDAM.Controllers
         /// <summary>
         /// Edit a catalogue record on the database.
         /// </summary>
-        /// <param name="ids">ID of the catalogue record to edit.</param>
         /// <param name="catalogue">Catalogue records information.</param>
+        /// 
         /// <remarks>Id property of the <paramref name="catalogue"/> parameter is ignored.</remarks>
-        public static void EditCatalogue(int ids, Catalogue catalogue)
+        public static void EditCatalogue(Catalogue catalogue)
         {
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -91,7 +91,7 @@ namespace AstroDAM.Controllers
         {
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
-            int result = -1;
+            int result;
 
             cmd.CommandText = "INSERT INTO [tblCatalogues] ([ShortName],[LongName]) " +
                 "OUTPUT INSERTED.Id " +

@@ -20,7 +20,7 @@ namespace AstroDAM
         /// <param name="Type">Object Type</param>
         /// <param name="Id">Object id</param>
         /// <returns></returns>
-        public static bool IsDeletionCollision(frmManager.ManagerTabs Type, int Id)
+        public static bool IsDeletionCollision(ManagerForm.ManagerTabs Type, int Id)
         {
             SqlConnection con = DbManager.GetConnection();
 
@@ -29,34 +29,34 @@ namespace AstroDAM
 
             switch (Type)
             {
-                case frmManager.ManagerTabs.Cameras:
+                case ManagerForm.ManagerTabs.Cameras:
                     cmd.CommandText = "WHERE [Camera] = @Id";
                     break;
-                case frmManager.ManagerTabs.Catalogues:
+                case ManagerForm.ManagerTabs.Catalogues:
                     cmd.CommandText = "WHERE [CatalogueId] = @Id";
 
                     break;
-                case frmManager.ManagerTabs.ColorSpaces:
+                case ManagerForm.ManagerTabs.ColorSpaces:
                     cmd.CommandText = "WHERE [ColorSpace] = @Id";
 
                     break;
-                case frmManager.ManagerTabs.FileFormats:
+                case ManagerForm.ManagerTabs.FileFormats:
                     cmd.CommandText = "WHERE [FileFormat] = @Id";
 
                     break;
-                case frmManager.ManagerTabs.Optics:
+                case ManagerForm.ManagerTabs.Optics:
                     cmd.CommandText = "WHERE [Optics] LIKE '%@Id%'";
                     
                     break;
-                case frmManager.ManagerTabs.Photographers:
+                case ManagerForm.ManagerTabs.Photographers:
                     cmd.CommandText = "WHERE [Photographer] = @Id";
 
                     break;
-                case frmManager.ManagerTabs.Scopes:
+                case ManagerForm.ManagerTabs.Scopes:
                     cmd.CommandText = "WHERE [Scope] = @Id";
 
                     break;
-                case frmManager.ManagerTabs.Sites:
+                case ManagerForm.ManagerTabs.Sites:
                     cmd.CommandText = "WHERE [Site] = @Id";
 
                     break;

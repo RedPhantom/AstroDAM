@@ -1,6 +1,6 @@
 ﻿namespace AstroDAM
 {
-    partial class frmSplash
+    partial class SplashForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSplash));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashForm));
             this.label1 = new System.Windows.Forms.Label();
             this.lblCaption = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
@@ -44,9 +44,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Light", 29.88679F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(16, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 54);
+            this.label1.Size = new System.Drawing.Size(244, 67);
             this.label1.TabIndex = 4;
             this.label1.Text = "AstroDAM";
             // 
@@ -54,18 +55,20 @@
             // 
             this.lblCaption.AutoSize = true;
             this.lblCaption.Font = new System.Drawing.Font("Segoe UI Light", 18.33962F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCaption.Location = new System.Drawing.Point(16, 70);
+            this.lblCaption.Location = new System.Drawing.Point(21, 86);
+            this.lblCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCaption.Name = "lblCaption";
-            this.lblCaption.Size = new System.Drawing.Size(171, 35);
+            this.lblCaption.Size = new System.Drawing.Size(210, 42);
             this.lblCaption.TabIndex = 4;
             this.lblCaption.Text = "It\'s great, yeah.";
             // 
             // lblVersion
             // 
             this.lblVersion.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion.Location = new System.Drawing.Point(406, 1);
+            this.lblVersion.Location = new System.Drawing.Point(541, 1);
+            this.lblVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(87, 40);
+            this.lblVersion.Size = new System.Drawing.Size(116, 49);
             this.lblVersion.TabIndex = 4;
             this.lblVersion.Text = "2019.1";
             this.lblVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -73,9 +76,10 @@
             // lblStatus
             // 
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI Light", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(2, 1);
+            this.lblStatus.Location = new System.Drawing.Point(3, 1);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(400, 40);
+            this.lblStatus.Size = new System.Drawing.Size(533, 49);
             this.lblStatus.TabIndex = 4;
             this.lblStatus.Text = "Starting up...";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -85,17 +89,19 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(8)))), ((int)(((byte)(13)))));
             this.panel1.Controls.Add(this.lblVersion);
             this.panel1.Controls.Add(this.lblStatus);
-            this.panel1.Location = new System.Drawing.Point(-1, 486);
+            this.panel1.Location = new System.Drawing.Point(-1, 598);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(496, 47);
+            this.panel1.Size = new System.Drawing.Size(661, 58);
             this.panel1.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Segoe UI Light", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(2, 460);
+            this.label2.Location = new System.Drawing.Point(3, 566);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(490, 23);
+            this.label2.Size = new System.Drawing.Size(653, 28);
             this.label2.TabIndex = 4;
             this.label2.Text = "Developed by the R&&D division of the Ort Rehovot Space Center";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -103,18 +109,19 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::AstroDAM.Properties.Resources.SplashSquence;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 110);
+            this.pictureBox1.Location = new System.Drawing.Point(-1, 135);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(496, 347);
+            this.pictureBox1.Size = new System.Drawing.Size(661, 427);
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
-            // frmSplash
+            // SplashForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(3)))));
-            this.ClientSize = new System.Drawing.Size(495, 535);
+            this.ClientSize = new System.Drawing.Size(660, 658);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
@@ -125,13 +132,14 @@
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmSplash";
+            this.Name = "SplashForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.frmSplash_Load);
+            this.Load += new System.EventHandler(this.FrmSplash_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

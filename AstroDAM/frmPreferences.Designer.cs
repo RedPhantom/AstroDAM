@@ -1,6 +1,6 @@
 ﻿namespace AstroDAM
 {
-    partial class frmPreferences
+    partial class PreferencesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -73,7 +73,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(24, 58);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(857, 449);
@@ -86,9 +86,9 @@
             this.tabPage1.Controls.Add(this.tbEndNodeFormat);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(849, 420);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Collection Naming";
@@ -97,7 +97,7 @@
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(12, 86);
-            this.treeView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(551, 323);
             this.treeView1.TabIndex = 10;
@@ -109,9 +109,9 @@
             this.groupBox1.Controls.Add(this.btnBbObjectTitle);
             this.groupBox1.Controls.Add(this.btnBbDateTime);
             this.groupBox1.Location = new System.Drawing.Point(572, 86);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(267, 324);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
@@ -120,43 +120,43 @@
             // btnTestTree
             // 
             this.btnTestTree.Location = new System.Drawing.Point(8, 276);
-            this.btnTestTree.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTestTree.Margin = new System.Windows.Forms.Padding(4);
             this.btnTestTree.Name = "btnTestTree";
             this.btnTestTree.Size = new System.Drawing.Size(251, 41);
             this.btnTestTree.TabIndex = 1;
             this.btnTestTree.Text = "Test Tree";
             this.toolTip1.SetToolTip(this.btnTestTree, "Tests the tree.");
             this.btnTestTree.UseVisualStyleBackColor = true;
-            this.btnTestTree.Click += new System.EventHandler(this.btnTestTree_Click);
+            this.btnTestTree.Click += new System.EventHandler(this.BtnTestTree_Click);
             // 
             // btnBbCollection
             // 
             this.btnBbCollection.Location = new System.Drawing.Point(8, 119);
-            this.btnBbCollection.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBbCollection.Margin = new System.Windows.Forms.Padding(4);
             this.btnBbCollection.Name = "btnBbCollection";
             this.btnBbCollection.Size = new System.Drawing.Size(251, 41);
             this.btnBbCollection.TabIndex = 0;
             this.btnBbCollection.Text = "Catalogue";
             this.toolTip1.SetToolTip(this.btnBbCollection, "Inserts either collection Id {c|id}, short name {c|sn} \r\nor long name {c|ln}.\r\n");
             this.btnBbCollection.UseVisualStyleBackColor = true;
-            this.btnBbCollection.Click += new System.EventHandler(this.btnBbCollection_Click);
+            this.btnBbCollection.Click += new System.EventHandler(this.BtnBbCollection_Click);
             // 
             // btnBbObjectTitle
             // 
             this.btnBbObjectTitle.Location = new System.Drawing.Point(8, 71);
-            this.btnBbObjectTitle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBbObjectTitle.Margin = new System.Windows.Forms.Padding(4);
             this.btnBbObjectTitle.Name = "btnBbObjectTitle";
             this.btnBbObjectTitle.Size = new System.Drawing.Size(251, 41);
             this.btnBbObjectTitle.TabIndex = 0;
             this.btnBbObjectTitle.Text = "Object";
             this.toolTip1.SetToolTip(this.btnBbObjectTitle, "Inserts the Object field Id {o|id} or title {o|n}.");
             this.btnBbObjectTitle.UseVisualStyleBackColor = true;
-            this.btnBbObjectTitle.Click += new System.EventHandler(this.btnBbObject_Click);
+            this.btnBbObjectTitle.Click += new System.EventHandler(this.BtnBbObject_Click);
             // 
             // btnBbDateTime
             // 
             this.btnBbDateTime.Location = new System.Drawing.Point(8, 23);
-            this.btnBbDateTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBbDateTime.Margin = new System.Windows.Forms.Padding(4);
             this.btnBbDateTime.Name = "btnBbDateTime";
             this.btnBbDateTime.Size = new System.Drawing.Size(251, 41);
             this.btnBbDateTime.TabIndex = 0;
@@ -164,13 +164,13 @@
             this.toolTip1.SetToolTip(this.btnBbDateTime, "Insert information from the CaptureDateTime field \r\nof a collection according to " +
         "the .NET DateTime formatting rules.");
             this.btnBbDateTime.UseVisualStyleBackColor = true;
-            this.btnBbDateTime.Click += new System.EventHandler(this.btnBbDateTime_Click);
+            this.btnBbDateTime.Click += new System.EventHandler(this.BtnBbDateTime_Click);
             // 
             // tbEndNodeFormat
             // 
             this.tbEndNodeFormat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbEndNodeFormat.Location = new System.Drawing.Point(12, 49);
-            this.tbEndNodeFormat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbEndNodeFormat.Margin = new System.Windows.Forms.Padding(4);
             this.tbEndNodeFormat.Name = "tbEndNodeFormat";
             this.tbEndNodeFormat.Size = new System.Drawing.Size(825, 26);
             this.tbEndNodeFormat.TabIndex = 8;
@@ -191,9 +191,9 @@
             this.tabPage2.Controls.Add(this.cbNodeGrouping);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage2.Size = new System.Drawing.Size(849, 420);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Node Grouping";
@@ -208,7 +208,7 @@
             "Catalogue Name",
             "Object Title"});
             this.cbNodeGrouping.Location = new System.Drawing.Point(160, 18);
-            this.cbNodeGrouping.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbNodeGrouping.Margin = new System.Windows.Forms.Padding(4);
             this.cbNodeGrouping.Name = "cbNodeGrouping";
             this.cbNodeGrouping.Size = new System.Drawing.Size(160, 24);
             this.cbNodeGrouping.TabIndex = 2;
@@ -227,9 +227,9 @@
             // 
             this.tabPage3.Controls.Add(this.cbPlaySplashClip);
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage3.Size = new System.Drawing.Size(849, 420);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Graphics";
@@ -239,7 +239,7 @@
             // 
             this.cbPlaySplashClip.AutoSize = true;
             this.cbPlaySplashClip.Location = new System.Drawing.Point(8, 7);
-            this.cbPlaySplashClip.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbPlaySplashClip.Margin = new System.Windows.Forms.Padding(4);
             this.cbPlaySplashClip.Name = "cbPlaySplashClip";
             this.cbPlaySplashClip.Size = new System.Drawing.Size(233, 21);
             this.cbPlaySplashClip.TabIndex = 0;
@@ -252,19 +252,19 @@
             // 
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSave.Location = new System.Drawing.Point(781, 514);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 28);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(673, 514);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 0;
@@ -276,7 +276,7 @@
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "What\'s that?";
             // 
-            // frmPreferences
+            // PreferencesForm
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -287,11 +287,11 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label2);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "frmPreferences";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "PreferencesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Preferences";
-            this.Load += new System.EventHandler(this.frmPreferences_Load);
+            this.Load += new System.EventHandler(this.FrmPreferences_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

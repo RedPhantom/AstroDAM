@@ -13,9 +13,9 @@ using AstroDAM.Properties;
 
 namespace AstroDAM
 {
-    public partial class frmSplash : Form
+    public partial class SplashForm : Form
     {
-        public frmSplash()
+        public SplashForm()
         {
             InitializeComponent();
 
@@ -68,7 +68,7 @@ namespace AstroDAM
             {
                 // Db connection failed.
                 case -1:
-                    new frmDbConnection().ShowDialog();
+                    new DbConnectionForm(false).ShowDialog();
                     Application.Exit();
 
                     break;
@@ -77,7 +77,7 @@ namespace AstroDAM
                 case 0:
                     TopMost = false;
 
-                    frmMain frmMain = new frmMain();
+                    MainForm frmMain = new MainForm();
                     frmMain.Show();
                     frmMain.Focus();
 
@@ -92,7 +92,6 @@ namespace AstroDAM
 
         private void BgwStartupCheck_DoWork(object sender, DoWorkEventArgs e)
         {
-            BackgroundWorker bgw = (BackgroundWorker)sender;
             System.Threading.Thread.Sleep(1000); // show the splash so the user doest panic over a flashing form.
 
             // Test db connection:
@@ -105,7 +104,7 @@ namespace AstroDAM
                 UpdateStatusLabel("Database connection failed.");
 
                 // Configure the database connection.
-                new frmDbConnection().ShowDialog();
+                new DbConnectionForm(false).ShowDialog();
             }
 
             UpdateStatusLabel("All good in the hood." + ((bool)e.Argument ? " Showing film." : ""));
@@ -129,7 +128,7 @@ namespace AstroDAM
             lblStatus.Invoke((MethodInvoker)(() => lblStatus.Text = Message)); // https://stackoverflow.com/questions/2172467/set-value-of-label-with-c-sharp-cross-threading
         }
 
-        private void frmSplash_Load(object sender, EventArgs e)
+        private void FrmSplash_Load(object sender, EventArgs e)
         {
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);

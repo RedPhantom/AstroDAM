@@ -11,16 +11,16 @@ using System.Windows.Forms;
 
 namespace AstroDAM
 {
-    public partial class frmAbout : Form
+    public partial class AboutForm : Form
     {
-        public frmAbout()
+        public AboutForm()
         {
             InitializeComponent();
         }
 
-        private void frmAbout_Load(object sender, EventArgs e)
+        private void FrmAbout_Load(object sender, EventArgs e)
         {
-            string version = "";
+            string version;
             
             richTextBox1.Rtf = Properties.Resources.About;
 

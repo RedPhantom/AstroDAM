@@ -7,7 +7,7 @@ using AstroDAM.Controllers;
 
 namespace AstroDAM
 {
-    public partial class frmManager : Form
+    public partial class ManagerForm : Form
     {
         //BackgroundWorker bgwDataLoader = new BackgroundWorker();
 
@@ -59,7 +59,7 @@ namespace AstroDAM
             Edit
         }
 
-        public frmManager(ManagerTabs Tab)
+        public ManagerForm(ManagerTabs Tab)
         {
             InitializeComponent();
 
@@ -70,7 +70,7 @@ namespace AstroDAM
             //bgwDataLoader.RunWorkerAsync();
         }
 
-        private void frmManager_Load(object sender, EventArgs e)
+        private void FrmManager_Load(object sender, EventArgs e)
         {
             PrepareDataLists();
 
@@ -177,7 +177,7 @@ namespace AstroDAM
         }
 
         // Cameras
-        private void btnCamerasSave_Click(object sender, EventArgs e)
+        private void BtnCamerasSave_Click(object sender, EventArgs e)
         {
             // Valiations:
 
@@ -230,7 +230,9 @@ namespace AstroDAM
                 ColorSpace cs = listColorSpaces.Find(x => x.Name == item.ToString());
 
                 if (cs != null)
+                {
                     colorSpaces.Add(cs);
+                }
             }
 
             if (emCameras == EditingModes.Add)
@@ -261,14 +263,14 @@ namespace AstroDAM
             lblStatus.Text += "Complete.";
         }
 
-        private void btnCamerasNew_Click(object sender, EventArgs e)
+        private void BtnCamerasNew_Click(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Add, ref emCameras, ref lblCameras, "Cameras");
 
             ClearCameraData();
         }
 
-        private void lbCameras_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbCameras_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Edit, ref emCameras, ref lblCameras, "Cameras");
 
@@ -276,7 +278,7 @@ namespace AstroDAM
             LoadCameraData(currentCamera);
         }
 
-        private void btnCamerasAddColorSpace_Click(object sender, EventArgs e)
+        private void BtnCamerasAddColorSpace_Click(object sender, EventArgs e)
         {
             int index = cbCamerasColorSpaces.SelectedIndex;
             if (index != -1)
@@ -291,7 +293,7 @@ namespace AstroDAM
             }
         }
 
-        private void btnCamerasRemoveColorSpace_Click(object sender, EventArgs e)
+        private void BtnCamerasRemoveColorSpace_Click(object sender, EventArgs e)
         {
             int index = lbCamerasColorSpaces.SelectedIndex;
             if (index != -1)
@@ -328,7 +330,7 @@ namespace AstroDAM
         }
 
         // Catalogues
-        private void btnCataloguesSave_Click(object sender, EventArgs e)
+        private void BtnCataloguesSave_Click(object sender, EventArgs e)
         {
             // Valiations:
 
@@ -339,10 +341,10 @@ namespace AstroDAM
 
             // Save new/changes:
 
-            int id = 0;
             string shortName = tbCataloguesShortName.Text;
             string longName = tbCataloguesLongName.Text;
 
+            int id;
             if (emCatalogues == EditingModes.Add)
                 id = 0;
             else
@@ -356,7 +358,7 @@ namespace AstroDAM
             }
             else
             { 
-                CatalogueController.EditCatalogue(id, candidate);
+                CatalogueController.EditCatalogue(candidate);
             }
 
             // Reload data:
@@ -368,14 +370,14 @@ namespace AstroDAM
             lblStatus.Text += "Complete.";
         }
 
-        private void btnCataloguesNew_Click(object sender, EventArgs e)
+        private void BtnCataloguesNew_Click(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Add, ref emCatalogues, ref lblCatalogues, "Catalogues");
 
             ClearCatalogueData();
         }
 
-        private void lbCatalogues_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbCatalogues_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Edit, ref emCatalogues, ref lblCatalogues, "Catalogues");
 
@@ -398,7 +400,7 @@ namespace AstroDAM
         }
         
         // Color Spaces
-        private void btnColorSpacesSave_Click(object sender, EventArgs e)
+        private void BtnColorSpacesSave_Click(object sender, EventArgs e)
         {
             // Validations:
 
@@ -408,26 +410,36 @@ namespace AstroDAM
                 return;
             }
             else
+            {
                 errorProvider.SetError(tbColorSpaceName, "");
+            }
 
             if (!rbColorSpaceMultiChannelNo.Checked && !rbColorSpaceMultiChannelYes.Checked)
             {
                 errorProvider.SetError(rbColorSpaceMultiChannelNo, "Must select a value.");
                 return;
             }
-            else errorProvider.SetError(rbColorSpaceMultiChannelNo, "");
-            
-            // Save new/changes:
+            else
+            {
+                errorProvider.SetError(rbColorSpaceMultiChannelNo, "");
+            }
 
-            int id = 0;
             string name = tbColorSpaceName.Text;
+
+            // Save new/changes:
+            
             byte bitsPerChannel = Convert.ToByte(tbColorSpaceBitsPerChannel.Value);
             bool isMultiChannel = rbColorSpaceMultiChannelYes.Checked;
 
+            int id;
             if (emColorSpaces == EditingModes.Add)
+            {
                 id = 0;
+            }
             else
+            {
                 id = currentColorSpace.Id;
+            }
 
             ColorSpace candidate = new ColorSpace(id, name, bitsPerChannel, isMultiChannel);
 
@@ -449,14 +461,14 @@ namespace AstroDAM
             lblStatus.Text += "Complete.";
         }
 
-        private void btnColorSpacesNew_Click(object sender, EventArgs e)
+        private void BtnColorSpacesNew_Click(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Add, ref emColorSpaces, ref lblColorSpaces, "Color Spaces");
 
             ClearColorSpaceData();
         }
 
-        private void lbColorSpaces_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbColorSpaces_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Edit, ref emColorSpaces, ref lblColorSpaces, "Color Spaces");
 
@@ -482,25 +494,33 @@ namespace AstroDAM
 
         // File Formats
 
-        private void btnFileFormatsSave_Click(object sender, EventArgs e)
+        private void BtnFileFormatsSave_Click(object sender, EventArgs e)
         {
             // Valiations:
 
             if (tbFileFormatShortName.Text.Length == 0)
+            {
                 errorProvider.SetError(tbFileFormatShortName, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(tbFileFormatShortName, "");
+            }
 
             // Save new/changes:
-
-            int id = 0;
+            
             string shortName = tbFileFormatShortName.Text;
             string longName = tbFileFormatLongName.Text;
 
+            int id;
             if (emFileFormats == EditingModes.Add)
+            {
                 id = 0;
+            }
             else
+            {
                 id = currentFileFormat.Id;
+            }
 
             FileFormat candidate = new FileFormat(id, shortName, longName);
 
@@ -522,14 +542,14 @@ namespace AstroDAM
             lblStatus.Text += "Complete.";
         }
 
-        private void btnFileFormatsNew_Click(object sender, EventArgs e)
+        private void BtnFileFormatsNew_Click(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Add, ref emFileFormats, ref lblFileFormats, "File Formats");
 
             ClearFileFormatData();
         }
 
-        private void lbFileFormats_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbFileFormats_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Edit, ref emFileFormats, ref lblFileFormats, "File Formats");
 
@@ -552,21 +572,28 @@ namespace AstroDAM
         }
 
         // Optics
-        private void btnOpticsSave_Click(object sender, EventArgs e)
+        private void BtnOpticsSave_Click(object sender, EventArgs e)
         {
             // Valiations:
 
             if (cbOpticType.SelectedIndex == -1)
+            {
                 errorProvider.SetError(cbOpticType, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(cbOpticType, "");
+            }
 
             if (tbOpticValue.Text.Length == -1)
             {
                 errorProvider.SetError(tbOpticValue, "Must provide a value.");
                 return;
-            } else
+            } 
+            else
+            {
                 errorProvider.SetError(tbOpticValue, "");
+            }
 
 
             if (!float.TryParse(tbOpticValue.Text, out _))
@@ -575,18 +602,24 @@ namespace AstroDAM
                 return;
             }
             else
+            {
                 errorProvider.SetError(tbOpticValue, "");
+            }
 
             // Save new/changes:
 
-            int id = 0;
             Optic.OpticTypes type = (Optic.OpticTypes)cbOpticType.SelectedIndex;
             double value = double.Parse(tbOpticValue.Text);
 
+            int id;
             if (emOptics == EditingModes.Add)
+            {
                 id = 0;
+            }
             else
+            {
                 id = currentOptic.Id;
+            }
 
             Optic candidate = new Optic(id, type, value);
 
@@ -608,14 +641,14 @@ namespace AstroDAM
             lblStatus.Text += "Complete.";
         }
 
-        private void btnOpticsNew_Click(object sender, EventArgs e)
+        private void BtnOpticsNew_Click(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Add, ref emOptics, ref lblOptics, "Optics");
 
             ClearOpticData();
         }
 
-        private void lbOptics_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbOptics_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Edit, ref emOptics, ref lblOptics, "Optics");
 
@@ -639,25 +672,33 @@ namespace AstroDAM
 
         // Photographers
 
-        private void btnPhotographersSave_Click(object sender, EventArgs e)
+        private void BtnPhotographersSave_Click(object sender, EventArgs e)
         {
             // Valiations:
 
             if (tbPhotographerFirstName.Text.Length == 0)
+            {
                 errorProvider.SetError(tbPhotographerFirstName, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(tbPhotographerFirstName, "");
+            }
 
             // Save new/changes:
 
-            int id = 0;
             string FirstName = tbPhotographerFirstName.Text;
             string LastName = tbPhotographerLastName.Text;
 
+            int id;
             if (emPhotographers == EditingModes.Add)
+            {
                 id = 0;
+            }
             else
+            {
                 id = currentPhotographer.Id;
+            }
 
             Photographer candidate = new Photographer(id, FirstName, LastName);
 
@@ -679,14 +720,14 @@ namespace AstroDAM
             lblStatus.Text += "Complete.";
         }
 
-        private void btnPhotographersNew_Click(object sender, EventArgs e)
+        private void BtnPhotographersNew_Click(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Add, ref emPhotographers, ref lblPhotographers, "Photographers");
 
             ClearPhotographerData();
         }
 
-        private void lbPhotographers_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbPhotographers_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Edit, ref emPhotographers, ref lblPhotographers, "Photographers");
 
@@ -709,48 +750,75 @@ namespace AstroDAM
         }
 
         // Scopes
-        private void btnScopesSave_Click(object sender, EventArgs e)
+        private void BtnScopesSave_Click(object sender, EventArgs e)
         {
             // Valiations:
             // TODO check for valid float values
             if (tbScopeManufacturer.Text.Length == 0)
+            {
                 errorProvider.SetError(tbScopeManufacturer, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(tbScopeManufacturer, "");
+            }
 
             if (tbScopeName.Text.Length == 0)
+            {
                 errorProvider.SetError(tbScopeName, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(tbScopeName, "");
+            }
 
             if (tbScopeAperture.Text.Length == 0)
+            {
                 errorProvider.SetError(tbScopeAperture, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(tbScopeAperture, "");
+            }
 
             if (tbScopeFocalLength.Text.Length == 0)
+            {
                 errorProvider.SetError(tbScopeFocalLength, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(tbScopeFocalLength, "");
+            }
 
             if (tbScopeCentralObstructionDiameter.Text.Length == 0)
+            {
                 errorProvider.SetError(tbScopeCentralObstructionDiameter, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(tbScopeCentralObstructionDiameter, "");
+            }
 
             if (!rbScopeRoboticYes.Checked && !rbScopeRoboticNo.Checked)
+            {
                 errorProvider.SetError(rbScopeRoboticNo, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(rbScopeRoboticNo, "");
+            }
 
             if (cbScopeMountType.SelectedIndex == -1)
+            {
                 errorProvider.SetError(cbScopeMountType, "Must provide a value.");
+            }
             else
-                errorProvider.SetError(cbScopeMountType, "");
+            { 
+                errorProvider.SetError(cbScopeMountType, ""); 
+            }
 
             // Save new/changes:
 
-            int id = 0;
             string manufacturer = tbScopeManufacturer.Text;
             string name = tbScopeName.Text;
             float aperture = float.Parse(tbScopeAperture.Text);
@@ -759,10 +827,15 @@ namespace AstroDAM
             bool robotic = rbScopeRoboticYes.Checked;
             Scope.MountTypes mountType = (Scope.MountTypes)cbScopeMountType.SelectedIndex;
 
+            int id;
             if (emScopes == EditingModes.Add)
+            {
                 id = 0;
+            }
             else
+            {
                 id = currentScope.Id;
+            }
 
             Scope candidate = new Scope(id, manufacturer,name, aperture, focalLength, centralObstructionDiameter, robotic, mountType);
 
@@ -784,14 +857,14 @@ namespace AstroDAM
             lblStatus.Text += "Complete.";
         }
 
-        private void btnScopesNew_Click(object sender, EventArgs e)
+        private void BtnScopesNew_Click(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Add, ref emScopes, ref lblScopes, "Scopes");
 
             ClearScopeData();
         }
 
-        private void lbScopes_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbScopes_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Edit, ref emScopes, ref lblScopes, "Scopes");
 
@@ -830,48 +903,72 @@ namespace AstroDAM
 
         // Sites
 
-        private void btnSitesSave_Click(object sender, EventArgs e)
+        private void BtnSitesSave_Click(object sender, EventArgs e)
         {
             // Valiations:
 
             if (tbSiteName.Text.Length == 0)
-                errorProvider.SetError(tbSiteName, "Must provide a value.");
+            {
+                errorProvider.SetError(tbSiteName, "Must provide a value."); 
+            }
             else
-                errorProvider.SetError(tbSiteName, "");
+            { 
+                errorProvider.SetError(tbSiteName, ""); 
+            }
 
             if (tbSiteLongtitude.Text.Length == 0)
+            {
                 errorProvider.SetError(tbSiteLongtitude, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(tbSiteLongtitude, "");
+            }
 
             if (tbSiteLatitude.Text.Length == 0)
+            {
                 errorProvider.SetError(tbSiteLatitude, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(tbSiteLatitude, "");
+            }
 
             if (cbSiteLongtitudeType.SelectedIndex == -1)
+            {
                 errorProvider.SetError(cbSiteLongtitudeType, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(cbSiteLongtitudeType, "");
+            }
 
             if (cbSiteLatitudeType.SelectedIndex == -1)
+            {
                 errorProvider.SetError(cbSiteLatitudeType, "Must provide a value.");
+            }
             else
+            {
                 errorProvider.SetError(cbSiteLatitudeType, "");
+            }
 
             // Save new/changes:
-
-            int id = 0;
+            
             string name = tbSiteName.Text;
             float longtitude = float.Parse(tbSiteLongtitude.Text);
             float latitude = float.Parse(tbSiteLatitude.Text);
             Site.LongtitudeTypes longtitudeType = (Site.LongtitudeTypes)cbSiteLongtitudeType.SelectedIndex;
             Site.LatitudeTypes latitudeType = (Site.LatitudeTypes)cbSiteLatitudeType.SelectedIndex;
 
+            int id;
             if (emSites == EditingModes.Add)
+            {
                 id = 0;
+            }
             else
+            {
                 id = currentSite.Id;
+            }
 
             Site candidate = new Site(id, name, longtitude, longtitudeType, latitude, latitudeType); ;
 
@@ -893,14 +990,14 @@ namespace AstroDAM
             lblStatus.Text += "Complete.";
         }
 
-        private void btnSitesNew_Click(object sender, EventArgs e)
+        private void BtnSitesNew_Click(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Add, ref emSites, ref lblSites, "Sites");
 
             ClearSiteData();
         }
 
-        private void lbSites_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbSites_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEditingMode(EditingModes.Edit, ref emSites, ref lblSites, "Sites");
 

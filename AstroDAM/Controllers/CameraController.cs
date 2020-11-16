@@ -23,9 +23,7 @@ namespace AstroDAM.Controllers
             string selector = DbManager.SelectorBuilder(ids);
 
             SqlConnection con = DbManager.GetConnection();
-            SqlCommand cmd = new SqlCommand();
-
-            cmd = con.CreateCommand();
+            SqlCommand cmd = con.CreateCommand();
 
             cmd.CommandText = "SELECT [Id],[ShortName],[LongName],[MaxResolution],[ColorSpaces] FROM [tblCameras] " + selector;
 

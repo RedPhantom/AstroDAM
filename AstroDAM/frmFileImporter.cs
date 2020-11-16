@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace AstroDAM
 {
-    public partial class frmFileImporter : Form
+    public partial class FileImporterForm : Form
     {
         public DialogRes DialogRes { get; set; }
 
-        FileTypes FileType;
+        readonly FileTypes FileType;
 
         public enum FileTypes
         {
@@ -29,7 +29,7 @@ namespace AstroDAM
             Directory
         }
 
-        public frmFileImporter(FileTypes fileType)
+        public FileImporterForm(FileTypes fileType)
         {
             InitializeComponent();
 
@@ -85,7 +85,7 @@ namespace AstroDAM
             }
         }
 
-        private void btnSearchFile_Click(object sender, EventArgs e)
+        private void BtnSearchFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog();
         }
@@ -100,39 +100,38 @@ namespace AstroDAM
             FileChecker();
         }
 
-        private void tbFilePath_TextChanged(object sender, EventArgs e)
+        private void TbFilePath_TextChanged(object sender, EventArgs e)
         {
             FileChecker();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
 
-            DialogRes dialogRes = new DialogRes(tbFilePath.Text, cbImportData.Checked);
-            dialogRes.Metadata = new Dictionary<string, string>();
+            DialogRes dialogRes = new DialogRes(tbFilePath.Text, cbImportData.Checked)
+            {
+                Metadata = new Dictionary<string, string>()
+            };
 
             List<string> unparsableLines = new List<string>();
-
-            string[] metadataLines = { "" };
-            string[] line = { "" };
 
             if (FileType == FileTypes.MetadataFile)
             {
                 // basic text processing for metadata parsing.
-                metadataLines = File.ReadAllLines(tbFilePath.Text);
+                string[] metadataLines = File.ReadAllLines(tbFilePath.Text);
 
                 for (int i = 0; i < metadataLines.Length; i++)
                 {
                     if (metadataLines[i].Contains("="))
                     {
-                        line = metadataLines[i].Split('=');
+                        string[] line = metadataLines[i].Split('=');
                         dialogRes.Metadata.Add(line[0], line[1]);
                     }
                     else
@@ -180,7 +179,7 @@ namespace AstroDAM
             }
         }
 
-        private void btnSearchFolder_Click(object sender, EventArgs e)
+        private void BtnSearchFolder_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {

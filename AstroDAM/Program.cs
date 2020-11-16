@@ -15,7 +15,7 @@ namespace AstroDAM
             Application.SetCompatibleTextRenderingDefault(false);
 
             // https://stackoverflow.com/questions/17953298/c-sharp-application-exits-when-main-form-closes
-            var StartupForm = new frmSplash();
+            var StartupForm = new SplashForm();
             StartupForm.Show();
 
             Application.Run();
