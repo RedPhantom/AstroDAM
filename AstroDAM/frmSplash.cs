@@ -19,8 +19,10 @@ namespace AstroDAM
         {
             InitializeComponent();
 
-            if (Properties.Preferences.Default.PlaySplashClip)
-                pictureBox1.Image = Properties.Resources.SplashSquence;
+            if (Preferences.Default.PlaySplashClip)
+            {
+                pictureBox1.Image = Resources.SplashSquence;
+            }
 
             BackgroundWorker bgwStartupCheck = new BackgroundWorker();
 
@@ -101,6 +103,9 @@ namespace AstroDAM
             {
                 e.Result = -1;
                 UpdateStatusLabel("Database connection failed.");
+
+                // Configure the database connection.
+                new frmDbConnection().ShowDialog();
             }
 
             UpdateStatusLabel("All good in the hood." + ((bool)e.Argument ? " Showing film." : ""));

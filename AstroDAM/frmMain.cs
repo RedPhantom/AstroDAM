@@ -143,35 +143,51 @@ namespace AstroDAM
 
             cbCamera.Items.Clear();
             foreach (var item in listCameras)
+            {
                 cbCamera.Items.Add(item.LongName);
+            }
 
             cbCatalogue.Items.Clear();
             foreach (var item in listCatalogues)
+            {
                 cbCatalogue.Items.Add(item.LongName);
+            }
 
             cbColorSpace.Items.Clear();
             foreach (var item in listColorSpaces)
+            {
                 cbColorSpace.Items.Add(item.Name);
+            }
 
             cbFileFormat.Items.Clear();
             foreach (var item in listFileFormats)
+            {
                 cbFileFormat.Items.Add(item.LongName);
+            }
 
             cbPhotographer.Items.Clear();
             foreach (var item in listPhotographers)
+            {
                 cbPhotographer.Items.Add(item.GetInformalName());
+            }
 
             cbScope.Items.Clear();
             foreach (var item in listScopes)
+            {
                 cbScope.Items.Add(item.GetScopeName());
+            }
 
             clbOptics.Items.Clear();
             foreach (var item in listOptics)
+            {
                 clbOptics.Items.Add(item.Id + "|  " + item.GetOpticName());
+            }
 
             cbSite.Items.Clear();
             foreach (var item in listSites)
+            {
                 cbSite.Items.Add(item.Name);
+            }
 
             lblStatus.Text = "Loaded all assets.";
         }
@@ -395,7 +411,9 @@ namespace AstroDAM
                 SearchBoxFadeProgress = 100;
             }
             else
+            {
                 SearchBoxFadeProgress++;
+            }
         }
 
         private void btnLinkMetadataFile_Click(object sender, EventArgs e)
@@ -484,9 +502,13 @@ namespace AstroDAM
             }
 
             if (numPramsImported > 0)
+            {
                 lblStatus.Text = string.Format("Successfully imported {0} parameters from metadata.", numPramsImported);
+            }
             else
+            {
                 lblStatus.Text = "Failed to import data from metadata.";
+            }
         }
 
         private void aboutAstroDAMToolStripMenuItem_Click(object sender, EventArgs e)

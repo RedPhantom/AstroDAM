@@ -93,7 +93,9 @@ namespace AstroDAM
         void OpenFileDialog()
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
                 tbFilePath.Text = openFileDialog1.FileName;
+            }
 
             FileChecker();
         }
@@ -155,16 +157,22 @@ namespace AstroDAM
         public static ObjectTypes GetObjectType(string path)
         {
             if (string.IsNullOrEmpty(path))
+            {
                 return ObjectTypes.File;
+            }
 
             try
             {
                 FileAttributes attr = File.GetAttributes(path);
 
                 if (attr.HasFlag(FileAttributes.Directory))
+                {
                     return ObjectTypes.Directory;
+                }
                 else
+                {
                     return ObjectTypes.File;
+                }
             }
             catch (Exception)
             {
@@ -175,7 +183,9 @@ namespace AstroDAM
         private void btnSearchFolder_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
                 tbFilePath.Text = folderBrowserDialog1.SelectedPath;
+            }
 
             FileChecker();
         }

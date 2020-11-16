@@ -1,4 +1,5 @@
-﻿using AstroDAM.Models;
+﻿using AstroDAM.Controllers;
+using AstroDAM.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -117,7 +118,7 @@ namespace AstroDAM
 
         public static void PopulateTreeView(ref TreeView treeView, bool isAscending, string format = "")
         {
-            SqlConnection con = GetConnection();
+            SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
 
             treeView.Nodes.Clear();
@@ -131,7 +132,7 @@ namespace AstroDAM
             {
                 // for every collection, add to a new or existing group - by date.
                 int id = reader.GetInt32(0);
-                Collection col = GetCollections(new List<int>() { id })[0];
+                Collection col = CollectionController.GetCollections(new List<int>() { id })[0];
 
                 string folderKey;
 

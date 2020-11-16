@@ -37,10 +37,13 @@ namespace AstroDAM
             builder["Initial Catalog"] = tbDatabaseFile.Text;
 
             if (int.TryParse(tbConnectionTimeout.Text, out ConnectTimeout))
+            {
                 builder["Connect Timeout"] = ConnectTimeout;
-             else
+            }
+            else
+            {
                 builder["Connect Timeout"] = 30;
-
+            }
 
             tbConnectionString.Text = builder.ConnectionString;
         }
@@ -73,6 +76,7 @@ namespace AstroDAM
             Properties.Settings.Default.Save();
 
             MessageBox.Show("Settings updated. Please restart the application.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Close();
         }
     }
 }
