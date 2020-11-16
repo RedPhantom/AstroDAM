@@ -4,13 +4,21 @@ using AstroDAM.Models;
 
 namespace AstroDAM.Controllers
 {
+    /// <summary>
+    /// Manage catalogue records on the database.
+    /// </summary>
     public static class CatalogueController
     {
-        public static List<Catalogue> GetCatalogues(List<int> Ids = null)
+        /// <summary>
+        /// Get one or more catalogue records on the database.
+        /// </summary>
+        /// <param name="ids">List of IDs of the catalogue records.</param>
+        /// <returns>A list of catalogue records.</returns>
+        public static List<Catalogue> GetCatalogues(List<int> ids = null)
         {
             List<Catalogue> catalogues = new List<Catalogue>();
 
-            string selector = DbManager.SelectorBuilder(Ids);
+            string selector = DbManager.SelectorBuilder(ids);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -32,9 +40,13 @@ namespace AstroDAM.Controllers
             return catalogues;
         }
 
-        public static void DeleteCatalogues(List<int> Ids = null)
+        /// <summary>
+        /// Delete one or more catalogue records on the database.
+        /// </summary>
+        /// <param name="ids">List of IDs of the catalogue records.</param>
+        public static void DeleteCatalogues(List<int> ids = null)
         {
-            string selector = DbManager.SelectorBuilder(Ids, false);
+            string selector = DbManager.SelectorBuilder(ids, false);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -45,7 +57,13 @@ namespace AstroDAM.Controllers
             con.Close();
         }
 
-        public static void EditCatalogue(int Id, Catalogue catalogue)
+        /// <summary>
+        /// Edit a catalogue record on the database.
+        /// </summary>
+        /// <param name="ids">ID of the catalogue record to edit.</param>
+        /// <param name="catalogue">Catalogue records information.</param>
+        /// <remarks>Id property of the <paramref name="catalogue"/> parameter is ignored.</remarks>
+        public static void EditCatalogue(int ids, Catalogue catalogue)
         {
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -63,6 +81,12 @@ namespace AstroDAM.Controllers
             con.Close();
         }
 
+        /// <summary>
+        /// Add a catalogue record to the database.
+        /// </summary>
+        /// <param name="catalogue">Catalogue record information.</param>
+        /// <returns>ID of the new catalogue record.</returns>
+        /// <remarks>Id property of the <paramref name="catalogue"/> parameter is ignored.</remarks>
         public static int AddCatalogue(Catalogue catalogue)
         {
             SqlConnection con = DbManager.GetConnection();

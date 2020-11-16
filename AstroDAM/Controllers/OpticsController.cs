@@ -4,13 +4,21 @@ using AstroDAM.Models;
 
 namespace AstroDAM.Controllers
 {
+    /// <summary>
+    /// Manage optics records on the database.
+    /// </summary>
     public static class OpticsController
     {
-        public static List<Optic> GetOptics(List<int> Ids = null)
+        /// <summary>
+        /// Get one or more optics records on the database.
+        /// </summary>
+        /// <param name="ids">List of IDs of the optics records.</param>
+        /// <returns>A list of optics records.</returns>
+        public static List<Optic> GetOptics(List<int> ids = null)
         {
             List<Optic> optics = new List<Optic>();
 
-            string selector = DbManager.SelectorBuilder(Ids);
+            string selector = DbManager.SelectorBuilder(ids);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -32,9 +40,13 @@ namespace AstroDAM.Controllers
             return optics;
         }
 
-        public static void DeleteOptics(List<int> Ids = null)
+        /// <summary>
+        /// Delete one or more optics records on the database.
+        /// </summary>
+        /// <param name="ids">List of IDs of the optics records.</param>
+        public static void DeleteOptics(List<int> ids = null)
         {
-            string selector = DbManager.SelectorBuilder(Ids, false);
+            string selector = DbManager.SelectorBuilder(ids, false);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -45,7 +57,13 @@ namespace AstroDAM.Controllers
             con.Close();
         }
 
-        public static void EditOptics(int Id, Optic optic)
+        /// <summary>
+        /// Edit an optics record on the database.
+        /// </summary>
+        /// <param name="id">ID of the optics record to edit.</param>
+        /// <param name="optic">Optics records information.</param>
+        /// <remarks>Id property of the <paramref name="optic"/> parameter is ignored.</remarks>
+        public static void EditOptics(int id, Optic optic)
         {
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -57,12 +75,18 @@ namespace AstroDAM.Controllers
 
             cmd.Parameters.AddWithValue("@Type", (int)optic.OpticType);
             cmd.Parameters.AddWithValue("@Value", optic.Value);
-            cmd.Parameters.AddWithValue("@Id", Id);
+            cmd.Parameters.AddWithValue("@Id", id);
 
             cmd.ExecuteNonQuery();
             con.Close();
         }
 
+        /// <summary>
+        /// Add an optics record to the database.
+        /// </summary>
+        /// <param name="optic">Optics record information.</param>
+        /// <returns>ID of the new optics record.</returns>
+        /// <remarks>Id property of the <paramref name="optic"/> parameter is ignored.</remarks>
         public static int AddOptics(Optic optic)
         {
             SqlConnection con = DbManager.GetConnection();

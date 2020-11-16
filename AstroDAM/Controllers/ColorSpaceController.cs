@@ -4,13 +4,21 @@ using AstroDAM.Models;
 
 namespace AstroDAM.Controllers
 {
+    /// <summary>
+    /// Manage color space records on the database.
+    /// </summary>
     public static class ColorSpaceController
     {
-        public static List<ColorSpace> GetColorSpaces(List<int> Ids = null)
+        /// <summary>
+        /// Get one or more color space records on the database.
+        /// </summary>
+        /// <param name="ids">List of IDs of the color space records.</param>
+        /// <returns>A list of color space records.</returns>
+        public static List<ColorSpace> GetColorSpaces(List<int> ids = null)
         {
             List<ColorSpace> ColorSpaces = new List<ColorSpace>();
 
-            string selector = DbManager.SelectorBuilder(Ids);
+            string selector = DbManager.SelectorBuilder(ids);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -33,9 +41,13 @@ namespace AstroDAM.Controllers
             return ColorSpaces;
         }
 
-        public static void DeleteColorSpaces(List<int> Ids = null)
+        /// <summary>
+        /// Delete one or more color space records on the database.
+        /// </summary>
+        /// <param name="ids">List of IDs of the color space records.</param>
+        public static void DeleteColorSpaces(List<int> ids = null)
         {
-            string selector = DbManager.SelectorBuilder(Ids, false);
+            string selector = DbManager.SelectorBuilder(ids, false);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -46,7 +58,13 @@ namespace AstroDAM.Controllers
             con.Close();
         }
 
-        public static void EditColorSpace(int Id, ColorSpace colorSpace)
+        /// <summary>
+        /// Edit a color space record on the database.
+        /// </summary>
+        /// <param name="id">ID of the color space record to edit.</param>
+        /// <param name="colorSpace">Catalogue records information.</param>
+        /// <remarks>Id property of the <paramref name="colorSpace"/> parameter is ignored.</remarks>
+        public static void EditColorSpace(int id, ColorSpace colorSpace)
         {
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -60,12 +78,18 @@ namespace AstroDAM.Controllers
             cmd.Parameters.AddWithValue("@Name", colorSpace.Name);
             cmd.Parameters.AddWithValue("@BitsPerChannel", colorSpace.BitsPerChannel);
             cmd.Parameters.AddWithValue("@IsMultiChannel", colorSpace.IsMultiChannel);
-            cmd.Parameters.AddWithValue("@Id", Id);
+            cmd.Parameters.AddWithValue("@Id", id);
 
             cmd.ExecuteNonQuery();
             con.Close();
         }
 
+        /// <summary>
+        /// Add a color space record to the database.
+        /// </summary>
+        /// <param name="colorSpace">Color space record information.</param>
+        /// <returns>ID of the new color space record.</returns>
+        /// <remarks>Id property of the <paramref name="colorSpace"/> parameter is ignored.</remarks>
         public static int AddColorSpace(ColorSpace colorSpace)
         {
             SqlConnection con = DbManager.GetConnection();

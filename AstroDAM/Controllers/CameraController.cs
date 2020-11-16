@@ -6,13 +6,21 @@ using AstroDAM.Models;
 
 namespace AstroDAM.Controllers
 {
+    /// <summary>
+    /// Manage camera records on the database.
+    /// </summary>
     public static class CameraController
     {
-        public static List<Camera> GetCameras(List<int> Ids = null)
+        /// <summary>
+        /// Get one or more camera records on the database.
+        /// </summary>
+        /// <param name="ids">List of IDs of the camera records.</param>
+        /// <returns>A list of camera records.</returns>
+        public static List<Camera> GetCameras(List<int> ids = null)
         {
             List<Camera> Cameras = new List<Camera>();
 
-            string selector = DbManager.SelectorBuilder(Ids);
+            string selector = DbManager.SelectorBuilder(ids);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = new SqlCommand();
@@ -40,9 +48,13 @@ namespace AstroDAM.Controllers
             return Cameras;
         }
 
-        public static void DeleteCameras(List<int> Ids = null)
+        /// <summary>
+        /// Delete one or more camera records on the database.
+        /// </summary>
+        /// <param name="ids">List of IDs of the camera records.</param>
+        public static void DeleteCameras(List<int> ids = null)
         {
-            string selector = DbManager.SelectorBuilder(Ids, false);
+            string selector = DbManager.SelectorBuilder(ids, false);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -53,7 +65,13 @@ namespace AstroDAM.Controllers
             con.Close();
         }
 
-        public static void EditCamera(int Id, Camera camera)
+        /// <summary>
+        /// Edit a camera record on the database.
+        /// </summary>
+        /// <param name="id">ID of the camera record to edit.</param>
+        /// <param name="camera">Camera record information.</param>
+        /// <remarks>Id property of the <paramref name="camera"/> parameter is ignored.</remarks>
+        public static void EditCamera(int id, Camera camera)
         {
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -69,12 +87,18 @@ namespace AstroDAM.Controllers
             cmd.Parameters.AddWithValue("@LongName", camera.LongName);
             cmd.Parameters.AddWithValue("@MaxResolution", Utilities.ResolutionToString(camera.MaxResolution));
             cmd.Parameters.AddWithValue("@ColorSpaces", Utilities.IntListToString(camera.ColorSpaces.Select(x => x.Id).ToList()));
-            cmd.Parameters.AddWithValue("@Id", Id);
+            cmd.Parameters.AddWithValue("@Id", id);
 
             cmd.ExecuteNonQuery();
             con.Close();
         }
 
+        /// <summary>
+        /// Add a camera record to the database.
+        /// </summary>
+        /// <param name="camera">Camera record information.</param>
+        /// <returns>ID of the new camera record.</returns>
+        /// <remarks>Id property of the <paramref name="camera"/> parameter is ignored.</remarks>
         public static int AddCamera(Camera camera)
         {
             SqlConnection con = DbManager.GetConnection();

@@ -7,8 +7,16 @@ using AstroDAM.Models;
 
 namespace AstroDAM.Controllers
 {
+    /// <summary>
+    /// Manage collection records on the database.
+    /// </summary>
     public static class CollectionController
     {
+        /// <summary>
+        /// Get one or more collection records on the database.
+        /// </summary>
+        /// <param name="Ids">List of IDs of the collection records.</param>
+        /// <returns>A list of collection records.</returns>
         public static List<Collection> GetCollections(List<int> Ids = null)
         {
             List<Collection> collections = new List<Collection>();
@@ -54,6 +62,10 @@ namespace AstroDAM.Controllers
             return collections;
         }
 
+        /// <summary>
+        /// Delete one or more collection records on the database.
+        /// </summary>
+        /// <param name="Ids">List of IDs of the collection records.</param>
         public static void DeleteCollections(List<int> Ids = null)
         {
             string selector = DbManager.SelectorBuilder(Ids, false);
@@ -67,6 +79,12 @@ namespace AstroDAM.Controllers
             con.Close();
         }
 
+        /// <summary>
+        /// Edit a collection record on the database.
+        /// </summary>
+        /// <param name="Id">ID of the collection record to edit.</param>
+        /// <param name="collection">Collection record information.</param>
+        /// <remarks>Id property of the <paramref name="collection"/> parameter is ignored.</remarks>
         public static void EditCollection(int Id, Collection collection)
         {
             SqlConnection con = DbManager.GetConnection();
@@ -113,6 +131,12 @@ namespace AstroDAM.Controllers
             con.Close();
         }
 
+        /// <summary>
+        /// Add a collection record to the database.
+        /// </summary>
+        /// <param name="collection">Collection record information.</param>
+        /// <returns>ID of the new collection record.</returns>
+        /// <remarks>Id property of the <paramref name="collection"/> parameter is ignored.</remarks>
         public static bool AddCollection(Collection collection)
         {
             SqlConnection con = DbManager.GetConnection();

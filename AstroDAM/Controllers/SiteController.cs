@@ -4,13 +4,21 @@ using AstroDAM.Models;
 
 namespace AstroDAM.Controllers
 {
+    /// <summary>
+    /// Manage site records on the database.
+    /// </summary>
     public static class SiteController
     {
-        public static List<Site> GetSites(List<int> Ids = null)
+        /// <summary>
+        /// Get one or more site records on the database.
+        /// </summary>
+        /// <param name="ids">List of IDs of the site records.</param>
+        /// <returns>A list of site records.</returns>
+        public static List<Site> GetSites(List<int> ids = null)
         {
             List<Site> sites = new List<Site>();
 
-            string selector = DbManager.SelectorBuilder(Ids);
+            string selector = DbManager.SelectorBuilder(ids);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -36,9 +44,13 @@ namespace AstroDAM.Controllers
             return sites;
         }
 
-        public static void DeleteSites(List<int> Ids = null)
+        /// <summary>
+        /// Delete one or more site records.
+        /// </summary>
+        /// <param name="ids">List of IDs of the site records.</param>
+        public static void DeleteSites(List<int> ids = null)
         {
-            string selector = DbManager.SelectorBuilder(Ids, false);
+            string selector = DbManager.SelectorBuilder(ids, false);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -49,7 +61,13 @@ namespace AstroDAM.Controllers
             con.Close();
         }
 
-        public static void EditSite(int Id, Site site)
+        /// <summary>
+        /// Edit a site record on the database.
+        /// </summary>
+        /// <param name="ids">ID of the site record to edit.</param>
+        /// <param name="site">Site records information.</param>
+        /// <remarks>Id property of the <paramref name="site"/> parameter is ignored.</remarks>
+        public static void EditSite(int ids, Site site)
         {
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -67,12 +85,18 @@ namespace AstroDAM.Controllers
             cmd.Parameters.AddWithValue("@LongtitudeType", (int)site.LongtitudeType);
             cmd.Parameters.AddWithValue("@Latitude", site.Latitude);
             cmd.Parameters.AddWithValue("@LatitudeType", (int)site.LatitudeType);
-            cmd.Parameters.AddWithValue("@Id", Id);
+            cmd.Parameters.AddWithValue("@Id", ids);
 
             cmd.ExecuteNonQuery();
             con.Close();
         }
 
+        /// <summary>
+        /// Add a site record to the database.
+        /// </summary>
+        /// <param name="site">Site record information.</param>
+        /// <returns>ID of the new site record.</returns>
+        /// <remarks>Id property of the <paramref name="site"/> parameter is ignored.</remarks>
         public static int AddSite(Site site)
         {
             SqlConnection con = DbManager.GetConnection();

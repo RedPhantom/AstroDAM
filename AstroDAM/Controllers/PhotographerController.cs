@@ -4,13 +4,21 @@ using System.Data.SqlClient;
 
 namespace AstroDAM.Controllers
 {
+    /// <summary>
+    /// Manage photographer records on the database.
+    /// </summary>
     public static class PhotographerController
     {
-        public static List<Photographer> GetPhotographers(List<int> Ids = null)
+        /// <summary>
+        /// Get one or more photograpger records on the database.
+        /// </summary>
+        /// <param name="ids">List of IDs of the photograpger records.</param>
+        /// <returns>A list of photographer records.</returns>
+        public static List<Photographer> GetPhotographers(List<int> ids = null)
         {
             List<Photographer> photographers = new List<Photographer>();
 
-            string selector = DbManager.SelectorBuilder(Ids);
+            string selector = DbManager.SelectorBuilder(ids);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -32,9 +40,13 @@ namespace AstroDAM.Controllers
             return photographers;
         }
 
-        public static void DeletePhotographers(List<int> Ids = null)
+        /// <summary>
+        /// Delete one or more photographer records.
+        /// </summary>
+        /// <param name="ids">List of IDs of the photographer records.</param>
+        public static void DeletePhotographers(List<int> ids = null)
         {
-            string selector = DbManager.SelectorBuilder(Ids, false);
+            string selector = DbManager.SelectorBuilder(ids, false);
 
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -45,7 +57,13 @@ namespace AstroDAM.Controllers
             con.Close();
         }
 
-        public static void EditPhotographer(int Id, Photographer photographer)
+        /// <summary>
+        /// Edit a photographer record on the database.
+        /// </summary>
+        /// <param name="id">ID of the photographer record to edit.</param>
+        /// <param name="photographer">Photographer records information.</param>
+        /// <remarks>Id property of the <paramref name="photographer"/> parameter is ignored.</remarks>
+        public static void EditPhotographer(int id, Photographer photographer)
         {
             SqlConnection con = DbManager.GetConnection();
             SqlCommand cmd = con.CreateCommand();
@@ -57,12 +75,18 @@ namespace AstroDAM.Controllers
 
             cmd.Parameters.AddWithValue("@ShortName", photographer.FirstName);
             cmd.Parameters.AddWithValue("@LongName", photographer.LastName);
-            cmd.Parameters.AddWithValue("@Id", Id);
+            cmd.Parameters.AddWithValue("@Id", id);
 
             cmd.ExecuteNonQuery();
             con.Close();
         }
 
+        /// <summary>
+        /// Add a photographer record to the database.
+        /// </summary>
+        /// <param name="photographer">Photographer record information.</param>
+        /// <returns>ID of the new photographer record.</returns>
+        /// <remarks>Id property of the <paramref name="photographer"/> parameter is ignored.</remarks>
         public static int AddPhotographer(Photographer photographer)
         {
             SqlConnection con = DbManager.GetConnection();
